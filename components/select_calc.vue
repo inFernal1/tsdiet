@@ -13,8 +13,8 @@
           </div></v-radio>
     </v-radio-group>
             </v-container>
-                <v-snackbar vertical  :color="getHintsColor" :timeout="0" 
-                top auto-height multi-line v-model="hints" >
+                <v-snackbar   :color="getHintsColor" :timeout="0" 
+                 vertical  top multi-line v-model="hints" >
       <div v-if="getTypeCalc === 'simpleCalc'">
           Обычный тип калькулятора предполалает более быстрый расчёт 
 калорийности по формуле Миффлина-Сан Жеора с 
@@ -82,6 +82,13 @@ export default {
         color:black;
         font-weight: 500
     }
- 
-    
+  .help-notification {
+display: flex;
+
+  }
+  .help-notification *{
+border: none;
+box-shadow: 0 0 0 0;
+outline: none;
+  }
 </style>
