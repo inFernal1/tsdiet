@@ -113,7 +113,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations("calc", {
+    ...mapMutations({
       change: "changeE1",
       setUserPurpose: "setUserPurpose",
       setUserPurposeWay: "setUserPurposeWay",
@@ -133,7 +133,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters("calc", {
+    ...mapGetters( {
       getUserPurpose: "getUserPurpose",
       getUserPurposeWay: "getUserPurposeWay",
       

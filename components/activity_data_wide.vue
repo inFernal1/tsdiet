@@ -22,8 +22,8 @@
        v-model="hint"
        v-else-if="stateSnackbar === 'success'"
     >
-    <v-icon  size="50px" dark class="hidden-xs-only">done</v-icon>
-     <v-icon  large dark class="hidden-sm-and-up">done</v-icon>
+    <v-icon size="50px" dark class="hidden-xs-only">done</v-icon>
+     <v-icon large dark class="hidden-sm-and-up">done</v-icon>
      <v-btn outline class="btn-wide-active" :disabled="stateSnackbar !== 'success'" @click.native="nextSlide()">Cледующий шаг
        <v-icon dark>chevron_right</v-icon>
      </v-btn>
@@ -64,22 +64,6 @@
                         label="Выбрать действия"
                         > 
                        
-                         
-                          <!-- <template slot="item" slot-scope="data"  >
-                         
-                           {{ data.item.text}} 
-                            
-                             <v-checkbox
-                              v-model="selected"
-                              color="blue"
-                              
-                              :value="data.item.text">
-                              <template slot="label">
-                                <p >{{data.item.text}}</p>
-                              </template>
-                             </v-checkbox>
-                             
-                           </template>   -->     
                         </v-select>
                     </v-flex>
                 </v-layout>
@@ -508,7 +492,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getUserWeight: 'calc/getUserWeight'
+      getUserWeight: 'getUserWeight'
     }),
     getTime() {
       function getDecimal(num) {
@@ -539,8 +523,8 @@ export default {
   },
   methods: {
     ...mapMutations( {
-      change: "calc/changeE1",
-      setUserActivityWide: "calc/setUserActivityWide"
+      change: "changeE1",
+      setUserActivityWide: "setUserActivityWide"
     }),
     onScroll(e) {
       

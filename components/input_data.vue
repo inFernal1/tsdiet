@@ -81,7 +81,7 @@ export default {
       }
     },
     computed: {
-        ...mapGetters('calc',{
+        ...mapGetters({
             getUserAge:'getUserAge',
             getGender: 'getGender',
             getUserTall:'getUserTall',
@@ -121,7 +121,7 @@ export default {
         }
     },
   methods: {
-    ...mapMutations('calc', {
+    ...mapMutations({
       change: 'changeE1',
       setUserAge: 'setUserAge',
       setGender:'setGender',

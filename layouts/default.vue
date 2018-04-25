@@ -100,26 +100,25 @@
 </script> -->
 <template>
   <v-app class="tsd_bg">
-     
-      <nuxt-link to="/" class="mx-auto">
-      <img src="~/assets/img/logo.png" alt="" width="500" height="70" class="mx-auto hidden-xs-only tsd-logo" >
-      </nuxt-link>
-  <v-toolbar light  flat class="tsd-border_toolbar tsd_bg" >
-      <v-toolbar-side-icon class="hidden-sm-and-up" @click.native.stop="sideNav = !sideNav"> </v-toolbar-side-icon>
-         <v-toolbar-title class="hidden-sm-and-up mx-auto">
-              <nuxt-link to="/" class="mx-auto">
-              <img src="~/assets/img/logo_s.png" alt="theSmartestDiet" class="mx-auto" >
+    <v-card nuxt to="/" flat class="img-link">
+      <img src="~/assets/img/logo.png" alt="logo" width="500" height="70" class="hidden-xs-only tsd-logo" >
+      </v-card>
+  <v-toolbar light  flat class="tsd-border_toolbar tsd_bg hidden-sm-and-up menu-forphone" >
+      <v-toolbar-side-icon  @click.native.stop="sideNav = !sideNav"> </v-toolbar-side-icon>
+         <v-toolbar-title >
+              <nuxt-link to="/">
+              <img src="~/assets/img/logo_s.png" alt="theSmartestDiet" >
               </nuxt-link>
           <!--<span class="tsd-color_black">The</span><span class="tsd-color_blue">Smartest</span><span class="tsd-color_green">Diet</span><span class="tsd-color_black">.ru</span> -->
       </v-toolbar-title>
-      <v-toolbar-items class="mx-auto hidden-xs-only">
-          <v-btn flat v-for="item in menuItems" router :to="item.link" :key="item.title" exact>
+  </v-toolbar>
+  
+    <nav class="hidden-xs-only tsd-border_toolbar main-links">
+          <v-btn flat v-for="item in menuItems" router :to="item.link" :key="item.title" exact class="links-items">
               <v-icon left>{{item.icon}}</v-icon>
               {{item.title}}
               </v-btn>
-      </v-toolbar-items>
-
-  </v-toolbar>
+      </nav>
   <v-content>
         <nuxt />
   </v-content>
@@ -178,6 +177,31 @@ export default {
 .tsd-logo{
     margin-top: 20px;
     margin-bottom: 30px;
+}
+.img-link{
+  background-color: rgba(0, 0, 255, 0);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.main-links {
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+margin-bottom: 15px;
+  
+}
+.links-items{
+ padding: 30px 0;
+ margin:0;
+
+}
+.menu-forphone {
+  display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;
 }
 </style>
 <style>

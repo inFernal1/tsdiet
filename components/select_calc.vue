@@ -4,7 +4,7 @@
             <v-container >
             <h3 class="calc-caption mb-3">Выберите тип калькулятора:</h3>
         <v-radio-group v-model="radios" :mandatory="false" >
-      <v-radio color="primary"  v-ripple value="simpleCalc" @change="changeHints({show:true,color:'info'})" >
+      <v-radio color="primary"  v-ripple value="simpleCalc" @change="changeHints({show:true,color:'primary'})" >
           <div slot="label" class="calc_lbl">Обычный
           </div>
       </v-radio>
@@ -13,7 +13,8 @@
           </div></v-radio>
     </v-radio-group>
             </v-container>
-                <v-snackbar vertical auto-height :color="getHintsColor" :timeout="0" bottom multi-line v-model="hints" >
+                <v-snackbar vertical  :color="getHintsColor" :timeout="0" 
+                top auto-height multi-line v-model="hints" >
       <div v-if="getTypeCalc === 'simpleCalc'">
           Обычный тип калькулятора предполалает более быстрый расчёт 
 калорийности по формуле Миффлина-Сан Жеора с 
@@ -33,7 +34,7 @@
       <v-btn flat color="black" @click.native="changeHints({show:false})">Закрыть</v-btn>
     </v-snackbar>
         </v-card>
-        <v-btn color="info" @click.native="change(2)" :disabled="getTypeCalc == ''">Далее
+        <v-btn color="primary" @click.native="change(2)" :disabled="getTypeCalc == ''">Далее
             <v-icon dark>chevron_right</v-icon>
         </v-btn>
 </div>
@@ -44,7 +45,7 @@ import {mapMutations} from 'vuex'
 import {mapGetters} from 'vuex'
 export default {
     computed: {
-        ...mapGetters('calc',{
+        ...mapGetters({
             getTypeCalc: 'getTypeCalc',
             getHints:'getHintsForRadios',
             getHintsColor:'getHintsColor'
@@ -68,7 +69,7 @@ export default {
         }
     },
   methods:{
-      ...mapMutations('calc',{
+      ...mapMutations({
           change: 'changeE1',
           setTypeCalc:'setTypeCalc',
           changeHints:'changeHintsForRadios'
@@ -81,5 +82,6 @@ export default {
         color:black;
         font-weight: 500
     }
+ 
     
 </style>

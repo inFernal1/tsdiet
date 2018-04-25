@@ -8,15 +8,15 @@
                           <v-icon color="success" slot="activator">help_outline</v-icon>
                           <div v-html="hintBasicExchange"></div>
                           </v-tooltip></div>
-                     <div><span class="cal-number">{{getResultSum}}</span> ккал</div>
+                     <div><span class="cal-number">{{getResultSum.calBasic}}</span> ккал</div>
                 </v-flex>
                 <v-flex class="cal-items">
                    <div class="mb-2">Для поддержания веса:</div>
-                     <div><span class="cal-number">{{getResultSum}}</span> ккал</div>
+                     <div><span class="cal-number">{{getResultSum.calKeepWeight}}</span> ккал</div>
                 </v-flex>
                 <v-flex class="cal-items" v-if="getUserPurpose !== 'keepWeight'">
                     <div class="mb-2">С учётом вашей цели:</div>
-                     <div><span class="cal-number">{{getResultSum}}</span> ккал</div>
+                     <div><span class="cal-number">{{getResultSum.calWithPurpose}}</span> ккал</div>
                 </v-flex>
             </v-layout>
              <h2 class="result-captions">БЖУ</h2>
@@ -25,11 +25,11 @@
                    <chart-pfc :chart-data="fillData" ></chart-pfc>
                 </v-flex>
                 <v-flex class="pfc-text" xs11 lg6 md6 sm6>
-                    <div class="pfc-items pfc-proteins">Белки: <b>{{getPfc}} г.</b>
+                    <div class="pfc-items pfc-proteins">Белки: <b>{{getPfc.proteins}} г.</b>
                     или <b>{{getCalProteins}} ккал</b></div>
-                    <div class="pfc-items pfc-fats">Жиры: <b>{{getPfc}} г.</b>
+                    <div class="pfc-items pfc-fats">Жиры: <b>{{getPfc.fats}} г.</b>
                     или <b>{{getCalFats}} ккал</b></div>
-                    <div class="pfc-items pfc-carbs">Углеводы: <b>{{getPfc}} г.</b>
+                    <div class="pfc-items pfc-carbs">Углеводы: <b>{{getPfc.carbs}} г.</b>
                     или <b>{{getCalCarbs}} ккал</b></div>
                 </v-flex>
                 <v-flex xs12><hr></v-flex>
@@ -191,8 +191,8 @@ export default {
     },
   methods:{
       ...mapMutations({
-          change: 'calc/changeE1',
-          totalSumCalc:'calc/totalSumCalc'
+          change: 'changeE1',
+          totalSumCalc:'totalSumCalc'
       }),
       converting() {
           this.totalSumCalc('');
@@ -202,10 +202,10 @@ export default {
   },
   computed:{
       ...mapGetters({
-          getResultSum:'calc/getResultSum',
-          getUserPurpose:'calc/getUserPurpose',
-          getPfc:'calc/getPfc',
-          getPfcPercents:'calc/getPfcPercents'
+          getResultSum:'getResultSum',
+          getUserPurpose:'getUserPurpose',
+          getPfc:'getPfc',
+          getPfcPercents:'getPfcPercents'
       }),
       fillData() {
           return {
@@ -214,19 +214,19 @@ export default {
           {
             label: ['% белков','% жиров','% углеводов'],
             backgroundColor: ['#009cff','orange','#0ca600'],
-            data: [this.getPfcPercents,this.getPfcPercents,this.getPfcPercents]
+            data: [this.getPfcPercents.proteins,this.getPfcPercents.fats,this.getPfcPercents.carbs]
           }
         ]
       }
       },
       getCalProteins() {
-          return this.getPfc //.proteins * 4;
+          return this.getPfc.proteins * 4;
       },
       getCalFats() {
-          return this.getPfc //.fats * 9;
+          return this.getPfc.fats * 9;
       },
       getCalCarbs() {
-          return this.getPfc //.carbs * 4;
+          return this.getPfc.carbs * 4;
       }
   },
   components:{
