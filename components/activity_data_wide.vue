@@ -21,12 +21,16 @@
        multi-line 
        v-model="hint"
        v-else-if="stateSnackbar === 'success'"
+       class="success-notification"
     >
-    <v-icon size="50px" dark class="hidden-xs-only">done</v-icon>
-     <v-icon large dark class="hidden-sm-and-up">done</v-icon>
-     <v-btn outline class="btn-wide-active" :disabled="stateSnackbar !== 'success'" @click.native="nextSlide()">Cледующий шаг
+    <div>
+    <v-icon x-large dark class="hidden-xs-only">done</v-icon>
+     <v-icon x-large dark class="hidden-sm-and-up">done</v-icon>
+     <v-btn outline class="btn-wide-active white" :disabled="stateSnackbar !== 'success'" @click.native="nextSlide()">
+       <span>Cледующий шаг</span>
        <v-icon dark>chevron_right</v-icon>
      </v-btn>
+     </div>
     </v-snackbar>
       <v-snackbar vertical
      
@@ -619,12 +623,17 @@ export default {
 }
 .btn-wide-active{
   padding: 5px;
+  color: white;
+  margin-left:10px;
 }
 .error-snackbar{
   text-align: center;
 }
 .list-titles{
 font-weight: 400;
+}
+.success-notification {
+ 
 }
 </style>
 
