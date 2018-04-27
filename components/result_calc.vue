@@ -34,19 +34,20 @@
                 </v-flex>
                 <v-flex xs12><hr></v-flex>
                 <v-flex class="mt-3  pfc-myself" row>
-                    <v-layout row wrap justify-center>
-                    <v-flex xs11 lg5 md4 sm5 xl5>
+                    <v-layout row wrap class="mx-4">
+                    <v-flex>
                     <v-text-field type="number" v-model="pfcMyselfValue" 
                     label="Ручной ввод калорийности:"
-                    suffix="ккал"></v-text-field>
+                    suffix="ккал" ></v-text-field>
                     </v-flex>
-                    <v-flex xs8 lg2 md2 sm3 xl2><v-btn color="primary" 
-                    @click="totalSumCalc(pfcMyselfValue)">Пересчитать</v-btn></v-flex>
-                    <v-flex xs8 lg3 md3 sm3 xl5><v-btn 
-                    color="primary" 
-                     @click="converting">Сбросить БЖУ</v-btn></v-flex>
-                    </v-layout>
+                    <v-flex>
+                        <v-layout justify-center>
+                            <v-btn color="primary" @click="totalSumCalc(pfcMyselfValue)">Пересчитать</v-btn>
+                   <v-btn color="primary"  @click="converting">Сбросить БЖУ</v-btn>
+                     </v-layout>
                 </v-flex>
+            </v-layout>
+            </v-flex>
             </v-layout>
              <h2 class="result-captions">Рекомендации</h2>
             <v-layout class="container-items">
@@ -65,25 +66,26 @@
 </template>
 
 <script>
-import ChartPfc from '../plugins/ChartPfc.js'
-import {mapMutations, mapGetters} from 'vuex'
+import ChartPfc from "../plugins/ChartPfc.js";
+import { mapMutations, mapGetters } from "vuex";
 export default {
-    data() {
-        return {
-            pfcMyselfValue:'',
-            hintBasicExchange:`Базовый обмен веществ - это минимальное количество калорий, которое требует организм для 
+  data() {
+    return {
+      pfcMyselfValue: "",
+      hintBasicExchange: `Базовый обмен веществ - это минимальное количество калорий, которое требует организм для 
             обеспечения нормальной жизнедеятельности организма в состоянии полного покоя.`,
-            recommendationContent:[{
-                header:'Не полагайтесь только лишь на расчеты',
-                content:`Все калькуляторы калорий, которые существуют, включая наш не смогут выдать 100% результат.
+      recommendationContent: [
+        {
+          header: "Не полагайтесь только лишь на расчеты",
+          content: `Все калькуляторы калорий, которые существуют, включая наш не смогут выдать 100% результат.
                  Каждый человек индивидуален. У людей могут быть хронические болезни, нарушенный метаболизм,
                   индивидуальные особенности организма и т.д. Все это сильно влияет на базовый обмен и затраты
                    калорий на какие-либо действия. Калькулятор нужен лишь для того, чтобы получить начальные цифры
                     от которых можно получить реальные.`
-            },
-            {
-                header: 'Как узнать для себя идеальное число ккал',
-                content: `Как написано в предыдущей рекомендации, каждый человек индивидуален. В связи с этим, 
+        },
+        {
+          header: "Как узнать для себя идеальное число ккал",
+          content: `Как написано в предыдущей рекомендации, каждый человек индивидуален. В связи с этим, 
                 невозможно посчитать точное количество калорий, которое человек расходует в течение суток.
                  Никакие формулы в мире без полного обследования человека не смогут выдать точный результат. 
                  Существует только два метода, по которым мы сможем определить суточную норму калорий.
@@ -106,10 +108,10 @@ export default {
                     наоборот переедаете ), то уменьшите или увеличьте на 100-200 ккал и снова следите за результатами.
                      Таким практическим методом вы сможете вычислить нужное вам количество ккал. Полученное число можете 
                      ввести в калькулятор и получить нужное количество бжу.`
-            },
-              {
-                header: 'Правильный вход в диету',
-                content: `<p> 
+        },
+        {
+          header: "Правильный вход в диету",
+          content: `<p> 
                     Не важно снижаете вы вес или набираете, резко менять режим не стоит. 
                     В случае резкого снижения веса могут быть такие последствия как: замедленный метаболизм,
                      плохое самочувствие, проблемы с ЖКТ.
@@ -131,11 +133,11 @@ export default {
                     2 неделя = 2307.5 - 92.5 = 2215 ккал <br>
                     3 неделя = 2215 - 92.5 = 2122.5 <br>
                     4 неделя = 2122.5 - 92.5 = 2030 <br>
-                    Итого: подготовка к диете заняла 3 недели. </p>` 
-            },
-            {
-                header: 'Правильный выход из диеты',
-                content: `<p>Ни в коем случае нельзя возвращаться к своему прежнему режиму питания слишком резко.
+                    Итого: подготовка к диете заняла 3 недели. </p>`
+        },
+        {
+          header: "Правильный выход из диеты",
+          content: `<p>Ни в коем случае нельзя возвращаться к своему прежнему режиму питания слишком резко.
                  Последствия могут быть достаточно неприятные для вас. Вы можете вернуть все килограммы которые 
                  вы потеряли и даже набрать ещё больше, а также приобрести проблемы с пищеварительным трактом. 
                  Это естественная реакция организма на резкие изменения. Восполнение жировой ткани тесно связано 
@@ -151,14 +153,14 @@ export default {
                 В итоге: 1 неделя: 1700ккал, 2:1800ккал, 3:1900 ккал 4: 2000ккал  <br>
                 В итоге эффективный выход займет у вас один месяц. Если отрыв калорий весьма незначительный(<400 ккал), 
                 то можете использовать и 2-х недельный выход, разделив не на 4 + 1, а на 2 + 1.</p>`
-            },
-            /* {
+        },
+        /* {
                 header: 'Вес - неточный показатель истинного результата',
                 content: `vdddddddddddddd`
             }, */
-            {
-                header: 'Как минимизировать потерю мышечной массы при сжигании сжира',
-                content: `Наши организмы так устроены, что они в качестве источника энергии 
+        {
+          header: "Как минимизировать потерю мышечной массы при сжигании сжира",
+          content: `Наши организмы так устроены, что они в качестве источника энергии 
                 при дифиците калорий более предпочтут использовать мышечную массу нежели жировую. 
                 Так происходит потому что на содержание мышц организм тратит определенное количество 
                 калорий, именно поэтому от нее он хочет избавиться в первую очередь. А как дать понять
@@ -171,10 +173,11 @@ export default {
 Вывод: постарайтесь как можно больше включить в свою программу силовых тренировок.
  Лучше, если их будет больше, чем кардио тренировок. Но не забывайте также про перетренированность.
   Поэтому постарайтесь составить грамотный план тренировок.`
-            },
-            {
-                header:'Как минимизировать количество набора жира при наборе мышечной массы',
-                content: `<p>
+        },
+        {
+          header:
+            "Как минимизировать количество набора жира при наборе мышечной массы",
+          content: `<p>
                 Следуйте следующим советам: <br>
 1. Ограничьте или вообще не ешьте углеводы вечером.  <br>
 2. Делайте выбор в пользу медленных углеводов (гречка, овсянка, бурый рис и т.д)
@@ -185,128 +188,127 @@ export default {
 5. Разделите свой суточный рацион на 5 - 6 приемов пищи. Это поможет ускорить ваш метаболизм 
 и позволит съесть необходимое количество калорий без чувства переедания
                 </p>`
-            }
-            ]
         }
-    },
-  methods:{
-      ...mapMutations({
-          change: 'changeE1',
-          totalSumCalc:'totalSumCalc'
-      }),
-      converting() {
-          this.totalSumCalc('');
-          this.pfcMyselfValue = '';
-      }
-      
+      ]
+    };
   },
-  computed:{
-      ...mapGetters({
-          getResultSum:'getResultSum',
-          getUserPurpose:'getUserPurpose',
-          getPfc:'getPfc',
-          getPfcPercents:'getPfcPercents'
-      }),
-      fillData() {
-          return {
-        labels:  ['% белков гр. ','% жиров гр. ','% углеводов гр. '],
+  methods: {
+    ...mapMutations({
+      change: "changeE1",
+      totalSumCalc: "totalSumCalc"
+    }),
+    converting() {
+      this.totalSumCalc("");
+      this.pfcMyselfValue = "";
+    }
+  },
+  computed: {
+    ...mapGetters({
+      getResultSum: "getResultSum",
+      getUserPurpose: "getUserPurpose",
+      getPfc: "getPfc",
+      getPfcPercents: "getPfcPercents"
+    }),
+    fillData() {
+      return {
+        labels: ["% белков гр. ", "% жиров гр. ", "% углеводов гр. "],
         datasets: [
           {
-            label: ['% белков','% жиров','% углеводов'],
-            backgroundColor: ['#009cff','orange','#0ca600'],
-            data: [this.getPfcPercents.proteins,this.getPfcPercents.fats,this.getPfcPercents.carbs]
+            label: ["% белков", "% жиров", "% углеводов"],
+            backgroundColor: ["#009cff", "orange", "#0ca600"],
+            data: [
+              this.getPfcPercents.proteins,
+              this.getPfcPercents.fats,
+              this.getPfcPercents.carbs
+            ]
           }
         ]
-      }
-      },
-      getCalProteins() {
-          return this.getPfc.proteins * 4;
-      },
-      getCalFats() {
-          return this.getPfc.fats * 9;
-      },
-      getCalCarbs() {
-          return this.getPfc.carbs * 4;
-      }
+      };
+    },
+    getCalProteins() {
+      return this.getPfc.proteins * 4;
+    },
+    getCalFats() {
+      return this.getPfc.fats * 9;
+    },
+    getCalCarbs() {
+      return this.getPfc.carbs * 4;
+    }
   },
-  components:{
-      ChartPfc
+  components: {
+    ChartPfc
   }
-}
+};
 </script>
 <style scoped>
-.cal-items{
-    text-align: center;
-    font-size: calc( (100vw - 480px)/(1280 - 480) * (16 - 14) + 18px);
-    border-bottom: 2px dashed  #0ca600;
-    padding: 15px;
-     line-height: calc( (100vw - 480px)/(1280 - 480) * (16 - 14) + 18px);
+.cal-items {
+  text-align: center;
+  font-size: calc( (100vw - 480px)/(1280 - 480) * (16 - 14) + 18px);
+  border-bottom: 2px dashed #0ca600;
+  padding: 15px;
+  line-height: calc( (100vw - 480px)/(1280 - 480) * (16 - 14) + 18px);
 }
 .cal-items:last-of-type {
-    border-bottom: 0
+  border-bottom: 0;
 }
 .container-items {
-    margin-bottom: 30px;
-     border-left: 4px solid #009cff;
-        border-right: 4px solid #009cff;
-        border-bottom: 2px solid  #0ca600;
-        border-top:2px solid #0ca600;
-      
+  margin-bottom: 30px;
+  border-left: 4px solid #009cff;
+  border-right: 4px solid #009cff;
+  border-bottom: 2px solid #0ca600;
+  border-top: 2px solid #0ca600;
 }
 .result-captions {
-      font-size: calc( (100vw - 480px)/(1280 - 480) * (22 - 14) + 18px);
-        text-align:center;
-        font-weight:300;
-        padding:5px;
-         border-left: 4px solid #009cff;
-        border-right: 4px solid #009cff;
-        border-top:2px solid #0ca600;
+  font-size: calc( (100vw - 480px)/(1280 - 480) * (22 - 14) + 18px);
+  text-align: center;
+  font-weight: 300;
+  padding: 5px;
+  border-left: 4px solid #009cff;
+  border-right: 4px solid #009cff;
+  border-top: 2px solid #0ca600;
 }
 .cal-number {
-    color: #009cff;
-    font-weight: 500
+  color: #009cff;
+  font-weight: 500;
 }
-.tsd-chart{
-    width:100%;
-    height:100%;
-    margin: 0px 20px 40px 20px;
+.tsd-chart {
+  width: 100%;
+  height: 100%;
+  margin: 0px 20px 40px 20px;
 }
-.pfc-text{
-    font-size: 1.3em;
-    margin:auto auto;
-    text-align: center
+.pfc-text {
+  font-size: 1.3em;
+  margin: auto auto;
+  text-align: center;
 }
 .pfc-items {
-    border: 2px solid #0ca600;
-    padding: 15px;
-    margin-bottom: 30px;
- 
-    
+  border: 2px solid #0ca600;
+  padding: 15px;
+  margin-bottom: 30px;
 }
 .pfc-proteins {
-    border-color: #009cff;
-    border-top: 2px solid #009cff
+  border-color: #009cff;
+  border-top: 2px solid #009cff;
 }
 .pfc-proteins b {
-    color:#009cff
+  color: #009cff;
 }
 .pfc-fats {
-    border-color: orange;
+  border-color: orange;
 }
 .pfc-fats b {
-    color: orange;
+  color: orange;
 }
 .pfc-carbs b {
-    color:#0ca600;
+  color: #0ca600;
 }
 .recommendations {
-   border:2px solid rgb(250, 192, 2);
-   border-bottom: 0;
-   border-top: 0;
-   margin: 10px 5px;
+  border: 2px solid rgb(250, 192, 2);
+  border-bottom: 0;
+  border-top: 0;
+  margin: 10px 5px;
 }
 .pfc-myself {
-    
-    margin: auto auto;
+  margin: auto auto;
 }
 </style>

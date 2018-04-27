@@ -632,8 +632,8 @@ export default {
 .list-titles{
 font-weight: 400;
 }
-.success-notification {
- 
+.success-notification div:first-child{
+ margin: 0 auto;
 }
 </style>
 

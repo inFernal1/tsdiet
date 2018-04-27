@@ -180,9 +180,8 @@ export default {
 }
 .img-link{
   background-color: rgba(0, 0, 255, 0);
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+  margin: 0 auto;
+  width: 500px;
 }
 .main-links {
 display: flex;
