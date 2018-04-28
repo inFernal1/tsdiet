@@ -1,7 +1,16 @@
 <template>
   <v-container class="container-recipes">
     <v-layout column>
-    
+    <v-flex>
+      <v-layout row class="recipe-add-link">
+        <v-flex d-flex>
+          <v-btn block flat color="success" to="add-recipe/dr_add" >
+            <v-icon color="success" x-large>add</v-icon>
+            <span class="add-recipe-link-text">Добавить новый рецепт</span>
+            </v-btn>
+        </v-flex>
+      </v-layout>
+    </v-flex>
     <v-flex>
     <v-layout  justify-center row wrap v-if="filterToggle"> 
       <v-flex  v-for="(item,index) in filter" :key="index" class="filter-items" >
@@ -69,6 +78,15 @@ export default {
 }
 .filter-title-item {
   text-align: center;
+}
+.recipe-add-link {
+ border: 2px dashed green;
+ padding: 10px;
+ margin-bottom:30px;
+};
+.add-recipe-link-text {
+  display: inline-block;
+  padding-left: 10px;
 }
 </style>
 
