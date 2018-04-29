@@ -1,16 +1,21 @@
 <template>
   <v-container class="container-recipes">
     <v-layout column>
-    <v-flex>
+      <v-flex v-if="addActivated">
+          <dr-add></dr-add>
+        </v-flex>
+    <v-flex v-if="!addActivated">
       <v-layout row class="recipe-add-link">
         <v-flex d-flex>
-          <v-btn block flat color="success" to="add-recipe/dr_add" >
+          <v-btn block flat color="success" @click="addActivated = true">
             <v-icon color="success" x-large>add</v-icon>
             <span class="add-recipe-link-text">Добавить новый рецепт</span>
             </v-btn>
         </v-flex>
+        
       </v-layout>
     </v-flex>
+    
     <v-flex>
     <v-layout  justify-center row wrap v-if="filterToggle"> 
       <v-flex  v-for="(item,index) in filter" :key="index" class="filter-items" >
@@ -36,10 +41,13 @@
   </v-container>
 </template>
 <script>
+import drAdd from '~/components/dr_add';
 export default {
+  
   layout: 'default',
   data() {
     return {
+      addActivated: false,
       filterToggle: false,
       filter: [{
         title: 'Тип блюда',
@@ -64,6 +72,9 @@ export default {
     resetFilter() {
       this.selectedFilter.splice(0)
     }
+  },
+  components: {
+    drAdd
   }
 }
 </script>
