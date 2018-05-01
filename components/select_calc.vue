@@ -46,9 +46,9 @@ import {mapGetters} from 'vuex'
 export default {
     computed: {
         ...mapGetters({
-            getTypeCalc: 'getTypeCalc',
-            getHints:'getHintsForRadios',
-            getHintsColor:'getHintsColor'
+            getTypeCalc: 'Calc/getTypeCalc',
+            getHints:'Calc/getHintsForRadios',
+            getHintsColor:'Calc/getHintsColor'
         }),
         radios: {
             get() {
@@ -70,9 +70,9 @@ export default {
     },
   methods:{
       ...mapMutations({
-          change: 'changeE1',
-          setTypeCalc:'setTypeCalc',
-          changeHints:'changeHintsForRadios'
+          change: 'Calc/changeE1',
+          setTypeCalc:'Calc/setTypeCalc',
+          changeHints:'Calc/changeHintsForRadios'
       })
   }
 }

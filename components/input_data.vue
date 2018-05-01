@@ -82,10 +82,10 @@ export default {
     },
     computed: {
         ...mapGetters({
-            getUserAge:'getUserAge',
-            getGender: 'getGender',
-            getUserTall:'getUserTall',
-            getUserWeight:'getUserWeight'
+            getUserAge:'Calc/getUserAge',
+            getGender: 'Calc/getGender',
+            getUserTall:'Calc/getUserTall',
+            getUserWeight:'Calc/getUserWeight'
         }),
         userAge: {
             get() {
@@ -122,11 +122,11 @@ export default {
     },
   methods: {
     ...mapMutations({
-      change: 'changeE1',
-      setUserAge: 'setUserAge',
-      setGender:'setGender',
-      setUserWeight:'setUserWeight',
-      setUserTall:'setUserTall'
+      change: 'Calc/changeE1',
+      setUserAge: 'Calc/setUserAge',
+      setGender:'Calc/setGender',
+      setUserWeight:'Calc/setUserWeight',
+      setUserTall:'Calc/setUserTall'
     }),
     validateAndClick() {
         if(this.$refs.form.validate()) this.change(3)

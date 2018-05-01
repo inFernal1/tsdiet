@@ -496,7 +496,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getUserWeight: 'getUserWeight'
+      getUserWeight: 'Calc/getUserWeight'
     }),
     getTime() {
       function getDecimal(num) {
@@ -527,8 +527,8 @@ export default {
   },
   methods: {
     ...mapMutations( {
-      change: "changeE1",
-      setUserActivityWide: "setUserActivityWide"
+      change: "Calc/changeE1",
+      setUserActivityWide: "Calc/setUserActivityWide"
     }),
     onScroll(e) {
       

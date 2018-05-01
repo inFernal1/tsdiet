@@ -114,11 +114,11 @@ export default {
   },
   methods: {
     ...mapMutations({
-      change: "changeE1",
-      setUserPurpose: "setUserPurpose",
-      setUserPurposeWay: "setUserPurposeWay",
-      totalSumCalc:"totalSumCalc",
-      setUserLifting: "setUserLifting"
+      change: "Calc/changeE1",
+      setUserPurpose: "Calc/setUserPurpose",
+      setUserPurposeWay: "Calc/setUserPurposeWay",
+      totalSumCalc:"Calc/totalSumCalc",
+      setUserLifting: "Calc/setUserLifting"
     }),
     stepResult(userLifting) {
         if(userLifting) {
@@ -134,8 +134,8 @@ export default {
   },
   computed: {
     ...mapGetters( {
-      getUserPurpose: "getUserPurpose",
-      getUserPurposeWay: "getUserPurposeWay",
+      getUserPurpose: "Calc/getUserPurpose",
+      getUserPurposeWay: "Calc/getUserPurposeWay",
       
     }),
     userPurpose: {

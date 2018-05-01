@@ -63,7 +63,7 @@ export default {
     },
     computed: {
        ...mapGetters({
-           getUserActivity: 'getUserActivitySimple'
+           getUserActivity: 'Calc/getUserActivitySimple'
        }),
        userActivity: {
            get() {
@@ -76,8 +76,8 @@ export default {
     },
   methods:{
       ...mapMutations({
-          change: 'changeE1',
-          setUserActivity: 'setUserActivitySimple'
+          change: 'Calc/changeE1',
+          setUserActivity: 'Calc/setUserActivitySimple'
       })
   }
 }

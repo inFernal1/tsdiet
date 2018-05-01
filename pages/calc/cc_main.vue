@@ -49,13 +49,13 @@ export default {
   layout: 'default',
   computed: {
     ...mapGetters({
-      getE1: 'getE1',
-      getTypeCalc:'getTypeCalc'
+      getE1: 'Calc/getE1',
+      getTypeCalc:'Calc/getTypeCalc'
     })
   },
   methods:{
     ...mapMutations({
-      changeE1:'changeE1'
+      changeE1:'Calc/changeE1'
     })
   },
   	components: {

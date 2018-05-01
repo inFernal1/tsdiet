@@ -194,8 +194,8 @@ export default {
   },
   methods: {
     ...mapMutations({
-      change: "changeE1",
-      totalSumCalc: "totalSumCalc"
+      change: "Calc/changeE1",
+      totalSumCalc: "Calc/totalSumCalc"
     }),
     converting() {
       this.totalSumCalc("");
@@ -204,10 +204,10 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getResultSum: "getResultSum",
-      getUserPurpose: "getUserPurpose",
-      getPfc: "getPfc",
-      getPfcPercents: "getPfcPercents"
+      getResultSum: "Calc/getResultSum",
+      getUserPurpose: "Calc/getUserPurpose",
+      getPfc: "Calc/getPfc",
+      getPfcPercents: "Calc/getPfcPercents"
     }),
     fillData() {
       return {
