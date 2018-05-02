@@ -15,10 +15,10 @@
         
       </v-layout>
     </v-flex>
-    
+   
     <v-flex>
     <v-layout  justify-center row wrap v-if="filterToggle"> 
-      <v-flex  v-for="(item,index) in filter" :key="index" class="filter-items" >
+      <v-flex  v-for="(item,index) in getFilter" :key="index" class="filter-items" >
         <h3 class="filter-title-item">{{item.title}}</h3>
       <v-select multiple :items = "item.items" v-model="selectedFilter" chips deletable-chips></v-select>
       </v-flex>
@@ -32,16 +32,18 @@
        </v-flex>
          <v-flex d-flex justify-center>
         <v-btn @click="filterToggle = !filterToggle" block>
-          <span v-if="!filterToggle">Показать фильтр</span>
+          <span v-if="!filterToggle">Показать фильтр </span>
            <span v-if="filterToggle">Скрыть фильтр</span>
         <v-icon>filter_list</v-icon>
         </v-btn>
+        
       </v-flex>
       </v-layout>
   </v-container>
 </template>
 <script>
 import drAdd from '~/components/dr_add';
+import { mapGetters } from 'vuex';
 export default {
   
   layout: 'default',
@@ -49,24 +51,13 @@ export default {
     return {
       addActivated: false,
       filterToggle: false,
-      filter: [{
-        title: 'Тип блюда',
-        items: ['Салаты', 'Выпечка', 'Перекусы', 'Вторые блюда','Супы']
-      },
-      {
-        title: 'Время приготовления',
-        items: ['Медленно (более 40 мин.)', 'Средне (20-40 мин.)', 'Быстро (10 - 20 мин.)', 'Очень быстро (менее 10 мин.)']
-      },
-      {
-        title: 'Калорийность',
-        items: ['Низкокалорийные','Среднекалорийные','Высококалорийные']
-      },
-      {
-        title: 'Вегетарианские рецепты?',
-        items: ['Нет', 'Да']
-      }],
       selectedFilter:[]
     }
+  },
+  computed: {
+    ...mapGetters('Recipes',{
+      getFilter:'getFilter'
+    })
   },
   methods: {
     resetFilter() {

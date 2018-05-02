@@ -51,15 +51,15 @@
                   </v-text-field>
                 </v-flex>
                 <v-flex row d-flex align-center>
-                  <v-text-field v-model="ingredient.proteins" label="белков" 
-                  solo suffix="гр." type="number" class="mr-3" :min="0" :rules="ingredientsRules" required>
+                  <v-text-field v-model="ingredient.protein" label="белков" 
+                  solo suffix="гр." type="number" class="mr-3" :min="0"  required>
                   </v-text-field>
-                  <v-text-field v-model="ingredient.fats" label="жиров" 
+                  <v-text-field v-model="ingredient.fat" label="жиров" 
                   solo suffix="гр." type="number" class="mr-3" :min="0"
-                   :rules="ingredientsRules" required>
+                    required>
                   </v-text-field>
-                  <v-text-field v-model="ingredient.carbs" label="углеводов" 
-                  solo suffix="гр." type="number" :min="0" :rules="ingredientsRules" required>
+                  <v-text-field v-model="ingredient.carb" label="углеводов" 
+                  solo suffix="гр." type="number" :min="0"  required>
                   </v-text-field>
                 </v-flex>
               </v-layout>
@@ -94,13 +94,26 @@
             </v-flex>
           </v-layout>
         </v-flex>
-        <v-flex class="add add_tags"></v-flex>
-        <v-flex class="add buttons"></v-flex>
+        <v-flex class="add add_tags">
+           <v-layout  justify-center row wrap > 
+      <v-flex  v-for="(item,index) in getFilter" :key="index" class="filter-items" >
+        <h3 class="filter-title-item">{{item.title}}</h3>
+      <v-select multiple :items = "item.items" v-model="selectedFilter[index]" chips deletable-chips></v-select>
+      </v-flex>
+    </v-layout>
+        </v-flex>
+        <v-flex class="add buttons">
+          <v-layout justify-center>
+          <v-btn color="primary"  style="width:40%" @click="addRecipe">Добавить рецепт</v-btn>
+          <v-btn color="red" dark style="width:40%">Закрыть без сохранения данных</v-btn>
+          </v-layout>
+        </v-flex>
       </v-layout>
     </v-form>
   </v-layout>
 </template>
 <script>
+import { mapGetters } from 'vuex';
   export default {
     data() {
       return {
@@ -112,6 +125,7 @@
         addIngredients: [],
         addSteps: [],
         addTags: [],
+        selectedFilter:[],
         captionRules: [
           v =>
           (v.length > 10 && v.length < 100) ||
@@ -124,6 +138,11 @@
         ],
         requireRules: [v => !!v || "Поле является обязательным"]
       };
+    },
+    computed: {
+      ...mapGetters('Recipes',{
+        getFilter: 'getFilter'
+      })
     },
     methods: {
       onPickFile() {
@@ -146,10 +165,10 @@
       eventAddIngredient() {
         let objIngredients = {
           name: "",
-          portion: "",
-          proteints: "",
-          fats: "",
-          carb: ""
+          portion: 0,
+          protein: 0,
+          fat: 0,
+          carb: 0
         };
         this.addIngredients.push(objIngredients);
       },
@@ -161,6 +180,32 @@
       },
       eventDeleteStep(i) {
         this.addSteps.splice(i, 1);
+      },
+      addRecipe() {
+        let protein = 0;
+          let fat = 0;
+          let carb = 0;
+          let cal = 0;
+          let calHundred = 0;
+          let proteinHundred = 0;
+          let fatHundred = 0;
+          let carbHundred = 0;
+          let allGramms = 0
+        let getAllCalFromIngridients = () => {
+          //let protein = this.addIngredients.reduce((a,b) =>  a.protein + b.protein);
+          //console.log(protein)
+          
+          this.addIngredients.forEach(elem => {
+            protein += +elem.protein;
+            fat += +elem.fat;
+            carb += +elem.carb;
+            allGramms += +elem.portion;
+    
+          });
+          cal = (protein * 4) + (carb * 4)+ (fat * 9);
+          
+        }
+        getAllCalFromIngridients();
       }
     }
   };
@@ -173,8 +218,7 @@
   }
   .add {
     margin-bottom: 20px;
-    border: 1px dotted #009cff;
-    border-bottom: 0;
+    border: 2px solid #0ca600;
     padding: 20px;
   }
   .view_image {
@@ -185,5 +229,17 @@
     padding-bottom: 20px;
     border-bottom: 4px solid #0ca600;
   }
+  .filter-items {
+  margin: 0 20px;
+  max-width: 320px;
+  min-width:280px;
+}
+.filter-title-item {
+  text-align: center;
+}
+.buttons {
+  border:0;
+  padding-bottom: 0;
+}
 </style>
 
