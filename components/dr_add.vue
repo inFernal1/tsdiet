@@ -1,9 +1,9 @@
 <template>
-  <v-layout column class="add_container">
+  <v-layout column class="add_container" >
     <v-flex>
       <h2 class="calc-caption">Добавление рецепта</h2>
     </v-flex>
-    <v-form v-model="valid" ref="form">
+    <v-form v-model="valid" ref="form" >
       <v-layout column>
         <v-flex class="add add_caption">
           <v-text-field label="Введите заголовок рецепта" v-model="addCaption" required :counter="100" :rules="captionRules">
@@ -15,15 +15,6 @@
         </v-flex>
         <v-flex class="add add_image">
           <v-layout column align-center>
-            <!--<v-text-field prepend-icon="attach_file" single-line
-    
-                          v-model="addImage" label="Загрузите изображение" required
-    
-                          :disabled="false" ref="fileTextField"></v-text-field>
-    
-            <input type="file" :accept="true" :multiple="false" :disabled="true"
-    
-                   ref="fileInput" > -->
             <v-flex d-flex class="view_image" ref="image">
               <img :src="imageUrl" height="150" width="150">
             </v-flex>
@@ -51,14 +42,14 @@
                   </v-text-field>
                 </v-flex>
                 <v-flex row d-flex align-center>
-                  <v-text-field v-model="ingredient.protein" label="белков" 
+                  <v-text-field v-model="ingredient.protein" label="белков на 100гр." 
                   solo suffix="гр." type="number" class="mr-3" :min="0"  required>
                   </v-text-field>
-                  <v-text-field v-model="ingredient.fat" label="жиров" 
+                  <v-text-field v-model="ingredient.fat" label="жиров на 100гр." 
                   solo suffix="гр." type="number" class="mr-3" :min="0"
                     required>
                   </v-text-field>
-                  <v-text-field v-model="ingredient.carb" label="углеводов" 
+                  <v-text-field v-model="ingredient.carb" label="углеводов на 100гр." 
                   solo suffix="гр." type="number" :min="0"  required>
                   </v-text-field>
                 </v-flex>
@@ -81,8 +72,8 @@
               <v-layout align-center>
                 <v-flex xs10>
                   <v-text-field :label="'Описание шага ' + (index + 1)"
-                   v-model="addSteps[index]" required :counter="255" 
-                  :rules="describeRules" multi-line>
+                   v-model="addSteps[index]" required  
+                  :rules="requireRules" multi-line>
                   </v-text-field>
                   </v-flex>
                   <v-flex xs2>
@@ -104,8 +95,8 @@
         </v-flex>
         <v-flex class="add buttons">
           <v-layout justify-center>
-          <v-btn color="primary"  style="width:40%" @click="addRecipe">Добавить рецепт</v-btn>
-          <v-btn color="red" dark style="width:40%">Закрыть без сохранения данных</v-btn>
+          <v-btn color="primary"  style="width:40%" @click="addRecipe" :disabled="!valid">Добавить рецепт</v-btn>
+          <v-btn color="red" dark style="width:40%" @click="closeAdding">Закрыть без сохранения данных</v-btn>
           </v-layout>
         </v-flex>
       </v-layout>
@@ -114,6 +105,7 @@
 </template>
 <script>
 import { mapGetters } from 'vuex';
+import axios from 'axios';
   export default {
     data() {
       return {
@@ -164,11 +156,11 @@ import { mapGetters } from 'vuex';
       },
       eventAddIngredient() {
         let objIngredients = {
-          name: "",
-          portion: 0,
-          protein: 0,
-          fat: 0,
-          carb: 0
+          name: '',
+          portion: '',
+          protein: '',
+          fat: '',
+          carb: ''
         };
         this.addIngredients.push(objIngredients);
       },
@@ -192,20 +184,49 @@ import { mapGetters } from 'vuex';
           let carbHundred = 0;
           let allGramms = 0
         let getAllCalFromIngridients = () => {
-          //let protein = this.addIngredients.reduce((a,b) =>  a.protein + b.protein);
-          //console.log(protein)
-          
           this.addIngredients.forEach(elem => {
-            protein += +elem.protein;
-            fat += +elem.fat;
-            carb += +elem.carb;
+            if(elem.portion !== '' && elem.portion > 0 && elem.protein !== '' && elem.fat !== ''
+             && elem.carb !== '') {
+            protein += (+elem.protein * elem.portion / 100);
+            fat += (+elem.fat * elem.portion / 100);
+            carb += (+elem.carb * elem.portion / 100);
             allGramms += +elem.portion;
-    
+            }
           });
-          cal = (protein * 4) + (carb * 4)+ (fat * 9);
-          
+          cal = +((protein * 4) + (carb * 4) + (fat * 9)).toFixed(2);
+          proteinHundred = +(protein * 100 / allGramms).toFixed(2) ;
+          fatHundred = +(fat * 100 / allGramms).toFixed(2);
+          carbHundred = +(carb * 100 / allGramms).toFixed(2);
+          calHundred = +(cal * 100 / allGramms).toFixed(2);
+          console.log(cal)
         }
-        getAllCalFromIngridients();
+           if (this.$refs.form.validate() && 
+           ( this.addIngredients.length > 0 && this.addSteps.length > 0 && this.selectedFilter.length > 0)) {
+             getAllCalFromIngridients();
+          axios.post('/api/submit', {
+            caption: this.addCaption,
+            describe: this.addDescribe,
+            image: this.addImage,
+            ingredients: this.addIngredients,
+            steps:this.addSteps,
+            calories: cal,
+            protein: +protein.toFixed(2),
+            fat: +fat.toFixed(2),
+            carb: + carb.toFixed(2),
+            proteinHundred,
+            fatHundred,
+            carbHundred,
+            calHundred
+          })
+          this.$emit('closeAdd');
+        }
+        else {
+          alert('Заполните все блоки информацией')
+        }
+      },
+      closeAdding() {
+        this.$refs.form.reset();
+        this.$emit('closeAdd');
       }
     }
   };
@@ -215,6 +236,7 @@ import { mapGetters } from 'vuex';
     border: 3px solid #009cff;
     padding: 20px;
     margin-bottom: 20px;
+    width: 960px;
   }
   .add {
     margin-bottom: 20px;

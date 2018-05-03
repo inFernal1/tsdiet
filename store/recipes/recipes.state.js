@@ -15,5 +15,6 @@ const state = {
         title: 'Вегетарианские рецепты?',
         items: ['Нет', 'Да']
       }]
+      
 }
 export default state;

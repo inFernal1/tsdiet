@@ -2,12 +2,12 @@
   <v-container class="container-recipes">
     <v-layout column>
       <v-flex v-if="addActivated">
-          <dr-add></dr-add>
+          <dr-add @closeAdd="addActivated = false"></dr-add>
         </v-flex>
     <v-flex v-if="!addActivated">
       <v-layout row class="recipe-add-link">
         <v-flex d-flex>
-          <v-btn block flat color="success" @click="addActivated = true">
+          <v-btn block flat color="success" @click="addActivated = true" >
             <v-icon color="success" x-large>add</v-icon>
             <span class="add-recipe-link-text">Добавить новый рецепт</span>
             </v-btn>
