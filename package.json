@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.0.0",
+    "body-parser": "^1.18.2",
     "chart.js": "^2.7.2",
     "express": "^4.15.3",
     "nuxt": "^1.0.0",
