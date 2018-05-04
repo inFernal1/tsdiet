@@ -1,15 +1,24 @@
+//const express = require('express')
+//const api = require('./api');
+//const bodyParser = require('body')
+//const { Nuxt, Builder } = require('nuxt')
 import express from 'express'
 import bodyParser from 'body-parser'
 import {
   Nuxt,
   Builder
 } from 'nuxt'
+import api from './api'
 const app = express()
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3000
-
 app.set('port', port)
 
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({
+  extended: true
+}))
+app.use('/api', api)
 // Import and Set Nuxt.js options
 let config = require('../nuxt.config.js')
 config.dev = !(process.env.NODE_ENV === 'production')
