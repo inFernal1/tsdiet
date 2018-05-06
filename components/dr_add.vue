@@ -95,8 +95,7 @@
         </v-flex>
         <v-flex class="add buttons">
           <v-layout justify-center>
-          <v-btn color="primary"  style="width:40%" @click="addRecipe" :disabled="!valid">Добавить рецепт</v-btn>
-          <v-btn color="red" dark style="width:40%" @click="closeAdding">Закрыть без сохранения данных</v-btn>
+          <v-btn color="primary"  block @click="addRecipe" :disabled="!valid">Добавить рецепт</v-btn>
           </v-layout>
         </v-flex>
       </v-layout>
@@ -173,7 +172,7 @@ import axios from 'axios';
       eventDeleteStep(i) {
         this.addSteps.splice(i, 1);
       },
-      async addRecipe() {
+       addRecipe() {
         let protein = 0;
           let fat = 0;
           let carb = 0;
@@ -203,7 +202,7 @@ import axios from 'axios';
            if (this.$refs.form.validate() && 
            ( this.addIngredients.length > 0 && this.addSteps.length > 0 && this.selectedFilter.length > 0)) {
              getAllCalFromIngridients();
-          await axios.post('/api/add-recipe', {
+           axios.post('/', {
             caption: this.addCaption,
             describe: this.addDescribe,
             image: this.addImage,
@@ -217,8 +216,11 @@ import axios from 'axios';
             fatHundred,
             carbHundred,
             calHundred
-          })
-          this.$emit('closeAdd');
+          }).then(function (response) {
+    console.log('axios');
+  }).catch(function (error) {
+    console.log(error);
+  });
         }
         else {
           alert('Заполните все блоки информацией')
@@ -226,7 +228,6 @@ import axios from 'axios';
       },
       closeAdding() {
         this.$refs.form.reset();
-        this.$emit('closeAdd');
       }
     }
   };

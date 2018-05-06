@@ -9,6 +9,31 @@ import {
   Builder
 } from 'nuxt'
 import api from './api'
+import mongoose from 'mongoose'
+
+const Schema = mongoose.Schema;
+mongoose.connect('mongodb://localhost/tsd',err => {
+  if(err) {
+    console.log(err)
+  }
+  console.log('connected db')
+})
+
+const recipesSchema = new Schema({
+  title: {
+    type: 'string'
+  },
+  description : {
+    type: 'string'
+  },
+  image: {
+    type: 'string'
+  },
+  ingredients: {
+
+  }
+})
+
 const app = express()
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3000
@@ -22,7 +47,6 @@ app.use('/api', api)
 // Import and Set Nuxt.js options
 let config = require('../nuxt.config.js')
 config.dev = !(process.env.NODE_ENV === 'production')
-
 async function start() {
   // Init Nuxt.js
   const nuxt = new Nuxt(config)

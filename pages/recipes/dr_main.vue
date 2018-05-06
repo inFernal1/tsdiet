@@ -1,6 +1,7 @@
 <template>
   <v-container class="container-recipes">
-   
+   <v-layout column>
+    <v-flex>
       <v-layout row class="recipe-add-link">
         <v-flex d-flex>
           <v-btn block flat color="success" nuxt to="../administration/add" >
@@ -8,7 +9,8 @@
             <span class="add-recipe-link-text">Добавить новый рецепт</span>
             </v-btn>
         </v-flex>
-   
+      </v-layout>
+    </v-flex>
     <v-flex>
     <v-layout  justify-center row wrap v-if="filterToggle"> 
       <v-flex  v-for="(item,index) in getFilter" :key="index" class="filter-items" >
@@ -54,9 +56,6 @@ export default {
     resetFilter() {
       this.selectedFilter.splice(0)
     }
-  },
-  components: {
-    drAdd
   }
 }
 </script>
