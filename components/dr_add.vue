@@ -172,7 +172,7 @@ import axios from 'axios';
       eventDeleteStep(i) {
         this.addSteps.splice(i, 1);
       },
-       addRecipe() {
+       async addRecipe() {
         let protein = 0;
           let fat = 0;
           let carb = 0;
@@ -202,7 +202,7 @@ import axios from 'axios';
            if (this.$refs.form.validate() && 
            ( this.addIngredients.length > 0 && this.addSteps.length > 0 && this.selectedFilter.length > 0)) {
              getAllCalFromIngridients();
-           axios.post('/', {
+           await axios.post('http://localhost:3000/api/administration/add', {
             caption: this.addCaption,
             describe: this.addDescribe,
             image: this.addImage,

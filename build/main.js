@@ -191,14 +191,10 @@ router.use(__WEBPACK_IMPORTED_MODULE_1__add_recipe__["a" /* default */]);
 
 
 const router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
+router.post('/administration/add', function (req, res, next) {
+  console.log(req.body);
+});
 
-router.post('/', function (req, res, next) {
-  console.log(req.body.caption);
-});
-router.get('/', function (req, res, next) {
-  console.log('nice to meet you');
-  res.send('good for you');
-});
 /* harmony default export */ __webpack_exports__["a"] = (router);
 
 /***/ }),
