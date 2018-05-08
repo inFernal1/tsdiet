@@ -37,20 +37,20 @@
                 <v-flex row d-flex align-center>
                   <v-text-field v-model="ingredient.name" label="Название ингредиента"
                    class="mr-4" :rules="requireRules" required></v-text-field>
-                  <v-text-field v-model="ingredient.portion" label="Количество" 
+                  <v-text-field v-model.number="ingredient.portion" label="Количество" 
                   solo suffix="гр." type="number" :min="0">
                   </v-text-field>
                 </v-flex>
                 <v-flex row d-flex align-center>
-                  <v-text-field v-model="ingredient.protein" label="белков на 100гр." 
+                  <v-text-field v-model.number="ingredient.protein" label="белков на 100гр." 
                   solo suffix="гр." type="number" class="mr-3" :min="0"  required>
                   </v-text-field>
-                  <v-text-field v-model="ingredient.fat" label="жиров на 100гр." 
+                  <v-text-field v-model.number="ingredient.fat" label="жиров на 100гр." 
                   solo suffix="гр." type="number" class="mr-3" :min="0"
                     required>
                   </v-text-field>
-                  <v-text-field v-model="ingredient.carb" label="углеводов на 100гр." 
-                  solo suffix="гр." type="number" :min="0"  required>
+                  <v-text-field v-model.number="ingredient.carb" label="углеводов на 100гр." 
+                  solo suffix="гр." type="number" :min="0"   required>
                   </v-text-field>
                 </v-flex>
               </v-layout>
@@ -68,6 +68,7 @@
               </v-btn>
           </v-layout>
           <v-layout column>
+            
             <v-flex v-for="(step,index) in addSteps" :key="index" class="step_item" >
               <v-layout align-center>
                 <v-flex xs10>
@@ -80,6 +81,7 @@
                   <v-btn fab dark color="red" @click="eventDeleteStep(index)">
                     <v-icon>delete</v-icon>
                   </v-btn>
+                  
                   </v-flex>
                   </v-layout>
             </v-flex>
@@ -115,7 +117,6 @@ import axios from 'axios';
         addImage: null,
         addIngredients: [],
         addSteps: [],
-        addTags: [],
         selectedFilter:[],
         captionRules: [
           v =>
@@ -154,14 +155,7 @@ import axios from 'axios';
         this.addImage = files[0];
       },
       eventAddIngredient() {
-        let objIngredients = {
-          name: '',
-          portion: '',
-          protein: '',
-          fat: '',
-          carb: ''
-        };
-        this.addIngredients.push(objIngredients);
+        this.addIngredients.push({});
       },
       eventDeleteIngredient(i) {
         this.addIngredients.splice(i, 1);
@@ -197,14 +191,13 @@ import axios from 'axios';
           fatHundred = +(fat * 100 / allGramms).toFixed(2);
           carbHundred = +(carb * 100 / allGramms).toFixed(2);
           calHundred = +(cal * 100 / allGramms).toFixed(2);
-          console.log(cal)
         }
            if (this.$refs.form.validate() && 
            ( this.addIngredients.length > 0 && this.addSteps.length > 0 && this.selectedFilter.length > 0)) {
              getAllCalFromIngridients();
            await axios.post('http://localhost:3000/api/administration/add', {
-            caption: this.addCaption,
-            describe: this.addDescribe,
+            title: this.addCaption,
+            description: this.addDescribe,
             image: this.addImage,
             ingredients: this.addIngredients,
             steps:this.addSteps,
@@ -215,9 +208,13 @@ import axios from 'axios';
             proteinHundred,
             fatHundred,
             carbHundred,
-            calHundred
+            calHundred,
+            tags: this.selectedFilter
           }).then(function (response) {
-    console.log('axios');
+            if(response.status === 200) {
+              console.log('Рецепт успешно добавлен')
+    $nuxt._router.push('/recipes/dr_main')
+            }
   }).catch(function (error) {
     console.log(error);
   });

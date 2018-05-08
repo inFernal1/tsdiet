@@ -11,27 +11,12 @@ import {
 import api from './api'
 import mongoose from 'mongoose'
 
-const Schema = mongoose.Schema;
-mongoose.connect('mongodb://localhost/tsd',err => {
+let db = 'mongodb://localhost/tsd'
+mongoose.connect(db,err => {
   if(err) {
     console.log(err)
   }
   console.log('connected db')
-})
-
-const recipesSchema = new Schema({
-  title: {
-    type: 'string'
-  },
-  description : {
-    type: 'string'
-  },
-  image: {
-    type: 'string'
-  },
-  ingredients: {
-
-  }
 })
 
 const app = express()
