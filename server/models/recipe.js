@@ -10,7 +10,7 @@ const recipesSchema = new Schema({
       required: true
     },
     image: {
-      type: Buffer
+      type: String
     },
     ingredients: [{
       name:String,

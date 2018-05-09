@@ -191,8 +191,8 @@ router.post('/administration/add', function (req, res, next) {
     // mongoose.disconnect();
     if (err) return console.log(err);else {
       console.log("Сохранен рецепт");
-      console.log(req.body);
-      res.status(200).end();
+      res.send(200);
+      //res.status(200).end();
     }
   });
 });
@@ -218,7 +218,7 @@ const recipesSchema = new Schema({
     required: true
   },
   image: {
-    type: Buffer
+    type: String
   },
   ingredients: [{
     name: String,

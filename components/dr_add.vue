@@ -13,7 +13,7 @@
           <v-text-field label="Введите описание рецепта" v-model="addDescribe" required :counter="255" :rules="describeRules" multi-line>
           </v-text-field>
         </v-flex>
-        <v-flex class="add add_image">
+        <!--<v-flex class="add add_image">
           <v-layout column align-center>
             <v-flex d-flex class="view_image" ref="image">
               <img :src="imageUrl" height="150" width="150">
@@ -21,6 +21,23 @@
             <v-flex d-flex>
               <v-btn rased class="primary" @click="onPickFile">Загрузить изображение</v-btn>
               <input type="file" ref="fileInput" style="display:none" accept="image/*" @change="onFilePicked"></v-flex>
+          </v-layout>
+        </v-flex>
+        -->
+        <v-flex class="add choose-lvl">
+          <v-layout row align-center>
+            <v-flex xs5 >
+              <span class="choose-lvl-text">Выберите уровень сложности рецепта:</span>
+            </v-flex>
+            <v-flex xs6 class="mt-2">
+              <v-radio-group v-model="imageUrl" row>
+                <v-radio label="1" color="primary" value="~/assets/img/recipes_lvl1.png"></v-radio>
+                <v-radio label="2" color="primary" value="~/assets/img/recipes_lvl2.png"></v-radio>
+                <v-radio label="3" color="primary" value="~/assets/img/recipes_lvl3.png"></v-radio>
+                <v-radio label="4" color="primary" value="~/assets/img/recipes_lvl4.png"></v-radio>
+                <v-radio label="5" color="primary" value="~/assets/img/recipes_lvl5.png"></v-radio>
+              </v-radio-group>
+            </v-flex>
           </v-layout>
         </v-flex>
         <v-flex class="add add_ingredients">
@@ -111,9 +128,9 @@ import axios from 'axios';
     data() {
       return {
         valid: false,
-        imageUrl: "",
-        addCaption: "",
-        addDescribe: "",
+        imageUrl: '~/assets/img/recipes_lvl1.png',
+        addCaption: '',
+        addDescribe: '',
         addImage: null,
         addIngredients: [],
         addSteps: [],
@@ -137,7 +154,7 @@ import axios from 'axios';
       })
     },
     methods: {
-      onPickFile() {
+      /*onPickFile() {
         this.$refs.fileInput.click();
       },
       onFilePicked(event) {
@@ -153,7 +170,7 @@ import axios from 'axios';
         });
         fileReader.readAsDataURL(files[0]);
         this.addImage = files[0];
-      },
+      }, */
       eventAddIngredient() {
         this.addIngredients.push({});
       },
@@ -198,7 +215,7 @@ import axios from 'axios';
            await axios.post('http://localhost:3000/api/administration/add', {
             title: this.addCaption,
             description: this.addDescribe,
-            image: this.addImage,
+            image: this.imageUrl,
             ingredients: this.addIngredients,
             steps:this.addSteps,
             calories: cal,
@@ -260,6 +277,9 @@ import axios from 'axios';
 .buttons {
   border:0;
   padding-bottom: 0;
+}
+.choose-lvl-text {
+  font-size: 1.3em
 }
 </style>
 
