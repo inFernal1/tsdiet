@@ -8,7 +8,7 @@ router.post('/administration/add', function(req,res,next) {
     if(err) return console.log(err);
     else {
     console.log("Сохранен рецепт");
-    res.send(200);
+    res.sendStatus(200);
     //res.status(200).end();
     }
 });
