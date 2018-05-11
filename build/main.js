@@ -120,6 +120,7 @@ app.use(__WEBPACK_IMPORTED_MODULE_1_body_parser___default.a.urlencoded({
   extended: true
 }));
 app.use('/api', __WEBPACK_IMPORTED_MODULE_3__api__["a" /* default */]);
+
 // Import and Set Nuxt.js options
 let config = __webpack_require__(8);
 config.dev = !("development" === 'production');
@@ -162,6 +163,7 @@ module.exports = require("nuxt");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__add_recipe__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__get_recipes__ = __webpack_require__(14);
 //const express = require('express')
 //const router = express.Router();
 //const addRecipe = require('./add-recipe')
@@ -171,6 +173,7 @@ module.exports = require("nuxt");
 const router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
 
 router.use(__WEBPACK_IMPORTED_MODULE_1__add_recipe__["a" /* default */]);
+router.use(__WEBPACK_IMPORTED_MODULE_2__get_recipes__["a" /* default */]);
 
 /* harmony default export */ __webpack_exports__["a"] = (router);
 
@@ -480,6 +483,26 @@ module.exports = require("fs");
 /***/ (function(module, exports) {
 
 module.exports = require("path");
+
+/***/ }),
+/* 14 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_recipe__ = __webpack_require__(7);
+
+
+
+const router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
+
+router.get('/get-recipes', function (req, res, next) {
+    let elemsCount = req.query.elems;
+    __WEBPACK_IMPORTED_MODULE_1__models_recipe__["a" /* default */].find({}).sort({ createdDate: -1 }).skip(elemsCount).limit(5).exec((err, recipes) => res.json(recipes));
+    //console.log(req.query.elems)
+});
+/* harmony default export */ __webpack_exports__["a"] = (router);
 
 /***/ })
 /******/ ]);

@@ -64,13 +64,18 @@
   </v-container>
 </template>
 <script>
+import axios from 'axios'
 import { mapGetters } from "vuex";
 export default {
   layout: "default",
+  async created() {
+    await this.getRecipes();
+  }, 
   data() {
     return {
       filterToggle: false,
-      selectedFilter: []
+      selectedFilter: [],
+      recipes: []
     };
   },
   computed: {
@@ -81,6 +86,19 @@ export default {
   methods: {
     resetFilter() {
       this.selectedFilter.splice(0);
+    },
+    async getRecipes() {
+      await axios.get('http://localhost:3000/api/get-recipes', {
+        params:{
+          elems:this.recipes.length + 5
+        }
+      })
+    .then(response => {
+      if(response.status === 200) {
+        console.log(response.data)
+      }
+    })
+    .catch(error => console.log(error))
     }
   }
 };
