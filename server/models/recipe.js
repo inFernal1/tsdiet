@@ -28,7 +28,7 @@ const recipesSchema = new Schema({
     fatHundred:Number,
     carbHundred:Number,
     calHundred:Number,
-    tags:[[]]
+    tags:[]
 
   })
   const Recipe = mongoose.model('recipe', recipesSchema)

@@ -108,7 +108,7 @@ const recipesSchema = new Schema({
   fatHundred: Number,
   carbHundred: Number,
   calHundred: Number,
-  tags: [[]]
+  tags: []
 
 });
 const Recipe = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('recipe', recipesSchema);
