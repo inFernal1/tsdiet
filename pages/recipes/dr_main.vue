@@ -55,7 +55,7 @@
                    <v-flex>
                      <span class="tags-caption">Характеристика рецептов:</span>
                      <v-chip v-for="(tag,index) in recipe.tags" :key="recipe.tags + index * 10">
-                       <span v-if="index === 3" class="mr-1">Вегетарианские: </span> {{tag[0]}}</v-chip>
+                       <span v-if="index === 3" class="mr-1">Вегетарианские: </span> {{tag}}</v-chip>
                    </v-flex>
                    <v-flex xs12 >
                      <v-btn color="primary" block>Перейти к рецепту</v-btn>
