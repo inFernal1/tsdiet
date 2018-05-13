@@ -1,13 +1,13 @@
 <template>
   <v-app class="tsd_bg">
     <v-card nuxt to="/" flat class="img-link">
-      <img src="~/assets/img/logo.png" alt="logo" width="500" height="70" class="hidden-xs-only tsd-logo" >
+      <img src="/img/logo.png" alt="logo" width="500" height="70" class="hidden-xs-only tsd-logo" >
       </v-card>
   <v-toolbar light  flat class="tsd-border_toolbar tsd_bg hidden-sm-and-up menu-forphone" >
       <v-toolbar-side-icon  @click.native.stop="sideNav = !sideNav"> </v-toolbar-side-icon>
          <v-toolbar-title >
               <nuxt-link to="/">
-              <img src="~/assets/img/logo_s.png" alt="theSmartestDiet" >
+              <img src="/img/logo_s.png" alt="theSmartestDiet" >
               </nuxt-link>
           <!--<span class="tsd-color_black">The</span><span class="tsd-color_blue">Smartest</span><span class="tsd-color_green">Diet</span><span class="tsd-color_black">.ru</span> -->
       </v-toolbar-title>
@@ -71,7 +71,7 @@ export default {
     color:#383838
 }
 .tsd_bg{
-    background: url(~/assets/img/bg_texture.png) repeat;
+    background: url(/img/bg_texture.png) repeat;
     min-width:320px;
 }
 .tsd-logo{

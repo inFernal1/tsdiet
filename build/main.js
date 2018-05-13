@@ -62,7 +62,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -73,141 +73,10 @@ module.exports = require("express");
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports) {
-
-module.exports = require("mongoose");
-
-/***/ }),
-/* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_body_parser__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_body_parser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_body_parser__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_nuxt__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_nuxt___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_nuxt__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__api__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_mongoose__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_mongoose__);
-//const express = require('express')
-//const api = require('./api');
-//const bodyParser = require('body')
-//const { Nuxt, Builder } = require('nuxt')
-
-
-
-
-
-
-let db = 'mongodb://localhost/tsd';
-__WEBPACK_IMPORTED_MODULE_4_mongoose___default.a.connect(db, err => {
-  if (err) {
-    console.log(err);
-  }
-  console.log('connected db');
-});
-
-const app = __WEBPACK_IMPORTED_MODULE_0_express___default()();
-const host = process.env.HOST || '127.0.0.1';
-const port = process.env.PORT || 3000;
-app.set('port', port);
-
-app.use(__WEBPACK_IMPORTED_MODULE_1_body_parser___default.a.json());
-app.use(__WEBPACK_IMPORTED_MODULE_1_body_parser___default.a.urlencoded({
-  extended: true
-}));
-app.use('/api', __WEBPACK_IMPORTED_MODULE_3__api__["a" /* default */]);
-
-// Import and Set Nuxt.js options
-let config = __webpack_require__(8);
-config.dev = !("development" === 'production');
-async function start() {
-  // Init Nuxt.js
-  const nuxt = new __WEBPACK_IMPORTED_MODULE_2_nuxt__["Nuxt"](config);
-
-  // Build only in dev mode
-  if (config.dev) {
-    const builder = new __WEBPACK_IMPORTED_MODULE_2_nuxt__["Builder"](nuxt);
-    await builder.build();
-  }
-
-  // Give nuxt middleware to express
-  app.use(nuxt.render);
-
-  // Listen the server
-  app.listen(port, host);
-  console.log('Server listening on http://' + host + ':' + port); // eslint-disable-line no-console
-}
-start();
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-module.exports = require("body-parser");
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports) {
-
-module.exports = require("nuxt");
-
-/***/ }),
-/* 5 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__add_recipe__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__get_recipes__ = __webpack_require__(14);
-//const express = require('express')
-//const router = express.Router();
-//const addRecipe = require('./add-recipe')
-
-
-
-const router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
-
-router.use(__WEBPACK_IMPORTED_MODULE_1__add_recipe__["a" /* default */]);
-router.use(__WEBPACK_IMPORTED_MODULE_2__get_recipes__["a" /* default */]);
-
-/* harmony default export */ __webpack_exports__["a"] = (router);
-
-/***/ }),
-/* 6 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_recipe__ = __webpack_require__(7);
-
-
-
-const router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
-router.post('/administration/add', function (req, res, next) {
-  __WEBPACK_IMPORTED_MODULE_1__models_recipe__["a" /* default */].create(req.body, function (err) {
-    // mongoose.disconnect();
-    if (err) return console.log(err);else {
-      console.log("Сохранен рецепт");
-      res.sendStatus(200);
-      //res.status(200).end();
-    }
-  });
-});
-
-/* harmony default export */ __webpack_exports__["a"] = (router);
-
-/***/ }),
-/* 7 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
 
 const Schema = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Schema;
@@ -260,12 +129,213 @@ const Recipe = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('recipe', 
             calHundred */
 
 /***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+module.exports = require("mongoose");
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_body_parser__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_body_parser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_body_parser__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_nuxt__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_nuxt___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_nuxt__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__api__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_mongoose__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_mongoose__);
+//const express = require('express')
+//const api = require('./api');
+//const bodyParser = require('body')
+//const { Nuxt, Builder } = require('nuxt')
+
+
+
+
+
+
+let db = 'mongodb://localhost/tsd';
+__WEBPACK_IMPORTED_MODULE_4_mongoose___default.a.connect(db, err => {
+  if (err) {
+    console.log(err);
+  }
+  console.log('connected db');
+});
+
+const app = __WEBPACK_IMPORTED_MODULE_0_express___default()();
+const host = process.env.HOST || '127.0.0.1';
+const port = process.env.PORT || 3000;
+app.set('port', port);
+
+app.use(__WEBPACK_IMPORTED_MODULE_1_body_parser___default.a.json());
+app.use(__WEBPACK_IMPORTED_MODULE_1_body_parser___default.a.urlencoded({
+  extended: true
+}));
+app.use('/api', __WEBPACK_IMPORTED_MODULE_3__api__["a" /* default */]);
+
+// Import and Set Nuxt.js options
+let config = __webpack_require__(10);
+config.dev = !("development" === 'production');
+async function start() {
+  // Init Nuxt.js
+  const nuxt = new __WEBPACK_IMPORTED_MODULE_2_nuxt__["Nuxt"](config);
+
+  // Build only in dev mode
+  if (config.dev) {
+    const builder = new __WEBPACK_IMPORTED_MODULE_2_nuxt__["Builder"](nuxt);
+    await builder.build();
+  }
+
+  // Give nuxt middleware to express
+  app.use(nuxt.render);
+
+  // Listen the server
+  app.listen(port, host);
+  console.log('Server listening on http://' + host + ':' + port); // eslint-disable-line no-console
+}
+start();
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+module.exports = require("body-parser");
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+module.exports = require("nuxt");
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__add_recipe__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__get_recipes__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__filter_recipes__ = __webpack_require__(9);
+//const express = require('express')
+//const router = express.Router();
+//const addRecipe = require('./add-recipe')
+
+
+
+
+const router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
+
+router.use(__WEBPACK_IMPORTED_MODULE_1__add_recipe__["a" /* default */]);
+router.use(__WEBPACK_IMPORTED_MODULE_2__get_recipes__["a" /* default */]);
+router.use(__WEBPACK_IMPORTED_MODULE_3__filter_recipes__["a" /* default */]);
+
+/* harmony default export */ __webpack_exports__["a"] = (router);
+
+/***/ }),
+/* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_recipe__ = __webpack_require__(1);
+
+
+
+const router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
+router.post('/administration/add', function (req, res, next) {
+  __WEBPACK_IMPORTED_MODULE_1__models_recipe__["a" /* default */].create(req.body, function (err) {
+    // mongoose.disconnect();
+    if (err) return console.log(err);else {
+      console.log("Сохранен рецепт");
+      res.sendStatus(200);
+      //res.status(200).end();
+    }
+  });
+});
+
+/* harmony default export */ __webpack_exports__["a"] = (router);
+
+/***/ }),
 /* 8 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_recipe__ = __webpack_require__(1);
+
+
+
+const router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
+
+router.get('/get-recipes', function (req, res, next) {
+  let elemsCount = parseInt(req.query.elems);
+  __WEBPACK_IMPORTED_MODULE_1__models_recipe__["a" /* default */].find({}, { title: 1, description: 1, caloriesHundred: 1, calHundred: 1, proteinHundred: 1, fatHundred: 1, carbHundred: 1, image: 1, tags: 1 }).sort({ createdDate: 1 }).skip(elemsCount).limit(5).exec((err, recipes) => res.json(recipes));
+});
+/* harmony default export */ __webpack_exports__["a"] = (router);
+
+/***/ }),
+/* 9 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_recipe__ = __webpack_require__(1);
+
+
+
+const router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
+
+router.post('/filter-recipes', function (req, res, next) {
+  /*let elemsCount = parseInt(req.query.elems);
+  Recipe.find({},
+    {title:1,description:1,caloriesHundred:1,calHundred:1,proteinHundred:1,fatHundred:1,carbHundred:1,image:1})
+  .sort({createdDate:1})
+  .skip(elemsCount).limit(5).exec((err,recipes) => res.json(recipes)) */
+  //let queryTags = JSON.parse(JSON.stringify(req.query.tags));
+  /*let tagsOne = req.body.tagsOne;
+  let tagsTwo = req.body.tagsTwo;
+  let tagsThree = req.body.tagsThree;
+  let tagsFour = req.body.tagsFour; */
+  let tags = req.body.tags;
+  console.log(tags);
+  let elemsCount = parseInt(req.body.elems);
+  console.log(elemsCount);
+  __WEBPACK_IMPORTED_MODULE_1__models_recipe__["a" /* default */].find({
+    "tags.0": { $in: tags[0] },
+    "tags.1": { $in: tags[1] },
+    "tags.2": { $in: tags[2] },
+    "tags.3": { $in: tags[3]
+      /*$where:function() {
+         for(let i = 0; this.tags.length > i; i++) {
+           if(queryTags[i].length === 0) return true;
+          if(this.tags[i] === queryTags[i][i] 
+            || this.tags[i] === queryTags[i][i+1] 
+            || this.tags[i] === queryTags[i][i+2] 
+            || this.tags[i] === queryTags[i][i+3]) {
+              return true};
+         }
+      }*/
+
+    } }).skip(elemsCount).limit(5).exec((err, recipes) => res.json(recipes));
+});
+/* harmony default export */ __webpack_exports__["a"] = (router);
+
+/***/ }),
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
-const pkg = __webpack_require__(9);
+const pkg = __webpack_require__(11);
 
-const nodeExternals = __webpack_require__(10);
+const nodeExternals = __webpack_require__(12);
 
 module.exports = {
   mode: 'universal',
@@ -327,16 +397,16 @@ module.exports = {
 };
 
 /***/ }),
-/* 9 */
+/* 11 */
 /***/ (function(module, exports) {
 
 module.exports = {"name":"tsd","version":"1.0.0","description":"My funkadelic Nuxt.js project","author":"ILYA TERESHCHENKO","private":true,"scripts":{"dev":"backpack dev","build":"nuxt build && backpack build","start":"cross-env NODE_ENV=production node build/main.js","generate":"nuxt generate"},"dependencies":{"@nuxtjs/axios":"^5.0.0","body-parser":"^1.18.2","chart.js":"^2.7.2","express":"^4.15.3","mongoose":"^5.0.17","nuxt":"^1.0.0","vue-chartjs":"^3.3.1","vuetify":"^0.17.3"},"devDependencies":{"babel-eslint":"^8.2.3","backpack-core":"^0.7.0","cross-env":"^5.0.1","eslint":"^4.19.1","eslint-plugin-import":"^2.11.0","nodemon":"^1.11.0","stylus":"^0.54.5","stylus-loader":"^3.0.1"}}
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var utils = __webpack_require__(11);
+var utils = __webpack_require__(13);
 
 var scopedModuleRegex = new RegExp('@[a-zA-Z0-9][\\w-.]+\/[a-zA-Z0-9][\\w-.]+([a-zA-Z0-9.\/]+)?', 'g');
 
@@ -389,11 +459,11 @@ module.exports = function nodeExternals(options) {
 };
 
 /***/ }),
-/* 11 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var fs = __webpack_require__(12);
-var path = __webpack_require__(13);
+var fs = __webpack_require__(14);
+var path = __webpack_require__(15);
 
 exports.contains = function contains(arr, val) {
     return arr && arr.indexOf(val) !== -1;
@@ -473,36 +543,16 @@ exports.containsPattern = function containsPattern(arr, val) {
 }
 
 /***/ }),
-/* 12 */
+/* 14 */
 /***/ (function(module, exports) {
 
 module.exports = require("fs");
 
 /***/ }),
-/* 13 */
+/* 15 */
 /***/ (function(module, exports) {
 
 module.exports = require("path");
-
-/***/ }),
-/* 14 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_recipe__ = __webpack_require__(7);
-
-
-
-const router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
-
-router.get('/get-recipes', function (req, res, next) {
-    let elemsCount = req.query.elems;
-    __WEBPACK_IMPORTED_MODULE_1__models_recipe__["a" /* default */].find({}).sort({ createdDate: -1 }).skip(elemsCount).limit(5).exec((err, recipes) => res.json(recipes));
-    //console.log(req.query.elems)
-});
-/* harmony default export */ __webpack_exports__["a"] = (router);
 
 /***/ })
 /******/ ]);

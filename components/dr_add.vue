@@ -31,11 +31,11 @@
             </v-flex>
             <v-flex xs6 class="mt-2">
               <v-radio-group v-model="imageUrl" row>
-                <v-radio label="1" color="primary" value="~/assets/img/recipes_lvl1.png"></v-radio>
-                <v-radio label="2" color="primary" value="~/assets/img/recipes_lvl2.png"></v-radio>
-                <v-radio label="3" color="primary" value="~/assets/img/recipes_lvl3.png"></v-radio>
-                <v-radio label="4" color="primary" value="~/assets/img/recipes_lvl4.png"></v-radio>
-                <v-radio label="5" color="primary" value="~/assets/img/recipes_lvl5.png"></v-radio>
+                <v-radio label="1" color="primary" value="/img/recipes_lvl1.png"></v-radio>
+                <v-radio label="2" color="primary" value="/img/recipes_lvl2.png"></v-radio>
+                <v-radio label="3" color="primary" value="/img/recipes_lvl3.png"></v-radio>
+                <v-radio label="4" color="primary" value="/img/recipes_lvl4.png"></v-radio>
+                <v-radio label="5" color="primary" value="/img/recipes_lvl5.png"></v-radio>
               </v-radio-group>
             </v-flex>
           </v-layout>
@@ -108,7 +108,7 @@
            <v-layout  justify-center row wrap > 
       <v-flex  v-for="(item,index) in getFilter" :key="index" class="filter-items" >
         <h3 class="filter-title-item">{{item.title}}</h3>
-      <v-select multiple :items = "item.items" v-model="selectedFilter[index]" chips deletable-chips></v-select>
+      <v-select  :items = "item.items" v-model="selectedFilter[index]" ></v-select>
       </v-flex>
     </v-layout>
         </v-flex>
@@ -128,7 +128,7 @@ import axios from 'axios';
     data() {
       return {
         valid: false,
-        imageUrl: '~/assets/img/recipes_lvl1.png',
+        imageUrl: '/img/recipes_lvl1.png',
         addCaption: '',
         addDescribe: '',
         addImage: null,
@@ -137,8 +137,8 @@ import axios from 'axios';
         selectedFilter:[],
         captionRules: [
           v =>
-          (v.length > 10 && v.length < 100) ||
-          "Знаков не может быть меньше 10 и больше 100"
+          (v.length > 5 && v.length < 100) ||
+          "Знаков не может быть меньше 5 и больше 100"
         ],
         describeRules: [
           v =>
@@ -210,7 +210,7 @@ import axios from 'axios';
           calHundred = +(cal * 100 / allGramms).toFixed(2);
         }
            if (this.$refs.form.validate() && 
-           ( this.addIngredients.length > 0 && this.addSteps.length > 0 && this.selectedFilter.length > 0)) {
+           ( this.addIngredients.length > 0 && this.addSteps.length > 0 && this.selectedFilter.length === 4)) {
              getAllCalFromIngridients();
            await axios.post('http://localhost:3000/api/administration/add', {
             title: this.addCaption,
