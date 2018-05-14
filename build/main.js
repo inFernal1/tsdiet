@@ -222,9 +222,11 @@ module.exports = require("nuxt");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__add_recipe__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__get_recipes__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__filter_recipes__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__get_recipe__ = __webpack_require__(16);
 //const express = require('express')
 //const router = express.Router();
 //const addRecipe = require('./add-recipe')
+
 
 
 
@@ -234,6 +236,7 @@ const router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
 router.use(__WEBPACK_IMPORTED_MODULE_1__add_recipe__["a" /* default */]);
 router.use(__WEBPACK_IMPORTED_MODULE_2__get_recipes__["a" /* default */]);
 router.use(__WEBPACK_IMPORTED_MODULE_3__filter_recipes__["a" /* default */]);
+router.use(__WEBPACK_IMPORTED_MODULE_4__get_recipe__["a" /* default */]);
 
 /* harmony default export */ __webpack_exports__["a"] = (router);
 
@@ -553,6 +556,26 @@ module.exports = require("fs");
 /***/ (function(module, exports) {
 
 module.exports = require("path");
+
+/***/ }),
+/* 16 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_recipe__ = __webpack_require__(1);
+
+
+
+const router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
+
+router.get('/get-recipe', function (req, res, next) {
+    let id = req.query.id;
+    res.send(id);
+});
+
+/* harmony default export */ __webpack_exports__["a"] = (router);
 
 /***/ })
 /******/ ]);
