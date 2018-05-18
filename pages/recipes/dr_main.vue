@@ -58,7 +58,7 @@
                        <span v-if="index === 3" class="mr-1">Вегетарианские: </span> {{tag}}</v-chip>
                    </v-flex>
                    <v-flex xs12 >
-                     <v-btn color="primary" block>Перейти к рецепту</v-btn>
+                     <v-btn color="primary" block nuxt :to="{path:recipe._id}">Перейти к рецепту</v-btn>
                    </v-flex>
                  </v-layout>
                    <v-layout class="recipe-icons" v-if="index !== (recipes.length - 1)">
@@ -71,6 +71,7 @@
         </v-layout>
       </v-flex>
       </v-layout>
+      
   </v-container>
 </template>
 <script>
