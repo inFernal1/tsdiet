@@ -169,7 +169,7 @@ __WEBPACK_IMPORTED_MODULE_4_mongoose___default.a.connect(db, err => {
 
 const app = __WEBPACK_IMPORTED_MODULE_0_express___default()();
 const host = process.env.HOST || '127.0.0.1';
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 3000;
 app.set('port', port);
 
 app.use(__WEBPACK_IMPORTED_MODULE_1_body_parser___default.a.json());
@@ -223,7 +223,6 @@ module.exports = require("nuxt");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__get_recipes__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__filter_recipes__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__get_recipe__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__sign_in__ = __webpack_require__(11);
 //const express = require('express')
 //const router = express.Router();
 //const addRecipe = require('./add-recipe')
@@ -232,14 +231,14 @@ module.exports = require("nuxt");
 
 
 
-
+//import signIn from './sign-in'
 const router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
 
 router.use(__WEBPACK_IMPORTED_MODULE_1__add_recipe__["a" /* default */]);
 router.use(__WEBPACK_IMPORTED_MODULE_2__get_recipes__["a" /* default */]);
 router.use(__WEBPACK_IMPORTED_MODULE_3__filter_recipes__["a" /* default */]);
 router.use(__WEBPACK_IMPORTED_MODULE_4__get_recipe__["a" /* default */]);
-router.use(__WEBPACK_IMPORTED_MODULE_5__sign_in__["a" /* default */]);
+//router.use(signIn)
 
 /* harmony default export */ __webpack_exports__["a"] = (router);
 
@@ -283,7 +282,7 @@ const router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
 
 router.get('/get-recipes', function (req, res, next) {
   let elemsCount = parseInt(req.query.elems);
-  __WEBPACK_IMPORTED_MODULE_1__models_recipe__["a" /* default */].find({}, { title: 1, description: 1, caloriesHundred: 1, calHundred: 1, proteinHundred: 1, fatHundred: 1, carbHundred: 1, image: 1, tags: 1 }).sort({ createdDate: 1 }).skip(elemsCount).limit(5).exec((err, recipes) => {
+  __WEBPACK_IMPORTED_MODULE_1__models_recipe__["a" /* default */].find({}).skip(elemsCount).limit(5).exec((err, recipes) => {
     if (err) return console.log(err);
     res.json(recipes);
   });
@@ -353,25 +352,18 @@ const router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
 
 router.get('/get-recipe/:id', function (req, res, next) {
     let id = req.params.id;
-    __WEBPACK_IMPORTED_MODULE_1__models_recipe__["a" /* default */].findOne({ _id: id }).exec((err, recipe) => res.json(recipe));
+    __WEBPACK_IMPORTED_MODULE_1__models_recipe__["a" /* default */].findById(id).exec().then(doc => {
+        res.status(200).json(doc);
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json({ error: err });
+    });
 });
 
 /* harmony default export */ __webpack_exports__["a"] = (router);
 
 /***/ }),
-/* 11 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-
-
-const router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
-
-/* harmony default export */ __webpack_exports__["a"] = (router);
-
-/***/ }),
+/* 11 */,
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 

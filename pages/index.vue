@@ -88,7 +88,8 @@ export default {
       filterToggle: false,
       selectedFilter: [[],[],[],[]],
       recipes: [],
-      btnFilterActivate:false
+      btnFilterActivate:false,
+      getRecipesController: true
     }
   },
   computed: {
@@ -111,7 +112,9 @@ export default {
            elems = this.recipes.length % 5 === 0 ? this.recipes.length : this.recipes.length + 5;
             
         }
-      await axios.get('/api/get-recipes', {
+        this.getRecipesController = false;
+      await axios.get('http://localhost:3000/api/get-recipes', {
+        //proxy: { host: '127.0.0.1', port: 3000 },
         params:{
           elems
         }
@@ -119,6 +122,7 @@ export default {
     .then(response => {
       if(response.status === 200) {
         this.recipes = this.recipes.concat(response.data);
+        this.getRecipesController = true;
       }
     })
     .catch(error => console.log(error))
@@ -137,8 +141,7 @@ export default {
           }
           return item
         })
-       
-         await axios.post('/api/filter-recipes', {
+        await axios.post('/api/filter-recipes', {
          elems,
           /*tagsOne: this.selectedFilter[0],
           tagsTwo: this.selectedFilter[1],
@@ -175,7 +178,9 @@ export default {
       if( bottomOfPage && pageHeight > visible) {
         
         if(!this.btnFilterActivate) {
+          if(this.getRecipesController === true) {
         this.getRecipes()
+          }
         }
         else {
           this.filterRecipes()
