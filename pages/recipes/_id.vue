@@ -1,12 +1,11 @@
 <template>
   <v-container>
-     <v-layout>
-        <h1>{{recipe.title}}</h1>
-     </v-layout>
+     <view-recipe class="tsd-container" :recipe="recipe"></view-recipe>
   </v-container>
 </template>
 <script>
 import axios from 'axios'
+import viewRecipe from '~/components/view_recipe'
 export default {
   validate({ params }) {
     return String(params.id).length > 10
@@ -21,6 +20,9 @@ export default {
       return {
           
       }
+  },
+  components: {
+    viewRecipe
   }
 }
 </script>

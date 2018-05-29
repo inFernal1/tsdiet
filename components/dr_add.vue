@@ -53,7 +53,7 @@
               <v-layout column>
                 <v-flex row d-flex align-center>
                   <v-text-field v-model="ingredient.name" label="Название ингредиента"
-                   class="mr-4" :rules="requireRules" required></v-text-field>
+                   class="mr-4" :rules="requireRules" required :counter="21"></v-text-field>
                   <v-text-field v-model.number="ingredient.portion" label="Количество" 
                   solo suffix="гр." type="number" :min="0">
                   </v-text-field>
@@ -145,6 +145,11 @@ import axios from 'axios';
           (v.length > 100 && v.length < 255) ||
           "Знаков не может быть меньше 100 и больше 255"
         ],
+        /*ingredientNameRules: [
+          v =>
+          (v.length > 2 && v.length < 22) ||
+          "Знаков не может быть меньше 2 и больше 21"
+        ], */
         requireRules: [v => !!v || "Поле является обязательным"]
       };
     },

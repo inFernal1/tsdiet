@@ -98,7 +98,9 @@ export default {
   },
   methods: {
     resetFilter() {
-      this.selectedFilter.splice(0);
+      for(let i = 0; i < this.selectedFilter.length; i++) {
+      this.selectedFilter[i].splice(0);
+      }
     },
     async getRecipes(createdWatcher) {
       let elems;
