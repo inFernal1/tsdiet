@@ -235,7 +235,7 @@ import axios from 'axios';
           }).then(function (response) {
             if(response.status === 200) {
               console.log('Рецепт успешно добавлен')
-    $nuxt._router.push('/recipes/dr_main')
+    $nuxt._router.push('/')
             }
   }).catch(function (error) {
     console.log(error);

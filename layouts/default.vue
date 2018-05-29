@@ -42,15 +42,14 @@ export default {
     data() {
         return {
             sideNav: false,
-            menuItems: [{
-                icon:'home',title:'Главная', link:'/'
-                },
+            menuItems: [
             {
-                icon:'fitness_center', title:'Калькулятор калорий',  link:'/calc/cc_main'
+                icon:'restaurant', title:'Диетические рецепты',  link:'/'
             },
-            {
-                icon:'restaurant', title:'Диетические рецепты',  link:'/recipes/dr_main'
-            }]
+             {
+                icon:'fitness_center', title:'Калькулятор калорий',  link:'/calc/cc_main'
+            }
+            ]
         }
     }
 }
