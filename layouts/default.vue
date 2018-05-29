@@ -24,7 +24,7 @@
   </v-content>
    <v-navigation-drawer temporary fixed v-model="sideNav">
           <v-list>
-              <v-list-tile v-for="item in menuItems" :key="item.title" router :to="item.link" exact="">
+              <v-list-tile v-for="item in menuItems" :key="item.title" router :to="item.link" exact>
                   <v-list-tile-action>
                       <v-icon>{{item.icon}}</v-icon>
                   </v-list-tile-action>

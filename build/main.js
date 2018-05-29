@@ -169,7 +169,7 @@ __WEBPACK_IMPORTED_MODULE_4_mongoose___default.a.connect(db, err => {
 
 const app = __WEBPACK_IMPORTED_MODULE_0_express___default()();
 const host = process.env.HOST || '127.0.0.1';
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 app.set('port', port);
 
 app.use(__WEBPACK_IMPORTED_MODULE_1_body_parser___default.a.json());
@@ -283,7 +283,10 @@ const router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
 
 router.get('/get-recipes', function (req, res, next) {
   let elemsCount = parseInt(req.query.elems);
-  __WEBPACK_IMPORTED_MODULE_1__models_recipe__["a" /* default */].find({}, { title: 1, description: 1, caloriesHundred: 1, calHundred: 1, proteinHundred: 1, fatHundred: 1, carbHundred: 1, image: 1, tags: 1 }).sort({ createdDate: 1 }).skip(elemsCount).limit(5).exec((err, recipes) => res.json(recipes));
+  __WEBPACK_IMPORTED_MODULE_1__models_recipe__["a" /* default */].find({}, { title: 1, description: 1, caloriesHundred: 1, calHundred: 1, proteinHundred: 1, fatHundred: 1, carbHundred: 1, image: 1, tags: 1 }).sort({ createdDate: 1 }).skip(elemsCount).limit(5).exec((err, recipes) => {
+    if (err) return console.log(err);
+    res.json(recipes);
+  });
 });
 /* harmony default export */ __webpack_exports__["a"] = (router);
 
