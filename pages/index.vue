@@ -67,7 +67,11 @@
             <v-icon color="primary">receipt</v-icon>
           </v-layout>
           </v-flex>
-        
+          <v-flex class="recipes-loading">
+            <v-layout justify-center align-center>
+        <v-progress-circular indeterminate color="green" v-if="getRecipesController === false"></v-progress-circular>
+            </v-layout>
+        </v-flex>
         </v-layout>
       </v-flex>
       </v-layout>
@@ -83,13 +87,19 @@ export default {
     let createdWatcher = true;
     await this.getRecipes(createdWatcher);
   }, 
+  async mounted() {
+let {data} = await axios.get('http://localhost:3000/api/get-count-recipes');
+    console.log(data);
+    this.countDB = data;
+  },
   data() {
     return {
       filterToggle: false,
       selectedFilter: [[],[],[],[]],
       recipes: [],
       btnFilterActivate:false,
-      getRecipesController: true
+      getRecipesController: true,
+      countDB: 0
     }
   },
   computed: {
@@ -164,6 +174,7 @@ export default {
     this.filterRecipes(true)
     },
     onScroll(event) {
+       if(this.recipes.length === this.countDB) return;
       /*let wrapper = this.$refs.wrapper;
       let list = this.$refs.recipeItems;
       let scrollTop = document.documentElement.scrollTop,
@@ -178,6 +189,7 @@ export default {
       if( bottomOfPage && pageHeight > visible) {
         
         if(!this.btnFilterActivate) {
+         
           if(this.getRecipesController === true) {
         this.getRecipes()
           }
@@ -269,6 +281,9 @@ export default {
   padding: 0 5px;
   font-weight: 500;
   font-size: 1.1em;
+}
+.recipes-loading {
+  margin-top: -30px;
 }
 </style>
 
