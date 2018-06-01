@@ -1,13 +1,15 @@
 <template>
-    <v-layout class="container recipe-container" column>
+    <v-layout class="recipe-container mx-auto" column >
         <v-flex xs12><h1 class="recipe-title calc-caption">{{recipe.title}}</h1></v-flex>
         <v-flex>
-            <v-layout row>
-                <v-flex class="ingredients">
+            <v-layout row wrap>
+                <v-flex  fill-height xs12 lg4 md4 sm6>
+                        <figure class="recipe-img-container"> <img :src="recipe.image"   alt="Рецепт"></figure>
+                    <v-layout column class="ingredients">
                     <h3 class="ingredients-title">Ингредиенты</h3>
-                    <v-layout column>
-                        
-                        <v-flex v-for="(ingredient,index) in recipe.ingredients" :key="ingredient.name + index" row d-flex  class="ingredient-item">
+                        <v-flex v-for="(ingredient,index) in recipe.ingredients" 
+                        :key="ingredient.name + index" row d-flex 
+                         class="ingredient-item">
                             <v-layout class="ingredient-icons">
                                 <v-icon small color="success">play_arrow</v-icon>
                             </v-layout>
@@ -15,9 +17,9 @@
                                 <v-flex class="ingredient-block-one"><span class="ingredient-name">{{ingredient.name  + ' '}}</span>
                                  </v-flex>
                                 <v-flex class="ingredient-block-two">
-                                    <span>Б. 16 </span>
-                                    <span>Ж. 18 </span>
-                                    <span>У. 27 </span>
+                                    <span>Б: {{ingredient.protein}}г.|</span>
+                                    <span> Ж: {{ingredient.fat}}г.|</span>
+                                    <span> У: {{ingredient.carb}}г.</span>
                                 </v-flex>
                             </v-layout>
                             <v-layout column class="ingredient-portion">
@@ -27,7 +29,7 @@
                         </v-flex>
                     </v-layout>
                 </v-flex>
-                <v-flex class="steps">
+                <v-flex class="steps" xs12 lg8 md8 sm6>
                      <v-layout column>
                         <v-flex v-for="(step,index) in recipe.steps" :key="step + index">
                             <v-layout>
@@ -43,17 +45,102 @@
                 </v-flex>
             </v-layout>
         </v-flex>
-        <v-flex></v-flex>
-        <v-flex></v-flex>
+        <v-flex>
+                       <h2 class="pfc-captions mt-4">Энергетическая ценность рецепта</h2>
+            <v-layout column class="container-items pt-4">
+                <v-flex>
+                    <v-layout row>
+                        <v-radio-group column v-model="userGramms">
+                            <v-layout row wrap>
+                            <v-flex xs11 lg5>
+                            <v-radio class="pfc-radio" color="success" :value="100">
+                                <div slot="label" class="radio_lbl" >100 грамм
+          </div></v-radio>
+          </v-flex>
+          <v-flex xs11 lg5>
+                            <v-radio class="pfc-radio" color="success" :value="allGramms"><div slot="label" class="radio_lbl" >Весь рецепт
+          </div></v-radio>
+          </v-flex>
+          </v-layout>
+             <v-layout class="pfc-radio">
+                        <!-- <v-radio color="success"  :value="1"><div slot="label" class="radio_lbl">Ваше значение:</div></v-radio>-->
+                    <v-layout row>
+                        <h2 class="mr-3">Ваше значение:</h2>
+                        <v-flex lg8 md11 sm10 xs9>
+                            <v-slider :min="1" :max="allGramms" v-model="userGramms"
+                             thumb-label hint="Установите количество грамм на одну порцию и вам автоматически рассчитается энергетическа ценность порции">
+                             </v-slider>
+                        </v-flex>
+                            <v-flex lg1 md1 sm2 xs3>
+                                 <v-text-field v-model="userGramms" type="number"></v-text-field>
+                            </v-flex>
+                    </v-layout>
+                    </v-layout>
+                        </v-radio-group>
+                    </v-layout>
+                </v-flex>
+                  <v-flex>
+                      <v-layout row wrap >
+                          <v-flex class="tsd-chart" xs11 lg5 md5 sm5>
+                               <chart-pfc :chart-data="fillData" ></chart-pfc>
+                          </v-flex>
+                            <v-flex class="pfc-text" xs11 lg6 md6 sm6>
+                                <div class="pfc-items pfc-calories">Калории: <b>{{recipe.calHundred}}</b></div>
+                    <div class="pfc-items pfc-proteins">Белки: <b>{{recipe.proteinHundred}} г.</b>
+                    </div>
+                    <div class="pfc-items pfc-fats">Жиры: <b>{{recipe.fatHundred}} г.</b>
+                   </div>
+                    <div class="pfc-items pfc-carbs">Углеводы: <b>{{recipe.carbHundred}} г.</b>
+                </div>
+                </v-flex>
+                      </v-layout>
+                  </v-flex>
+              
+                <v-flex>
+
+                </v-flex>
+            </v-layout>
+        </v-flex>
+      
     </v-layout>
 </template>
 <script>
+import ChartPfc from "~/plugins/ChartPfc.js";
 export default {
     props: ['recipe'],
     data() {
         return {
-
+            userGramms: 100,
+            allGramms: 0
         }
+    },
+    mounted() {
+        let allGramms = 0;
+            this.recipe.ingredients.forEach(elem => {
+            if(elem.portion !== '' && elem.portion > 0 && elem.protein !== '' && elem.fat !== ''
+             && elem.carb !== '') {
+                 allGramms += elem.portion;
+            }
+          })
+          this.allGramms = allGramms;
+    },
+    computed: {
+           fillData() {
+      return {
+        labels: ["% белков", "% жиров", "% углеводов"],
+        datasets: [
+          {
+            label: ["% белков", "% жиров", "% углеводов"],
+            backgroundColor: ["#009cff", "orange", "#0ca600"],
+            data: [
+              this.recipe.protein,
+              this.recipe.fat,
+              this.recipe.carb
+            ]
+          }
+        ]
+      };
+    }
     },
     methods: {
         portionLastLetter(val) {
@@ -61,12 +148,21 @@ export default {
             let valLength = (String(val)).length - 1
             return Number(valStr[valLength]) > 1 && Number(valStr[valLength]) < 5
         }
+    },
+    components: {
+        ChartPfc
+    },
+    watch:{
+        allGramms() {
+            
+        }
     }
 }
 </script>
 <style scoped>
 .recipe-container {
    max-width:960px;
+   
 }
 .recipe-title {
     text-align:center;
@@ -75,8 +171,8 @@ export default {
     border: 2px solid #0ca600;
  border-right: 3px solid #009cff;
   border-left: 3px solid #009cff;
-  margin-right: 20px;
-  min-width:300px;
+  margin-right: 40px;
+  min-width:275px;
 }
 .ingredient-block-one {
   
@@ -102,13 +198,16 @@ export default {
 .ingredient-item {
     border-bottom: 3px solid #0ca600;
 }
+.ingredient-item:last-child {
+    border-bottom: 1px solid #0ca600;
+}
 .ingredient-data {
-    flex-grow: 330;
+    min-width:185px;
 }
 .ingredient-portion{
     padding: 5px;
     text-align: center;
-    width:70px;
+    min-width:65px;
     border-left:2px solid #009cff;
 }
 .ingredient-portion span{
@@ -124,5 +223,81 @@ export default {
 .steps-fieldset legend {
     font-size: 1.3em;
     margin-left: 50px;
+}
+.recipe-img-container {
+  margin-bottom: 30px;
+    
+}
+.container-items {
+  margin-bottom: 30px;
+  border-left: 4px solid #009cff;
+  border-right: 4px solid #009cff;
+  border-bottom: 2px solid #0ca600;
+  border-top: 2px solid #0ca600;
+}
+.pfc-captions {
+  font-size: calc( (100vw - 480px)/(1280 - 480) * (22 - 14) + 18px);
+  text-align: center;
+  font-weight: 300;
+  padding: 5px;
+  border-left: 4px solid #009cff;
+  border-right: 4px solid #009cff;
+  border-top: 2px solid #0ca600;
+}
+.tsd-chart {
+  width: 100%;
+  height: 100%;
+  margin: 0px 20px 40px 20px;
+}
+.pfc-text {
+  font-size: 1.3em;
+  margin: auto auto;
+  text-align: center;
+}
+.pfc-items {
+  border: 2px solid #0ca600;
+  padding: 15px;
+  margin-bottom: 30px;
+}
+.pfc-proteins {
+  border-color: #009cff;
+  border-top: 2px solid #009cff;
+}
+.pfc-proteins b {
+  color: #009cff;
+}
+.pfc-fats {
+  border-color: orange;
+}
+.pfc-calories {
+    border-color: rgb(0, 95, 24);
+}
+.pfc-calories b {
+  color: rgb(0, 95, 24);
+}
+.pfc-fats b {
+  color: orange;
+}
+.pfc-carbs b {
+  color: #0ca600;
+}
+
+.pfc-myself {
+  margin: auto auto;
+}
+.pfc-radio {
+    
+    padding: 15px;
+    margin: 10px 40px;
+}
+.radio_lbl {
+    font-size: 1.4em;
+    color: #353535;
+    margin-left: 20px;
+}
+@media (max-width: 960px) {
+    .recipe-img-container {
+        text-align: center;
+    }
 }
 </style>

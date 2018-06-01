@@ -179,7 +179,7 @@ app.use(__WEBPACK_IMPORTED_MODULE_1_body_parser___default.a.urlencoded({
 app.use('/api', __WEBPACK_IMPORTED_MODULE_3__api__["a" /* default */]);
 
 // Import and Set Nuxt.js options
-let config = __webpack_require__(11);
+let config = __webpack_require__(12);
 config.dev = !("development" === 'production');
 async function start() {
   // Init Nuxt.js
@@ -223,7 +223,7 @@ module.exports = require("nuxt");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__get_recipes__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__filter_recipes__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__get_recipe__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__get_count_recipes__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__get_count_recipes__ = __webpack_require__(11);
 //const express = require('express')
 //const router = express.Router();
 //const addRecipe = require('./add-recipe')
@@ -373,11 +373,32 @@ router.get('/get-recipe/:id', function (req, res, next) {
 
 /***/ }),
 /* 11 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_recipe__ = __webpack_require__(1);
+
+
+
+const router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
+
+router.get('/get-count-recipes', (req, res, next) => {
+  __WEBPACK_IMPORTED_MODULE_1__models_recipe__["a" /* default */].count({}, (err, count) => {
+    if (err) return console.log(err);
+    res.json(count);
+  });
+});
+/* harmony default export */ __webpack_exports__["a"] = (router);
+
+/***/ }),
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
-const pkg = __webpack_require__(12);
+const pkg = __webpack_require__(13);
 
-const nodeExternals = __webpack_require__(13);
+const nodeExternals = __webpack_require__(14);
 
 module.exports = {
   mode: 'universal',
@@ -439,16 +460,16 @@ module.exports = {
 };
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports) {
 
 module.exports = {"name":"tsd","version":"1.0.0","description":"My funkadelic Nuxt.js project","author":"ILYA TERESHCHENKO","private":true,"scripts":{"dev":"backpack dev","build":"nuxt build && backpack build","start":"cross-env NODE_ENV=production node build/main.js","generate":"nuxt generate"},"dependencies":{"@nuxtjs/axios":"^5.0.0","body-parser":"^1.18.2","chart.js":"^2.7.2","express":"^4.15.3","express-session":"^1.15.6","mongoose":"^5.0.17","nuxt":"^1.0.0","vue-chartjs":"^3.3.1","vuetify":"^1.0.18"},"devDependencies":{"babel-eslint":"^8.2.3","backpack-core":"^0.7.0","cross-env":"^5.0.1","eslint":"^4.19.1","eslint-plugin-import":"^2.11.0","nodemon":"^1.11.0","stylus":"^0.54.5","stylus-loader":"^3.0.1"}}
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var utils = __webpack_require__(14);
+var utils = __webpack_require__(15);
 
 var scopedModuleRegex = new RegExp('@[a-zA-Z0-9][\\w-.]+\/[a-zA-Z0-9][\\w-.]+([a-zA-Z0-9.\/]+)?', 'g');
 
@@ -501,11 +522,11 @@ module.exports = function nodeExternals(options) {
 };
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var fs = __webpack_require__(15);
-var path = __webpack_require__(16);
+var fs = __webpack_require__(16);
+var path = __webpack_require__(17);
 
 exports.contains = function contains(arr, val) {
     return arr && arr.indexOf(val) !== -1;
@@ -585,37 +606,16 @@ exports.containsPattern = function containsPattern(arr, val) {
 }
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports) {
 
 module.exports = require("fs");
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports) {
 
 module.exports = require("path");
-
-/***/ }),
-/* 17 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_recipe__ = __webpack_require__(1);
-
-
-
-const router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
-
-router.get('/get-count-recipes', (req, res, next) => {
-  __WEBPACK_IMPORTED_MODULE_1__models_recipe__["a" /* default */].count({}, (err, count) => {
-    if (err) return console.log(err);
-    res.json(count);
-  });
-});
-/* harmony default export */ __webpack_exports__["a"] = (router);
 
 /***/ })
 /******/ ]);
