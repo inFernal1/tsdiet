@@ -88,7 +88,7 @@ export default {
     await this.getRecipes(createdWatcher);
   }, 
   async mounted() {
-let {data} = await axios.get('http://localhost:3000/api/get-count-recipes');
+let {data} = await axios.get('http://127.0.0.1:3000/api/get-count-recipes');
     console.log(data);
     this.countDB = data;
   },
@@ -123,7 +123,7 @@ let {data} = await axios.get('http://localhost:3000/api/get-count-recipes');
             
         }
         this.getRecipesController = false;
-      await axios.get('http://localhost:3000/api/get-recipes', {
+      await axios.get('http://127.0.0.1:3000/api/get-recipes', {
         //proxy: { host: '127.0.0.1', port: 3000 },
         params:{
           elems
@@ -151,7 +151,7 @@ let {data} = await axios.get('http://localhost:3000/api/get-count-recipes');
           }
           return item
         })
-        await axios.post('/api/filter-recipes', {
+        await axios.post('http://127.0.0.1:3000/api/filter-recipes', {
          elems,
           /*tagsOne: this.selectedFilter[0],
           tagsTwo: this.selectedFilter[1],
@@ -284,6 +284,15 @@ let {data} = await axios.get('http://localhost:3000/api/get-count-recipes');
 }
 .recipes-loading {
   margin-top: -30px;
+}
+@media (max-width:600px) {
+    .container-recipes{
+        padding: 0;
+    }
+    .recipe-item{
+      border-left: 0;
+      border-right: 0;
+    }
 }
 </style>
 

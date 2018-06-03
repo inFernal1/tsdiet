@@ -52,27 +52,27 @@
                     <v-layout row>
                         <v-radio-group column v-model="userGramms">
                             <v-layout row wrap>
-                            <v-flex xs11 lg5>
+                            <v-flex xs11 lg3 md3 sm4>
                             <v-radio class="pfc-radio" color="success" :value="100">
                                 <div slot="label" class="radio_lbl" >100 грамм
           </div></v-radio>
           </v-flex>
-          <v-flex xs11 lg5>
+          <v-flex xs11 lg5 md5 sm6>
                             <v-radio class="pfc-radio" color="success" :value="allGramms"><div slot="label" class="radio_lbl" >Весь рецепт
           </div></v-radio>
           </v-flex>
           </v-layout>
              <v-layout class="pfc-radio">
                         <!-- <v-radio color="success"  :value="1"><div slot="label" class="radio_lbl">Ваше значение:</div></v-radio>-->
-                    <v-layout row>
-                        <h2 class="mr-3">Ваше значение:</h2>
-                        <v-flex lg8 md11 sm10 xs9>
-                            <v-slider :min="1" :max="allGramms" v-model="userGramms"
+                    <v-layout row wrap>
+                        <v-flex xs12 lg12><h2 class="mr-3 caption-user-gramms">Ваше значение:</h2></v-flex>
+                        <v-flex lg10 md10 sm10 xs12>
+                            <v-slider :min="1" :max="allGramms" v-model="userGramms" class="mt-2"
                              thumb-label hint="Установите количество грамм на одну порцию и вам автоматически рассчитается энергетическа ценность порции">
                              </v-slider>
                         </v-flex>
-                            <v-flex lg1 md1 sm2 xs3>
-                                 <v-text-field v-model="userGramms" type="number"></v-text-field>
+                            <v-flex lg2 md2 sm2 xs12>
+                                 <v-text-field v-model="userGramms" type="number" solo></v-text-field>
                             </v-flex>
                     </v-layout>
                     </v-layout>
@@ -85,12 +85,14 @@
                                <chart-pfc :chart-data="fillData" ></chart-pfc>
                           </v-flex>
                             <v-flex class="pfc-text" xs11 lg6 md6 sm6>
-                                <div class="pfc-items pfc-calories">Калории: <b>{{recipe.calHundred}}</b></div>
-                    <div class="pfc-items pfc-proteins">Белки: <b>{{recipe.proteinHundred}} г.</b>
+                                <div class="pfc-items pfc-carbs">Грамм: <b>{{userGramms}}</b>
+                </div>
+                                <div class="pfc-items pfc-calories">Калории: <b>{{userCal}}</b></div>
+                    <div class="pfc-items pfc-proteins">Белки: <b>{{userProteins}} г.</b>
                     </div>
-                    <div class="pfc-items pfc-fats">Жиры: <b>{{recipe.fatHundred}} г.</b>
-                   </div>
-                    <div class="pfc-items pfc-carbs">Углеводы: <b>{{recipe.carbHundred}} г.</b>
+                    <div class="pfc-items pfc-fats">Жиры: <b>{{userFats}} г.</b>
+                    </div>
+                    <div class="pfc-items pfc-carbs">Углеводы: <b>{{userCarbs}} г.</b>
                 </div>
                 </v-flex>
                       </v-layout>
@@ -111,7 +113,11 @@ export default {
     data() {
         return {
             userGramms: 100,
-            allGramms: 0
+            allGramms: 0,
+            userProteins: 0,
+            userFats: 0,
+            userCarbs:0,
+            userCal:0
         }
     },
     mounted() {
@@ -123,6 +129,11 @@ export default {
             }
           })
           this.allGramms = allGramms;
+          this.userGramms = 100;
+          this.userProteins = this.recipe.proteinHundred;
+            this.userFats = this.recipe.fatHundred;
+            this.userCarbs = this.recipe.carbHundred;
+            this.userCal = this.recipe.calHundred;
     },
     computed: {
            fillData() {
@@ -133,9 +144,9 @@ export default {
             label: ["% белков", "% жиров", "% углеводов"],
             backgroundColor: ["#009cff", "orange", "#0ca600"],
             data: [
-              this.recipe.protein,
-              this.recipe.fat,
-              this.recipe.carb
+              this.userProteins,
+              this.userFats,
+              this.userCarbs
             ]
           }
         ]
@@ -153,8 +164,15 @@ export default {
         ChartPfc
     },
     watch:{
-        allGramms() {
-            
+        userGramms(value) {
+             this.userProteins = this.recipe.proteinHundred;
+            this.userFats = this.recipe.fatHundred;
+            this.userCarbs = this.recipe.carbHundred;
+            this.userCal = this.recipe.calHundred;
+            this.userProteins = ((this.userProteins / 100) * value).toFixed(2);
+            this.userCarbs = ((this.userCarbs / 100) * value).toFixed(2);
+            this.userFats = ((this.userFats / 100) * value).toFixed(2);
+            this.userCal = ((this.userCal / 100) * value).toFixed(2);
         }
     }
 }
@@ -207,7 +225,7 @@ export default {
 .ingredient-portion{
     padding: 5px;
     text-align: center;
-    min-width:65px;
+    min-width:71px;
     border-left:2px solid #009cff;
 }
 .ingredient-portion span{
@@ -295,9 +313,22 @@ export default {
     color: #353535;
     margin-left: 20px;
 }
+.caption-user-gramms {
+    font-weight: 400;
+    color: #353535;
+}
 @media (max-width: 960px) {
     .recipe-img-container {
         text-align: center;
+    }
+}
+@media (max-width:600px) {
+    .caption-user-gramms {
+        font-size: 1.3em;
+    }
+    .pfc-radio {
+        margin: 0 10px;
+        padding:5px;
     }
 }
 </style>

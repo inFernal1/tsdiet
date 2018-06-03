@@ -217,7 +217,7 @@ import axios from 'axios';
            if (this.$refs.form.validate() && 
            ( this.addIngredients.length > 0 && this.addSteps.length > 0 && this.selectedFilter.length === 4)) {
              getAllCalFromIngridients();
-           await axios.post('http://localhost:3000/api/administration/add', {
+           await axios.post('http://127.0.0.1:3000/api/administration/add', {
             title: this.addCaption,
             description: this.addDescribe,
             image: this.imageUrl,
