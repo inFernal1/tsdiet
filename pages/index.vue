@@ -1,7 +1,7 @@
 <template>
   <v-container class="container-recipes" v-scroll="onScroll" >
    <v-layout column ref="wrapper">
-    <v-flex>
+    <v-flex v-if="$store.state.authAdmin">
       <v-layout row class="recipe-add-link">
         <v-flex d-flex>
           <v-btn block flat color="success" nuxt to="/administration/add" >

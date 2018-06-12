@@ -1,5 +1,6 @@
 const pkg = require('./package')
-
+import bodyParser from 'body-parser'
+import session from 'express-session'
 const nodeExternals = require('webpack-node-externals')
 
 module.exports = {
@@ -74,5 +75,19 @@ module.exports = {
         ]
       }
     }
-  }
+  },
+  /*serverMiddleware: [
+    // body-parser middleware
+    bodyParser.json(),
+    // session middleware
+    session({
+      secret: 'super-secret-key',
+      resave: false,
+      saveUninitialized: false,
+      cookie: { maxAge: 60000 }
+    }),
+    // Api middleware
+    // We add /api/login & /api/logout routes
+    '~/server/api/auth'
+  ] */
 }

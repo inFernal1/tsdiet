@@ -10,6 +10,7 @@ import {
 } from 'nuxt'
 import api from './api'
 import mongoose from 'mongoose'
+import session from 'express-session'
 
 let db = 'mongodb://localhost/tsd'
 mongoose.connect(db,err => {
@@ -28,7 +29,15 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
   extended: true
 }))
+app.use(session({
+  secret: 'super-secret-key',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 60000 }
+}))
+
 app.use('/api', api)
+
 
 // Import and Set Nuxt.js options
 let config = require('../nuxt.config.js')

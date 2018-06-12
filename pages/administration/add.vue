@@ -6,6 +6,7 @@
 <script>
   import DrAdd from '~/components/dr_add'
 export default {
+  middleware: 'auth',
     components: {
         DrAdd
     }
