@@ -51,3 +51,4 @@ async function start() {
   console.log('Server listening on http://' + host + ':' + port) // eslint-disable-line no-console
 }
 start()
+module.exports = app
