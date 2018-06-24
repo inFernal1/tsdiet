@@ -103,15 +103,29 @@
                 </v-flex>
             </v-layout>
         </v-flex>
-      
+       <v-flex v-if="$store.state.authAdmin">
+            <v-btn block color="red" dark @click="deleleAccess = true">Удалить рецепт</v-btn>
+        </v-flex>
+         <v-dialog v-model="deleleAccess" max-width="290">
+      <v-card>
+        <v-card-title class="headline">Вы действительно хотите удалить рецепт?</v-card-title>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="red darken-1" flat="flat" @click.native="deleteRecipe">Да</v-btn>
+          <v-btn color="green darken-1" flat="flat" @click.native="deleleAccess = false">Нет</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     </v-layout>
 </template>
 <script>
 import ChartPfc from "~/plugins/ChartPfc.js";
+import axios from "axios"
 export default {
     props: ['recipe'],
     data() {
         return {
+            deleleAccess:false,
             userGramms: 100,
             allGramms: 0,
             userProteins: 0,
@@ -158,7 +172,18 @@ export default {
             let valStr = String(val)
             let valLength = (String(val)).length - 1
             return Number(valStr[valLength]) > 1 && Number(valStr[valLength]) < 5
-        }
+        },
+        async deleteRecipe() {
+            this.deleleAccess = false;
+            await axios.delete('http://127.0.0.1:3000/api/administration/delete-recipe/' + this.recipe._id)
+            .then(response => {
+            if(response.status === 200) { 
+                console.log('Рецепт успешно удален');
+            $nuxt._router.push('/')
+            }
+            })
+            .catch(err => console.log(err))
+    }
     },
     components: {
         ChartPfc

@@ -1,7 +1,7 @@
 <template>
   <v-app class="tsd_bg">
     <v-card nuxt to="/" flat class="img-link">
-      <img src="/img/logo.png" alt="logo" width="500" height="70" class="hidden-xs-only tsd-logo" >
+      <img src="/img/logo.png" alt="logo"  class="hidden-xs-only tsd-logo" >
       </v-card>
   <v-toolbar light  flat class="tsd-border_toolbar tsd_bg hidden-sm-and-up menu-forphone" >
       <v-toolbar-side-icon  @click.native.stop="sideNav = !sideNav"> </v-toolbar-side-icon>
@@ -32,7 +32,25 @@
               </v-list-tile>
           </v-list>
       </v-navigation-drawer>
-  <v-footer app></v-footer>
+  <v-footer height="auto" class="footer-container py-2 mt-5">
+      <v-layout class="text-xs-center footer-card_container" column>
+          <v-flex class="pt-0">
+             <a href="/tsdiet-soglashenie.pdf">Соглашение</a> 
+          </v-flex>
+          <v-flex class="pt-1">
+              Сайт предназначен для информационных целей и не является заменой медицинской консультации.
+          </v-flex>
+          <v-flex class=" pt-1">
+             Копирование и распространение информации разрешено при условии активной ссылки.
+          </v-flex>
+          <v-flex class=" pt-1">
+             <span>По любым вопросам, касаемых работы данного сайта, пишите нам на <a href="mailto:info@tsdiet.ru">info@tsdiet.ru</a></span> 
+          </v-flex>
+          <v-flex class="pt-1">
+             &copy; 2018 TheSmartestDiet
+          </v-flex>
+      </v-layout>
+  </v-footer>
 </v-app>
 </template>
 
@@ -80,7 +98,6 @@ export default {
 .img-link{
   background-color: rgba(0, 0, 255, 0);
   margin: 0 auto;
-  width: 500px;
 }
 .main-links {
 display: flex;
@@ -121,6 +138,16 @@ align-items: center;
   opacity: 0;
   transform-origin: 50% 50%;
 }
-
+.footer-card_container {
+    margin: auto;
+    max-width: 960px;
+    color: #383838;
+    font-size: 1em;
+}
+.footer-container {
+     background: url(/img/bg_texture.png) repeat !important;
+    border-top: 3px solid #009cff;
+    border-bottom: 3px solid #0ca600;
+}
 </style>
 

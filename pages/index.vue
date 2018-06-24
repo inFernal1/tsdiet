@@ -89,7 +89,6 @@ export default {
   }, 
   async mounted() {
 let {data} = await axios.get('http://127.0.0.1:3000/api/get-count-recipes');
-    console.log(data);
     this.countDB = data;
   },
   data() {
@@ -151,6 +150,7 @@ let {data} = await axios.get('http://127.0.0.1:3000/api/get-count-recipes');
           }
           return item
         })
+        this.getRecipesController = false;
         await axios.post('http://127.0.0.1:3000/api/filter-recipes', {
          elems,
           /*tagsOne: this.selectedFilter[0],
@@ -161,7 +161,7 @@ let {data} = await axios.get('http://127.0.0.1:3000/api/get-count-recipes');
       })
     .then(response => {
       if(response.status === 200) {
-       
+       this.getRecipesController = true;
         this.recipes = this.recipes.concat(response.data);
       }
     })
@@ -195,7 +195,9 @@ let {data} = await axios.get('http://127.0.0.1:3000/api/get-count-recipes');
           }
         }
         else {
+          if(this.getRecipesController === true) {
           this.filterRecipes()
+          }
         }
       }
     }

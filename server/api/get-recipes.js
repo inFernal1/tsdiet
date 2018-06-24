@@ -14,7 +14,6 @@ router.get('/get-recipes', (req,res,next) => {
     Recipe.find({})
     .skip(elemsCount).limit(5).exec((err,recipes) => {
       if (err) return console.log(err);
-     
       res.json(recipes)
     })
 

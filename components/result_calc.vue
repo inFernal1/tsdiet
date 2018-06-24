@@ -37,12 +37,14 @@
                     <v-layout row wrap class="mx-4">
                     <v-flex>
                     <v-text-field type="number" v-model="pfcMyselfValue" 
-                    label="Ручной ввод калорийности:"
+                    :rules="[(val) => (val > getResultSum.calBasic || val.length === 0) 
+                    || 'Введенное значение не может быть ниже значения вашего базового обмена']"
+                    label="Ваше значение"
                     suffix="ккал" ></v-text-field>
                     </v-flex>
                     <v-flex>
-                        <v-layout justify-center>
-                            <v-btn color="primary" @click="totalSumCalc(pfcMyselfValue)">Пересчитать</v-btn>
+                        <v-layout justify-center wrap>
+                            <v-btn color="primary" @click="totalSumCalc(pfcMyselfValue)" :disabled="chkPfcMyself">Пересчитать</v-btn>
                    <v-btn color="primary"  @click="converting">Сбросить БЖУ</v-btn>
                      </v-layout>
                 </v-flex>
@@ -209,6 +211,9 @@ export default {
       getPfc: "Calc/getPfc",
       getPfcPercents: "Calc/getPfcPercents"
     }),
+    chkPfcMyself() {
+      if((this.pfcMyselfValue.length === 0) || this.pfcMyselfValue < this.getResultSum.calBasic) return true;
+    },
     fillData() {
       return {
         labels: ["% белков", "% жиров", "% углеводов"],

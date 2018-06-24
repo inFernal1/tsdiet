@@ -266,7 +266,7 @@ app.use((0, _expressSession2.default)({
 app.use('/api', _api2.default);
 
 // Import and Set Nuxt.js options
-var config = __webpack_require__(18);
+var config = __webpack_require__(19);
 config.dev = !("development" === 'production');
 
 start();
@@ -1096,6 +1096,10 @@ var _auth = __webpack_require__(16);
 
 var _auth2 = _interopRequireDefault(_auth);
 
+var _deleteRecipe = __webpack_require__(18);
+
+var _deleteRecipe2 = _interopRequireDefault(_deleteRecipe);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var router = (0, _express.Router)();
@@ -1106,6 +1110,7 @@ router.use(_filterRecipes2.default);
 router.use(_getRecipe2.default);
 router.use(_getCountRecipes2.default);
 router.use(_auth2.default);
+router.use(_deleteRecipe2.default);
 
 exports.default = router;
 
@@ -1172,7 +1177,6 @@ router.get('/get-recipes', function (req, res, next) {
   var elemsCount = parseInt(req.query.elems);
   _recipe2.default.find({}).skip(elemsCount).limit(5).exec(function (err, recipes) {
     if (err) return console.log(err);
-
     res.json(recipes);
   });
 });
@@ -1200,11 +1204,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = (0, _express.Router)();
 
 router.post('/filter-recipes', function (req, res, next) {
-
     var tags = req.body.tags;
-    console.log(tags);
     var elemsCount = parseInt(req.body.elems);
-    console.log(elemsCount);
     _recipe2.default.find({
         "tags.0": { $in: tags[0] },
         "tags.1": { $in: tags[1] },
@@ -1346,6 +1347,38 @@ exports.default = Admin;
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _express = __webpack_require__(0);
+
+var _recipe = __webpack_require__(1);
+
+var _recipe2 = _interopRequireDefault(_recipe);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var router = (0, _express.Router)();
+
+router.delete('/administration/delete-recipe/:id', function (req, res, next) {
+    var id = req.params.id;
+    _recipe2.default.deleteOne({ _id: id }).then(function () {
+        res.sendStatus(200);
+    }).catch(function (err) {
+        return console.log(err);
+    });
+});
+
+exports.default = router;
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 var _bodyParser = __webpack_require__(3);
 
 var _bodyParser2 = _interopRequireDefault(_bodyParser);
@@ -1356,9 +1389,9 @@ var _expressSession2 = _interopRequireDefault(_expressSession);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var pkg = __webpack_require__(19);
+var pkg = __webpack_require__(20);
 
-var nodeExternals = __webpack_require__(20);
+var nodeExternals = __webpack_require__(21);
 
 module.exports = {
   mode: 'universal',
@@ -1434,16 +1467,16 @@ module.exports = {
 };
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports) {
 
 module.exports = {"name":"tsd","version":"1.0.0","description":"My funkadelic Nuxt.js project","author":"ILYA TERESHCHENKO","private":true,"scripts":{"dev":"backpack dev","build":"nuxt build && backpack build","start":"cross-env NODE_ENV=production node build/main.js","generate":"nuxt generate","test":"mocha -100000 --compilers js:babel-core/register ./test/*.js"},"dependencies":{"@nuxtjs/axios":"^5.0.0","babel-polyfill":"^6.26.0","body-parser":"^1.18.2","chart.js":"^2.7.2","express":"^4.15.3","express-session":"^1.15.6","mongoose":"^5.0.17","nuxt":"^1.0.0","vue-chartjs":"^3.3.1","vuetify":"^1.0.18"},"devDependencies":{"babel-core":"^6.26.3","babel-eslint":"^8.2.3","babel-preset-es2015":"^6.24.1","babel-preset-stage-0":"^6.24.1","backpack-core":"^0.7.0","chai":"^4.1.2","chai-http":"^4.0.0","cross-env":"^5.0.1","eslint":"^4.19.1","eslint-plugin-import":"^2.11.0","mocha":"^5.2.0","nodemon":"^1.11.0","should":"^13.2.1","stylus":"^0.54.5","stylus-loader":"^3.0.1","supertest":"^3.1.0"}}
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var utils = __webpack_require__(21);
+var utils = __webpack_require__(22);
 
 var scopedModuleRegex = new RegExp('@[a-zA-Z0-9][\\w-.]+\/[a-zA-Z0-9][\\w-.]+([a-zA-Z0-9.\/]+)?', 'g');
 
@@ -1496,11 +1529,11 @@ module.exports = function nodeExternals(options) {
 };
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var fs = __webpack_require__(22);
-var path = __webpack_require__(23);
+var fs = __webpack_require__(23);
+var path = __webpack_require__(24);
 
 exports.contains = function contains(arr, val) {
     return arr && arr.indexOf(val) !== -1;
@@ -1580,13 +1613,13 @@ exports.containsPattern = function containsPattern(arr, val) {
 }
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports) {
 
 module.exports = require("fs");
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports) {
 
 module.exports = require("path");
