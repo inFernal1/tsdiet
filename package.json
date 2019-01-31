@@ -2,6 +2,10 @@
   "name": "tsd",
   "version": "1.0.0",
   "description": "My funkadelic Nuxt.js project",
+  "engines": {
+    "node": "10.3.0",
+    "npm": "6.x"
+  },
   "author": "ILYA TERESHCHENKO",
   "private": true,
   "scripts": {
