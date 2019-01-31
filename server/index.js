@@ -3,7 +3,7 @@
 //const bodyParser = require('body')
 //const { Nuxt, Builder } = require('nuxt')
 import express from 'express'
-import bodyParser from 'body-parser'
+//import bodyParser from 'body-parser'
 import {
   Nuxt,
   Builder
