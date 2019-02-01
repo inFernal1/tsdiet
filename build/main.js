@@ -62,7 +62,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -145,24 +145,12 @@ module.exports = require("mongoose");
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports) {
-
-module.exports = require("body-parser");
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports) {
-
-module.exports = require("express-session");
-
-/***/ }),
-/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _regenerator = __webpack_require__(6);
+var _regenerator = __webpack_require__(4);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
@@ -213,13 +201,13 @@ var _express = __webpack_require__(0);
 
 var _express2 = _interopRequireDefault(_express);
 
-var _bodyParser = __webpack_require__(3);
+var _bodyParser = __webpack_require__(7);
 
 var _bodyParser2 = _interopRequireDefault(_bodyParser);
 
-var _nuxt = __webpack_require__(9);
+var _nuxt = __webpack_require__(8);
 
-var _api = __webpack_require__(10);
+var _api = __webpack_require__(9);
 
 var _api2 = _interopRequireDefault(_api);
 
@@ -227,7 +215,7 @@ var _mongoose = __webpack_require__(2);
 
 var _mongoose2 = _interopRequireDefault(_mongoose);
 
-var _expressSession = __webpack_require__(4);
+var _expressSession = __webpack_require__(18);
 
 var _expressSession2 = _interopRequireDefault(_expressSession);
 
@@ -239,7 +227,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //const { Nuxt, Builder } = require('nuxt')
 
 
-var db = 'mongodb://localhost/tsd';
+var db = 'mongodb://infernal:infernal11221156@ds119445.mlab.com:19445/tsd';
 _mongoose2.default.connect(db, function (err) {
   if (err) {
     console.log(err);
@@ -273,14 +261,14 @@ start();
 module.exports = app;
 
 /***/ }),
-/* 6 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(7);
+module.exports = __webpack_require__(5);
 
 
 /***/ }),
-/* 7 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -305,7 +293,7 @@ var oldRuntime = hadRuntime && g.regeneratorRuntime;
 // Force reevalutation of runtime.js.
 g.regeneratorRuntime = undefined;
 
-module.exports = __webpack_require__(8);
+module.exports = __webpack_require__(6);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -321,7 +309,7 @@ if (hadRuntime) {
 
 
 /***/ }),
-/* 8 */
+/* 6 */
 /***/ (function(module, exports) {
 
 /**
@@ -1054,13 +1042,19 @@ if (hadRuntime) {
 
 
 /***/ }),
-/* 9 */
+/* 7 */
+/***/ (function(module, exports) {
+
+module.exports = require("body-parser");
+
+/***/ }),
+/* 8 */
 /***/ (function(module, exports) {
 
 module.exports = require("nuxt");
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1072,31 +1066,31 @@ Object.defineProperty(exports, "__esModule", {
 
 var _express = __webpack_require__(0);
 
-var _addRecipe = __webpack_require__(11);
+var _addRecipe = __webpack_require__(10);
 
 var _addRecipe2 = _interopRequireDefault(_addRecipe);
 
-var _getRecipes = __webpack_require__(12);
+var _getRecipes = __webpack_require__(11);
 
 var _getRecipes2 = _interopRequireDefault(_getRecipes);
 
-var _filterRecipes = __webpack_require__(13);
+var _filterRecipes = __webpack_require__(12);
 
 var _filterRecipes2 = _interopRequireDefault(_filterRecipes);
 
-var _getRecipe = __webpack_require__(14);
+var _getRecipe = __webpack_require__(13);
 
 var _getRecipe2 = _interopRequireDefault(_getRecipe);
 
-var _getCountRecipes = __webpack_require__(15);
+var _getCountRecipes = __webpack_require__(14);
 
 var _getCountRecipes2 = _interopRequireDefault(_getCountRecipes);
 
-var _auth = __webpack_require__(16);
+var _auth = __webpack_require__(15);
 
 var _auth2 = _interopRequireDefault(_auth);
 
-var _deleteRecipe = __webpack_require__(18);
+var _deleteRecipe = __webpack_require__(17);
 
 var _deleteRecipe2 = _interopRequireDefault(_deleteRecipe);
 
@@ -1115,7 +1109,7 @@ router.use(_deleteRecipe2.default);
 exports.default = router;
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1148,7 +1142,7 @@ router.post('/administration/add', function (req, res, next) {
 exports.default = router;
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1183,7 +1177,7 @@ router.get('/get-recipes', function (req, res, next) {
 exports.default = router;
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1218,7 +1212,7 @@ router.post('/filter-recipes', function (req, res, next) {
 exports.default = router;
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1251,7 +1245,7 @@ router.get('/get-recipe/:id', function (req, res, next) {
 exports.default = router;
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1280,7 +1274,7 @@ router.get('/get-count-recipes', function (req, res, next) {
 exports.default = router;
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1292,7 +1286,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _express = __webpack_require__(0);
 
-var _admin = __webpack_require__(17);
+var _admin = __webpack_require__(16);
 
 var _admin2 = _interopRequireDefault(_admin);
 
@@ -1316,7 +1310,7 @@ router.post('/logout', function (req, res, next) {
 exports.default = router;
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1341,7 +1335,7 @@ var Admin = _mongoose2.default.model('admin', adminSchema);
 exports.default = Admin;
 
 /***/ }),
-/* 18 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1373,24 +1367,21 @@ router.delete('/administration/delete-recipe/:id', function (req, res, next) {
 exports.default = router;
 
 /***/ }),
+/* 18 */
+/***/ (function(module, exports) {
+
+module.exports = require("express-session");
+
+/***/ }),
 /* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _bodyParser = __webpack_require__(3);
-
-var _bodyParser2 = _interopRequireDefault(_bodyParser);
-
-var _expressSession = __webpack_require__(4);
-
-var _expressSession2 = _interopRequireDefault(_expressSession);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var pkg = __webpack_require__(20);
-
+//import bodyParser from 'body-parser'
+//import session from 'express-session'
 var nodeExternals = __webpack_require__(21);
 
 module.exports = {
@@ -1470,7 +1461,7 @@ module.exports = {
 /* 20 */
 /***/ (function(module, exports) {
 
-module.exports = {"name":"tsd","version":"1.0.0","description":"My funkadelic Nuxt.js project","author":"ILYA TERESHCHENKO","private":true,"scripts":{"dev":"backpack dev","build":"nuxt build && backpack build","start":"cross-env NODE_ENV=production node build/main.js","generate":"nuxt generate","test":"mocha -100000 --compilers js:babel-core/register ./test/*.js"},"dependencies":{"@nuxtjs/axios":"^5.0.0","babel-polyfill":"^6.26.0","body-parser":"^1.18.2","chart.js":"^2.7.2","express":"^4.15.3","express-session":"^1.15.6","mongoose":"^5.0.17","nuxt":"^1.0.0","vue-chartjs":"^3.3.1","vuetify":"^1.0.18"},"devDependencies":{"babel-core":"^6.26.3","babel-eslint":"^8.2.3","babel-preset-es2015":"^6.24.1","babel-preset-stage-0":"^6.24.1","backpack-core":"^0.7.0","chai":"^4.1.2","chai-http":"^4.0.0","cross-env":"^5.0.1","eslint":"^4.19.1","eslint-plugin-import":"^2.11.0","mocha":"^5.2.0","nodemon":"^1.11.0","should":"^13.2.1","stylus":"^0.54.5","stylus-loader":"^3.0.1","supertest":"^3.1.0"}}
+module.exports = {"name":"tsd","version":"1.0.0","description":"My funkadelic Nuxt.js project","engines":{"node":"10.3.0","npm":"6.x"},"author":"ILYA TERESHCHENKO","private":true,"scripts":{"dev":"backpack dev","build":"nuxt build && backpack build","start":"cross-env NODE_ENV=production node build/main.js","generate":"nuxt generate","test":"mocha -100000 --compilers js:babel-core/register ./test/*.js","heroku-prebuild":"npm i","heroku-postbuild":"npm run build"},"dependencies":{"@nuxtjs/axios":"^5.0.0","babel-polyfill":"^6.26.0","body-parser":"^1.18.2","chart.js":"^2.7.2","express":"^4.15.3","express-session":"^1.15.6","mongoose":"^5.0.17","nuxt":"^1.0.0","vue-chartjs":"^3.3.1","vuetify":"^1.0.18"},"devDependencies":{"babel-core":"^6.26.3","babel-eslint":"^8.2.3","babel-preset-es2015":"^6.24.1","babel-preset-stage-0":"^6.24.1","backpack-core":"^0.7.0","chai":"^4.1.2","chai-http":"^4.0.0","cross-env":"^5.0.1","eslint":"^4.19.1","eslint-plugin-import":"^2.11.0","mocha":"^5.2.0","nodemon":"^1.11.0","should":"^13.2.1","stylus":"^0.54.5","stylus-loader":"^3.0.1","supertest":"^3.1.0"}}
 
 /***/ }),
 /* 21 */

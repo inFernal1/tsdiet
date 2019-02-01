@@ -12,7 +12,7 @@ import api from './api'
 import mongoose from 'mongoose'
 import session from 'express-session'
 
-let db = 'mongodb://localhost/tsd'
+let db = 'mongodb://infernal:infernal11221156@ds119445.mlab.com:19445/tsd'
 mongoose.connect(db,err => {
   if(err) {
     console.log(err)
