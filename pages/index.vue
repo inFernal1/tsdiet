@@ -88,7 +88,7 @@ export default {
     await this.getRecipes(createdWatcher);
   }, 
   async mounted() {
-let {data} = await axios.get('http://127.0.0.1:3000/api/get-count-recipes');
+let {data} = await axios.get('https://thesmartestdiet.herokuapp.com/api/get-count-recipes');
     this.countDB = data;
   },
   data() {
@@ -122,7 +122,7 @@ let {data} = await axios.get('http://127.0.0.1:3000/api/get-count-recipes');
             
         }
         this.getRecipesController = false;
-      await axios.get('http://127.0.0.1:3000/api/get-recipes', {
+      await axios.get('https://thesmartestdiet.herokuapp.com/api/get-recipes', {
         //proxy: { host: '127.0.0.1', port: 3000 },
         params:{
           elems
@@ -151,7 +151,7 @@ let {data} = await axios.get('http://127.0.0.1:3000/api/get-count-recipes');
           return item
         })
         this.getRecipesController = false;
-        await axios.post('http://127.0.0.1:3000/api/filter-recipes', {
+        await axios.post('https://thesmartestdiet.herokuapp.com/api/filter-recipes', {
          elems,
           /*tagsOne: this.selectedFilter[0],
           tagsTwo: this.selectedFilter[1],

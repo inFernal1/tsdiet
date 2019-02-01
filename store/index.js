@@ -27,7 +27,7 @@ const store = () => {
       async login({ commit }, { login, password }) {
         try {
           console.log(login)
-          const { data } = await axios.post('http://127.0.0.1:3000/api/login', { login, password })
+          const { data } = await axios.post('https://thesmartestdiet.herokuapp.com/api/login', { login, password })
           commit('SET_ADMIN', data)
         } catch (error) {
           if (error.response && error.response.status === 401) {
@@ -38,7 +38,7 @@ const store = () => {
       },
     
       async logout({ commit }) {
-        await axios.post('http://127.0.0.1:3000/api/logout')
+        await axios.post('https://thesmartestdiet.herokuapp.com/api/logout')
         commit('SET_ADMIN', null)
       }
     }
