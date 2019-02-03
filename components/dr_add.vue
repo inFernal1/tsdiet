@@ -216,7 +216,7 @@ import axios from 'axios';
         }
         let getTypeTagCal = () => {
         let tag = '';
-          if(calhundred <= 150) {
+          if(this.calhundred <= 150) {
             tag = 'Низкокалорийные'
           }
           else if(calhundred > 150 && calHundred < 300) {
