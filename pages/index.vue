@@ -69,7 +69,7 @@
           </v-flex>
           <v-flex class="recipes-loading">
             <v-layout justify-center align-center>
-        <v-progress-circular indeterminate color="green" v-if="getRecipesController === false"></v-progress-circular>
+        <v-progress-circular indeterminate color="green" v-if="getRecipesController === false && recipes.length > 0"></v-progress-circular>
             </v-layout>
         </v-flex>
         </v-layout>

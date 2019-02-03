@@ -106,9 +106,9 @@
         </v-flex>
         <v-flex class="add add_tags">
            <v-layout  justify-center row wrap > 
-      <v-flex  v-for="(item,index) in getFilter" :key="index" class="filter-items" >
+      <v-flex  v-for="(item,index) in getFilter" v-if="item.title !== 'Калорийность'" :key="index" class="filter-items" >
         <h3 class="filter-title-item">{{item.title}}</h3>
-      <v-select  :items = "item.items" v-model="selectedFilter[index]" ></v-select>
+      <v-select  :items = "item.items" v-model="selectedTags[index]" ></v-select>
       </v-flex>
     </v-layout>
         </v-flex>
@@ -134,7 +134,7 @@ import axios from 'axios';
         addImage: null,
         addIngredients: [],
         addSteps: [],
-        selectedFilter:[],
+        selectedTags:[],
         captionRules: [
           v =>
           (v.length > 5 && v.length < 100) ||
@@ -214,8 +214,24 @@ import axios from 'axios';
           carbHundred = +(carb * 100 / allGramms).toFixed(2);
           calHundred = +(cal * 100 / allGramms).toFixed(2);
         }
+        let getTypeTagCal = () => {
+        let tag = '';
+          if(calhundred <= 150) {
+            tag = 'Низкокалорийные'
+          }
+          else if(calhundred > 150 && calHundred < 300) {
+            tag = 'Среднекалорийные'
+          }
+          else {
+            tag = 'Высококалорийные'
+          }
+          return {
+            title: 'Калорийность',
+
+          }
+        }
            if (this.$refs.form.validate() && 
-           ( this.addIngredients.length > 0 && this.addSteps.length > 0 && this.selectedFilter.length === 4)) {
+           ( this.addIngredients.length > 0 && this.addSteps.length > 0 && this.selectedTags.length === 4)) {
              getAllCalFromIngridients();
            await axios.post('https://thesmartestdiet.herokuapp.com/api/administration/add', {
             title: this.addCaption,
