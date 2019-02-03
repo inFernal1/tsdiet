@@ -219,7 +219,7 @@ import axios from 'axios';
           if(this.calhundred <= 150) {
             tag = 'Низкокалорийные'
           }
-          else if(calhundred > 150 && calHundred < 300) {
+          else if(this.calhundred > 150 && this.calHundred < 300) {
             tag = 'Среднекалорийные'
           }
           else {
