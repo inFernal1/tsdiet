@@ -9,7 +9,6 @@
               <nuxt-link to="/">
               <img src="/img/logo_s.png" alt="theSmartestDiet" >
               </nuxt-link>
-          <!--<span class="tsd-color_black">The</span><span class="tsd-color_blue">Smartest</span><span class="tsd-color_green">Diet</span><span class="tsd-color_black">.ru</span> -->
       </v-toolbar-title>
   </v-toolbar>
   

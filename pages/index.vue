@@ -153,10 +153,6 @@ let {data} = await axios.get('https://thesmartestdiet.herokuapp.com/api/get-coun
         this.getRecipesController = false;
         await axios.post('https://thesmartestdiet.herokuapp.com/api/filter-recipes', {
          elems,
-          /*tagsOne: this.selectedFilter[0],
-          tagsTwo: this.selectedFilter[1],
-          tagsThree: this.selectedFilter[2],
-          tagsFour: this.selectedFilter[3]*/
           tags: sendFilter
       })
     .then(response => {
@@ -175,14 +171,7 @@ let {data} = await axios.get('https://thesmartestdiet.herokuapp.com/api/get-coun
     },
     onScroll(event) {
        if(this.recipes.length === this.countDB) return;
-      /*let wrapper = this.$refs.wrapper;
-      let list = this.$refs.recipeItems;
-      let scrollTop = document.documentElement.scrollTop,
-      wrapperHeight = document.documentElement.offsetHeight,
-      listHeight = list.offsetHeight;
-      let diffHeight =  listHeight - (wrapperHeight - listHeight);
-      console.log(scrollTop +' '+ diffHeight + ' ' + listHeight) */
-       const scrollY = window.scrollY
+      const scrollY = window.scrollY
       const visible = document.documentElement.clientHeight
       const pageHeight = document.documentElement.scrollHeight
       const bottomOfPage = visible + scrollY >= pageHeight

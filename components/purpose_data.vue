@@ -4,18 +4,6 @@
             <v-container column>
                 <v-snackbar vertical auto-height color="red" 
                 :timeout="0" top multi-line v-model="hints" >
-                
-      <!--<div v-if="getUserPurposeWay == 15">
-          <span>Мы рекомендуем выбирать этот пункт: </span>
-              <ol>
-               <li>Если вы хотите сохранить результат на долго. </li> 
-               <li> Если вы не хотите навредить здоровью, а наоборот его улучшить.</li> 
-               <li> Если вы не хотите сильно истощать свой организм голодом 
-                   и постоянно не бороться с собой,чтобы не сорваться (В случае снижения веса).</li> 
-               </ol>
-</div>
-    <div v-else-if="getUserPurposeWay == 25"></div>
-    -->
 <div v-if="getUserPurposeWay == 40">
 <span>Мы не рекомендуем выбирать этот пункт,если только вы не: </span>
               <ol>

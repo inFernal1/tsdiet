@@ -74,9 +74,6 @@ export default {
               if(value < 80 || value > 250) return 'Введите число в диапазоне от 80-200'
               return true
           },
-          /*patternValidator: (value) => {
-            const pattern = /^([1-9]\d{1,2}[.,]\d{1,9})|^([1-9]\d{1,2})/
-            return pattern.test(value) || 'Неправильно заполнено поле' */
         }
       }
     },
