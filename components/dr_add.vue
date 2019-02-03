@@ -230,7 +230,7 @@ import axios from 'axios';
            if (this.$refs.form.validate() && 
            ( this.addIngredients.length > 0 && this.addSteps.length > 0 && this.selectedTags.length === 4)) {
              getAllCalFromIngridients();
-             selectedTags.push(getTypeTagCal())
+             this.selectedTags.push(getTypeTagCal())
            await axios.post('https://thesmartestdiet.herokuapp.com/api/administration/add', {
             title: this.addCaption,
             description: this.addDescribe,
