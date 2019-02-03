@@ -245,7 +245,7 @@ import axios from 'axios';
             fatHundred,
             carbHundred,
             calHundred,
-            tags: this.selectedFilter
+            tags: this.selectedTags
           }).then(function (response) {
             if(response.status === 200) {
               console.log('Рецепт успешно добавлен')
