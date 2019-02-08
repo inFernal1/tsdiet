@@ -216,6 +216,7 @@ import axios from 'axios';
         }
         let getTypeTagCal = () => {
         let tag = '';
+
           if(this.calhundred <= 150) {
             tag = 'Низкокалорийные'
           }
@@ -225,12 +226,14 @@ import axios from 'axios';
           else {
             tag = 'Высококалорийные'
           }
-          return tag;
+    
+          let indexOfFilter = this.getFilter.indexOf('Калорийность');
+          this.selectedTags[indexOfFilter] = tag;
         }
            if (this.$refs.form.validate() && 
            ( this.addIngredients.length > 0 && this.addSteps.length > 0 && this.selectedTags.length === 4)) {
              getAllCalFromIngridients();
-             this.selectedTags.push(getTypeTagCal())
+            getTypeTagCal()
            await axios.post('https://thesmartestdiet.herokuapp.com/api/administration/add', {
             title: this.addCaption,
             description: this.addDescribe,
