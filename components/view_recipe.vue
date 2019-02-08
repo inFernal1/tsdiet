@@ -175,7 +175,8 @@ export default {
         },
         async deleteRecipe() {
             this.deleleAccess = false;
-            await axios.delete('https://thesmartestdiet.herokuapp.com/api/administration/delete-recipe/' + this.recipe._id)
+            //await axios.delete('https://thesmartestdiet.herokuapp.com/api/administration/delete-recipe/' + this.recipe._id)
+            await axios.delete(window.location.toString() + 'api/administration/delete-recipe/' + this.recipe._id)
             .then(response => {
             if(response.status === 200) { 
                 console.log('Рецепт успешно удален');

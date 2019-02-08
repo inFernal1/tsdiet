@@ -42,7 +42,6 @@ export default {
   methods: {
       async login() {
            try {
-             console.log('priva')
         await this.$store.dispatch('login', {
           login: this.formLogin,
           password:this.formPassword

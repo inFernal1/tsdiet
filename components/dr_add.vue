@@ -135,6 +135,7 @@ import axios from 'axios';
         addIngredients: [],
         addSteps: [],
         selectedTags:[],
+        caloriesHundred: 0,
         captionRules: [
           v =>
           (v.length > 5 && v.length < 100) ||
@@ -209,21 +210,25 @@ import axios from 'axios';
             }
           });
           cal = +((protein * 4) + (carb * 4) + (fat * 9)).toFixed(2);
-          proteinHundred = +(protein * 100 / allGramms).toFixed(2) ;
-          fatHundred = +(fat * 100 / allGramms).toFixed(2);
-          carbHundred = +(carb * 100 / allGramms).toFixed(2);
-          calHundred = +(cal * 100 / allGramms).toFixed(2);
+          proteinHundred = +(protein * 100 / allGramms).toFixed(1) ;
+          fatHundred = +(fat * 100 / allGramms).toFixed(1);
+          carbHundred = +(carb * 100 / allGramms).toFixed(1);
+          calHundred = +(cal * 100 / allGramms).toFixed(1);
+          this.caloriesHundred = calHundred;
         }
         let getTypeTagCal = () => {
         let tag = '';
-
-          if(this.calhundred <= 150) {
-            tag = 'Низкокалорийные'
+       
+          if( this.caloriesHundred <= 150) {
+            tag = 'Низкокалорийные';
+             console.log(this.caloriesHundred)
           }
-          else if(this.calhundred > 150 && this.calHundred < 300) {
+          else if(this.caloriesHundred > 150 && this.caloriesHundred < 300) {
             tag = 'Среднекалорийные'
+             console.log(this.caloriesHundred)
           }
-          else {
+          else if(this.caloriesHundred>= 300) {
+             console.log(this.caloriesHundred)
             tag = 'Высококалорийные'
           }
     
@@ -235,7 +240,8 @@ import axios from 'axios';
            ( this.addIngredients.length > 0 && this.addSteps.length > 0 && this.selectedTags.length === 4)) {
              getAllCalFromIngridients();
             getTypeTagCal()
-           await axios.post('https://thesmartestdiet.herokuapp.com/api/administration/add', {
+           //await axios.post('https://thesmartestdiet.herokuapp.com/api/administration/add', {
+             await axios.post('http://127.0.0.1:3000/api/administration/add', {
             title: this.addCaption,
             description: this.addDescribe,
             image: this.imageUrl,
