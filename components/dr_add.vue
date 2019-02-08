@@ -227,8 +227,9 @@ import axios from 'axios';
             tag = 'Высококалорийные'
           }
     
-          let indexOfFilter = this.getFilter.indexOf('Калорийность');
-          this.selectedTags[indexOfFilter] = tag;
+          this.getFilter.forEach((v,i) => {
+            if(v.title === 'Калорийность') this.selectedTags[i] = tag;
+          })
         }
            if (this.$refs.form.validate() && 
            ( this.addIngredients.length > 0 && this.addSteps.length > 0 && this.selectedTags.length === 4)) {
