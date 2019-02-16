@@ -27,20 +27,20 @@
                     </v-flex>
                     <v-flex>
                         <v-radio-group row label="Ваш пол:" v-model="gender">
-                            <v-flex xs5 md2 sm2 lg1 xl1>
+                            <v-flex >
                             <v-radio label="M" color="primary" value="M"></v-radio>
                             </v-flex>
-                            <v-flex xs5 md2 sm2 lg1 xl1>
+                            <v-flex >
                             <v-radio label="Ж" color="primary" value="F"></v-radio>
                             </v-flex>
                         </v-radio-group>
                     </v-flex>
                     <p class="caption-age">Ваш возраст:</p>
                     <v-layout row wrap>
-          <v-flex xs9>
+          <v-flex xs9 >
             <v-slider :min="1" :max="85" v-model="userAge"></v-slider>
           </v-flex>
-          <v-flex xs3>
+          <v-flex xs2 class="ml-3">
             <v-text-field v-model="userAge" type="number"></v-text-field>
           </v-flex>
                     </v-layout>

@@ -14,7 +14,7 @@
     </v-radio-group>
             </v-container>
                 <v-snackbar   :color="getHintsColor" :timeout="0" 
-                 vertical  top multi-line v-model="hints" >
+                 vertical auto-height  top multi-line v-model="hints" >
       <div v-if="getTypeCalc === 'simpleCalc'">
           Обычный тип калькулятора предполалает более быстрый расчёт 
 калорийности по формуле Миффлина-Сан Жеора с 

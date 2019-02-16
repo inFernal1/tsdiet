@@ -107,7 +107,7 @@ margin-bottom: 15px;
   
 }
 .links-items{
- padding: 30px 0;
+ padding: 30px 10px;
  margin:0;
 
 }
