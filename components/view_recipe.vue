@@ -1,5 +1,5 @@
 <template>
-    <v-layout class="recipe-container mx-auto" column >
+    <v-layout class="recipe-container mx-auto" column>
         <v-flex xs12><h1 class="recipe-title calc-caption">{{recipe.title}}</h1></v-flex>
         <v-flex>
             <v-layout row wrap>
@@ -49,7 +49,7 @@
                        <h2 class="pfc-captions mt-4">Энергетическая ценность рецепта</h2>
             <v-layout column class="container-items pt-4">
                 <v-flex>
-                    <v-layout row>
+                    <v-layout column>
                         <v-radio-group column v-model="userGramms">
                             <v-layout row wrap>
                             <v-flex xs11 lg3 md3 sm4>
@@ -62,21 +62,19 @@
           </div></v-radio>
           </v-flex>
           </v-layout>
-             <v-layout class="pfc-radio">
+                        </v-radio-group>
+                        <v-layout class="pfc-radio" row wrap>
                         <!-- <v-radio color="success"  :value="1"><div slot="label" class="radio_lbl">Ваше значение:</div></v-radio>-->
-                    <v-layout row wrap>
                         <v-flex xs12 lg12><h2 class="mr-3 caption-user-gramms">Ваше значение:</h2></v-flex>
-                        <v-flex lg10 md10 sm10 xs12>
-                            <v-slider :min="1" :max="allGramms" v-model="userGramms" class="mt-2"
-                             thumb-label hint="Установите количество грамм на одну порцию и вам автоматически рассчитается энергетическа ценность порции">
+                        <v-flex lg9 md10 sm10 xs12>
+                            <v-slider :min="1" :max="allGramms" v-model="userGramms" class="mt-2 mr-3"
+                             thumb-label hint="Установите количество грамм на одну порцию и вам автоматически рассчитается энергетическая ценность порции">
                              </v-slider>
                         </v-flex>
                             <v-flex lg2 md2 sm2 xs12>
                                  <v-text-field v-model="userGramms" type="number" solo></v-text-field>
                             </v-flex>
                     </v-layout>
-                    </v-layout>
-                        </v-radio-group>
                     </v-layout>
                 </v-flex>
                   <v-flex>

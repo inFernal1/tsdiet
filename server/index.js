@@ -9,7 +9,7 @@ import mongoose from 'mongoose'
 import session from 'express-session'
 
 let db = 'mongodb://infernal:infernal11221156@ds119445.mlab.com:19445/tsd'
-mongoose.connect(db,err => {
+mongoose.connect(db,{useNewUrlParser: true},err => {
   if(err) {
     console.log(err)
   }

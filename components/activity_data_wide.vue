@@ -30,7 +30,7 @@
             <div v-html="select.hint"></div>
           </v-tooltip>
         </h3>
-        <v-select chips deletable-chips multiple hide-selected 
+        <v-select chips deletable-chips multiple
         :items="selects[index].items" return-object v-model="selectsValue[index]"
          max-height="auto" label="Выбрать действия">
         </v-select>
