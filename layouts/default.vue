@@ -65,7 +65,13 @@ export default {
             },
              {
                 icon:'fitness_center', title:'Калькулятор калорий',  link:'/calc/cc_main'
-            }
+            },
+	    {
+	    icon:'input', title:'Вход',  link:'/calc/cc_main'
+	    },
+	    {
+            icon:'person_add', title:'Регистрация',  link:'/calc/cc_main'
+	    }
             ]
         }
     }
