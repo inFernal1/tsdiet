@@ -71,7 +71,7 @@ export default {
 	    },
 	    {
             icon:'person_add', title:'Регистрация',  link:'/calc/cc_main'
-	    }
+	    },
             ]
         }
     }
