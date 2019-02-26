@@ -1,18 +1,24 @@
 <template>
  <v-layout row justify-center>
-    <v-dialog v-model="dialog" persistent max-width="500px">
+	<v-tabs slot="extension"
+	v-model="tabActive" centered>
+	<v-tab>
+	<v-icon class="mr-1">input</v-icon> Вход
+	</v-tab>
+	<v-tab>
+	<v-icon class="mr-1">person_add</v-icon> Регистрация
+	</v-tab>
+	<v-tabs-items v-model="tabActive">
+	<v-tab-item>
       <v-card>
-        <v-card-title>
-          <span class="headline">Вход для администраторов</span>
-        </v-card-title>
         <v-card-text>
           <v-container grid-list-md  v-if="!$store.state.authAdmin">
             <v-layout wrap >
               <v-flex xs12>
-                <v-text-field label="Login" required v-model="formLogin"></v-text-field>
+                <v-text-field label="Электронная почта" required v-model="formLogin"></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field label="Password" type="password" required v-model="formPassword"></v-text-field>
+                <v-text-field label="Пароль" type="password" required v-model="formPassword"></v-text-field>
               </v-flex>
             </v-layout>
           </v-container>
@@ -24,7 +30,13 @@
           <v-btn color="blue darken-1" flat @click.native="close">На главную</v-btn>
         </v-card-actions>
       </v-card>
-    </v-dialog>
+      </tab-item>
+      <v-tab-item>
+      <v-card>
+      </v-card>
+      </v-tab-item>
+      </v-tabs-items>
+      </v-tabs>
   </v-layout>
 </template>
 
@@ -33,10 +45,10 @@
 export default {
   data() {
       return {
-          dialog: true,
           formLogin:'',
           formPassword:'',
-          formError:''
+          formError:'',
+	  tabActive:''
       }
   },
   methods: {
