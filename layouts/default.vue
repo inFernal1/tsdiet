@@ -39,14 +39,8 @@
           <v-flex class="pt-1">
               Сайт предназначен для информационных целей и не является заменой медицинской консультации.
           </v-flex>
-          <v-flex class=" pt-1">
-             Копирование и распространение информации разрешено при условии активной ссылки.
-          </v-flex>
-          <v-flex class=" pt-1">
-             <span>По любым вопросам, касаемых работы данного сайта, пишите нам на <a href="mailto:info@tsdiet.ru">info@tsdiet.ru</a></span> 
-          </v-flex>
           <v-flex class="pt-1">
-             &copy; 2018 TheSmartestDiet
+             &copy; 2019 TheSmartestDiet
           </v-flex>
       </v-layout>
   </v-footer>
@@ -67,10 +61,10 @@ export default {
                 icon:'fitness_center', title:'Калькулятор калорий',  link:'/calc/cc_main'
             },
 	    {
-	    icon:'input', title:'Вход',  link:'/calc/cc_main'
+	    icon:'input', title:'Вход',  link:'/sign-in'
 	    },
 	    {
-            icon:'person_add', title:'Регистрация',  link:'/calc/cc_main'
+            icon:'person_add', title:'Регистрация',  link:'/sign-in'
 	    },
             ]
         }

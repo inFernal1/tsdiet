@@ -1,6 +1,6 @@
 <template>
  <v-layout row justify-center>
-	<v-tabs slot="extension"
+	<v-tabs
 	v-model="tabActive" centered>
 	<v-tab>
 	<v-icon class="mr-1">input</v-icon> Вход
@@ -9,16 +9,16 @@
 	<v-icon class="mr-1">person_add</v-icon> Регистрация
 	</v-tab>
 	<v-tabs-items v-model="tabActive">
-	<v-tab-item>
+	<v-tab-item value="input">
       <v-card>
         <v-card-text>
           <v-container grid-list-md  v-if="!$store.state.authAdmin">
             <v-layout wrap >
               <v-flex xs12>
-                <v-text-field label="Электронная почта" required v-model="formLogin"></v-text-field>
+                <v-text-field label="Электронная почта" required v-model="formEmailIn"></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field label="Пароль" type="password" required v-model="formPassword"></v-text-field>
+                <v-text-field label="Пароль" type="password" required v-model="formPasswordIn"></v-text-field>
               </v-flex>
             </v-layout>
           </v-container>
@@ -30,9 +30,16 @@
           <v-btn color="blue darken-1" flat @click.native="close">На главную</v-btn>
         </v-card-actions>
       </v-card>
-      </tab-item>
+      </v-tab-item value="registration">
       <v-tab-item>
       <v-card>
+      <v-card-text>                                     <v-container grid-list-md>             
+      <v-layout wrap>
+              <v-flex xs12>                                     <v-text-field label="Электронная почта" v-model="formEmailReg" required>
+	 </v-text-field>                              </v-flex>
+	      <v-flex xs12>                                   <v-text-field label="Пароль" type="password" required v-model="formPasswordReg"></v-text-field>                                                  </v-flex>
+	      <v-flex xs12>                                   <v-text-field label="Повторите пароль" type="password" required v-model="formPasswordRegD"></v-text-field>                                                  </v-flex>
+	      </v-layout>
       </v-card>
       </v-tab-item>
       </v-tabs-items>
@@ -45,10 +52,12 @@
 export default {
   data() {
       return {
-          formLogin:'',
-          formPassword:'',
+          formEmailIn:'',
+          formPasswordIn:'',
+	  formEmailReg:'',                                formPasswordReg:'',
+	  formPasswordRegD:'',
           formError:'',
-	  tabActive:''
+	  tabActive:'input'
       }
   },
   methods: {
@@ -58,8 +67,8 @@ export default {
           login: this.formLogin,
           password:this.formPassword
         })
-        this.formLogin = ''
-        this.formPassword = ''
+        this.formEmailIn = ''
+        this.formPasswordIn = ''
         this.formError = null
         if(this.$store.state.authAdmin) this.$nuxt.$router.push('/');
       } catch (e) {
