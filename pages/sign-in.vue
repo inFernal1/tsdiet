@@ -13,7 +13,7 @@
       <v-card>
         <v-card-text>
           <v-container grid-list-md  v-if="!$store.state.authAdmin">
-            <v-layout wrap >
+            <v-layout wrap>
               <v-flex xs12>
                 <v-text-field label="Электронная почта" required v-model="formEmailIn"></v-text-field>
               </v-flex>
