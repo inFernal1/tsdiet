@@ -2,10 +2,10 @@
  <v-layout row justify-center>
 	<v-tabs
 	v-model="tabActive" centered>
-	<v-tab>
+	<v-tab href="#input">
 	<v-icon class="mr-1">input</v-icon> Вход
 	</v-tab>
-	<v-tab>
+	<v-tab href="#registration">
 	<v-icon class="mr-1">person_add</v-icon> Регистрация
 	</v-tab>
 	<v-tabs-items v-model="tabActive">
@@ -30,8 +30,8 @@
           <v-btn color="blue darken-1" flat @click.native="close">На главную</v-btn>
         </v-card-actions>
       </v-card>
-      </v-tab-item value="registration">
-      <v-tab-item>
+      </v-tab-item>
+      <v-tab-item value="registration">
       <v-card>
       <v-card-text>                                     <v-container grid-list-md>             
       <v-layout wrap>
@@ -40,6 +40,9 @@
 	      <v-flex xs12>                                   <v-text-field label="Пароль" type="password" required v-model="formPasswordReg"></v-text-field>                                                  </v-flex>
 	      <v-flex xs12>                                   <v-text-field label="Повторите пароль" type="password" required v-model="formPasswordRegD"></v-text-field>                                                  </v-flex>
 	      </v-layout>
+	</v-container>
+	</v-card-text>
+	<v-spacer></v-spacer>                           <v-btn color="blue darken-1" flat @click="login">Регистрация</v-btn>                                  <v-btn color="blue darken-1" flat @click.native="close">На главную</v-btn>                    </v-card-actions>
       </v-card>
       </v-tab-item>
       </v-tabs-items>
