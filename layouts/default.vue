@@ -14,7 +14,7 @@
   
     <nav class="hidden-xs-only tsd-border_toolbar main-links">
           <v-btn flat v-for="item in menuItems" router :to="item.link" :key="item.title" exact class="links-items">
-              <v-icon left>{{item.icon}}</v-icon>
+              <v-icon class="menu-icons" left>{{item.icon}}</v-icon>
               {{item.title}}
               </v-btn>
       </nav>
@@ -61,10 +61,7 @@ export default {
                 icon:'fitness_center', title:'Калькулятор калорий',  link:'/calc/cc_main'
             },
 	    {
-	    icon:'input', title:'Вход',  link:'/sign-in'
-	    },
-	    {
-            icon:'person_add', title:'Регистрация',  link:'/sign-in'
+            icon:'person_add', title:'Вход/Регистрация',  link:'/sign-in'
 	    },
             ]
         }
@@ -103,13 +100,17 @@ display: flex;
 flex-direction: row;
 justify-content: center;
 align-items: center;
-margin-bottom: 15px;
+margin: 15px;
+
   
 }
 .links-items{
  padding: 30px 10px;
- margin:0;
-
+ margin: 0;
+}
+.menu-icons {
+    padding: 0;
+    margin-right: 5px;
 }
 .menu-forphone {
   display: flex;

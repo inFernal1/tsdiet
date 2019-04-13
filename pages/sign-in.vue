@@ -1,5 +1,5 @@
 <template>
-<v-layout row justify-center>
+<div class="signin-container">
     <v-tabs v-model="tabActive" centered>
         <v-tab href="#input">
             <v-icon class="mr-1">input</v-icon> Вход
@@ -10,52 +10,52 @@
         <v-tabs-items v-model="tabActive">
             <v-tab-item value="input">
                 <v-card>
-                    <v-card-text>
-                        <v-container grid-list-md v-if="!$store.state.authAdmin">
-                            <v-layout wrap>
-                                <v-flex xs12>
-                                    <v-text-field label="Электронная почта" required v-model="formEmailIn"></v-text-field>
-                                </v-flex>
-                                <v-flex xs12>
-                                    <v-text-field label="Пароль" type="password" required v-model="formPasswordIn"></v-text-field>
-                                </v-flex>
-                            </v-layout>
-                        </v-container>
-                        <h2 v-else>Вход выполнен!</h2>
-                    </v-card-text>
+                    <v-container grid-list-md v-if="!$store.state.authAdmin">
+                        <v-layout wrap>
+                            <v-flex>
+                                <v-text-field label="Электронная почта" required v-model="formEmailIn"></v-text-field>
+                            </v-flex>
+                            <v-flex>
+                                <v-text-field label="Пароль" type="password" required v-model="formPasswordIn"></v-text-field>
+                            </v-flex>
+                        </v-layout>
+                    </v-container>
+                    <h2 v-else>Вход выполнен!</h2>
                     <v-card-actions>
-                        <v-spacer></v-spacer>
+                      <v-layout justify-center>
                         <v-btn color="blue darken-1" flat @click="login">Войти</v-btn>
                         <v-btn color="blue darken-1" flat @click.native="close">На главную</v-btn>
+                        </v-layout>
                     </v-card-actions>
                 </v-card>
             </v-tab-item>
             <v-tab-item value="registration">
                 <v-card>
-                    <v-card-text>
-                        <v-container grid-list-md>
-                            <v-layout wrap>
-                                <v-flex xs12>
-                                    <v-text-field label="Электронная почта" v-model="formEmailReg" required>
-                                    </v-text-field>
-                                </v-flex>
-                                <v-flex xs12>
-                                    <v-text-field label="Пароль" type="password" required v-model="formPasswordReg"></v-text-field>
-                                </v-flex>
-                                <v-flex xs12>
-                                    <v-text-field label="Повторите пароль" type="password" required v-model="formPasswordRegD"></v-text-field>
-                                </v-flex>
-                            </v-layout>
-                        </v-container>
-                    </v-card-text>
-                    <v-spacer></v-spacer>
+                    <v-container grid-list-md>
+                        <v-layout wrap>
+                            <v-flex xs12>
+                                <v-text-field label="Электронная почта" v-model="formEmailReg" required>
+                                </v-text-field>
+                            </v-flex>
+                            <v-flex xs12>
+                                <v-text-field label="Пароль" type="password" required v-model="formPasswordReg"></v-text-field>
+                            </v-flex>
+                            <v-flex xs12>
+                                <v-text-field label="Повторите пароль" type="password" required v-model="formPasswordRegD"></v-text-field>
+                            </v-flex>
+                        </v-layout>
+                    </v-container>
+                    <v-card-actions>
+                      <v-layout justify-center>
                     <v-btn color="blue darken-1" flat @click="login">Регистрация</v-btn>
                     <v-btn color="blue darken-1" flat @click.native="close">На главную</v-btn>
+                    </v-layout>
+                    </v-card-actions>
                 </v-card>
             </v-tab-item>
         </v-tabs-items>
     </v-tabs>
-</v-layout>
+</div>
 </template>
 
 <script>
@@ -99,3 +99,11 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.signin-container {
+    min-width: 300px;
+    max-width: 400px;
+    margin: auto;
+}
+</style>
