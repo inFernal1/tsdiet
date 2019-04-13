@@ -19,7 +19,7 @@
               </v-btn>
       </nav>
   <v-content>
-        <nuxt />
+        <nuxt/>
   </v-content>
    <v-navigation-drawer temporary fixed v-model="sideNav">
           <v-list>
