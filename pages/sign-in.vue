@@ -11,7 +11,22 @@
             <v-tab-item value="input">
                 <v-card>
                     <v-container grid-list-md v-if="!$store.state.authAdmin">
-                        <v-layout wrap>
+                        <v-layout column>
+                            <v-flex>
+                                <v-layout column align-center>
+                                    <v-flex xs12>
+                                        <h6 class="tsd-color_black subheading">Вход с помощью: </h6>
+                                    </v-flex>
+                                    <v-flex xs12>
+                                        <v-btn icon nuxt  class="btn-icons-input btn-icon-vk">
+                                            <v-icon medium color="blue darken-1">mdi-vk</v-icon></v-btn>
+                                        <v-btn icon nuxt class="btn-icons-input btn-icon-fb">
+                                            <v-icon medium color="indigo">mdi-facebook</v-icon></v-btn>
+                                        <v-btn icon nuxt class="btn-icons-input btn-icon-gl">
+                                            <v-icon medium color="red darken-1">mdi-google-plus</v-icon></v-btn>
+                                    </v-flex>
+                                </v-layout>
+                            </v-flex>
                             <v-flex>
                                 <v-text-field label="Электронная почта" required v-model="formEmailIn"></v-text-field>
                             </v-flex>
@@ -105,5 +120,17 @@ export default {
     min-width: 300px;
     max-width: 400px;
     margin: auto;
+}
+.btn-icons-input {
+    outline: none;
+}
+.btn-icon-vk:hover {
+    border: 2px solid #1E88E5;
+}
+.btn-icon-fb:hover {
+    border: 2px solid #3F51B5;
+}
+.btn-icon-gl:hover {
+    border: 2px solid #E53935;
 }
 </style>

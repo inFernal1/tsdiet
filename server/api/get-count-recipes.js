@@ -4,7 +4,7 @@ import Recipe from '../models/recipe'
 const router = Router();
 
 router.get('/get-count-recipes', (req,res,next) => {
-   Recipe.count({}, (err, count) => { 
+   Recipe.countDocuments({}, (err, count) => { 
     if(err) return console.log(err);
     res.json(count);
 })

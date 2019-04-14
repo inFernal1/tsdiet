@@ -18,12 +18,13 @@
     "heroku-postbuild": "npm run build"
   },
   "dependencies": {
+    "@mdi/font": "^3.5.95",
     "@nuxtjs/axios": "^5.3.6",
     "body-parser": "^1.18.3",
     "chart.js": "^2.7.3",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
-    "mongoose": "^5.4.11",
+    "mongoose": "^5.5.1",
     "nano": "^8.0.0",
     "nuxt": "^2.4.3",
     "vue-chartjs": "^3.4.0",

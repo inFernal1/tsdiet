@@ -9,13 +9,11 @@ import mongoose from 'mongoose'
 import session from 'express-session'
 
 let db = 'mongodb://infernal:infernal11221156@ds119445.mlab.com:19445/tsd'
-mongoose.connect(db,{useNewUrlParser: true},err => {
-  if(err) {
-    console.log(err)
-  }
-  console.log('connected db')
-})
-
+mongoose.set('useNewUrlParser', true);
+mongoose.connect(db,{useNewUrlParser:true,
+  reconnectTries: 30 })
+  .then(() => console.log('Connected To Mongo!!'))
+.catch(err => console.log(err));
 const app = express()
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3000
