@@ -1,5 +1,4 @@
 import express from 'express'
-import bodyParser from 'body-parser'
 import {
   Nuxt,
   Builder
@@ -7,22 +6,17 @@ import {
 import api from './api'
 import mongoose from 'mongoose'
 import session from 'express-session'
+const db = require('./config/keys').MongoURI;
 
-let db = 'mongodb://infernal:infernal11221156@ds119445.mlab.com:19445/tsd'
-mongoose.set('useNewUrlParser', true);
-mongoose.connect(db,{useNewUrlParser:true,
-  reconnectTries: 30 })
-  .then(() => console.log('Connected To Mongo!!'))
+mongoose.connect(db,{ useNewUrlParser:true })
+.then(() => console.log('Connected To Mongo!!'))
 .catch(err => console.log(err));
 const app = express()
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3000
 app.set('port', port)
+app.use(express.urlencoded({extended: true}))
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({
-  extended: true
-}))
 app.use(session({
   secret: 'super-secret-key',
   resave: false,

@@ -47,7 +47,22 @@
             <v-tab-item value="registration">
                 <v-card>
                     <v-container grid-list-md>
-                        <v-layout wrap>
+                        <v-layout column>
+                            <v-flex>
+                                <v-layout column align-center>
+                                    <v-flex xs12>
+                                        <h6 class="tsd-color_black subheading">Регистрация с помощью: </h6>
+                                    </v-flex>
+                                    <v-flex xs12>
+                                        <v-btn icon nuxt  class="btn-icons-input btn-icon-vk">
+                                            <v-icon medium color="blue darken-1">mdi-vk</v-icon></v-btn>
+                                        <v-btn icon nuxt class="btn-icons-input btn-icon-fb">
+                                            <v-icon medium color="indigo">mdi-facebook</v-icon></v-btn>
+                                        <v-btn icon nuxt class="btn-icons-input btn-icon-gl">
+                                            <v-icon medium color="red darken-1">mdi-google-plus</v-icon></v-btn>
+                                    </v-flex>
+                                </v-layout>
+                            </v-flex>
                             <v-flex xs12>
                                 <v-text-field label="Электронная почта" v-model="formEmailReg" required>
                                 </v-text-field>
