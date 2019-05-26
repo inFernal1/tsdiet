@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@mdi/font": "^3.5.95",
-    "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/axios": "^5.4.1",
     "body-parser": "^1.18.3",
     "chart.js": "^2.7.3",
     "express": "^4.16.4",
@@ -35,7 +35,7 @@
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
     "cross-env": "^5.2.0",
-    "eslint": "^5.13.0",
+    "eslint": "^5.16.0",
     "eslint-plugin-import": "^2.16.0",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.10",
