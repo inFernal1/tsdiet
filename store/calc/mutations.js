@@ -1,4 +1,4 @@
-const mutations = {
+export default {
     changeE1(state, payLoad) {
         state.e1 = payLoad;
     },
@@ -145,4 +145,3 @@ const mutations = {
        
     }
 }
-export default mutations;

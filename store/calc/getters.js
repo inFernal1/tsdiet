@@ -1,4 +1,4 @@
-const getters =  {
+export default {
     getE1(state) {
         return state.e1;
     },
@@ -46,4 +46,3 @@ const getters =  {
     }
 
 }
-export default getters;

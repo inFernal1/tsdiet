@@ -1,4 +1,4 @@
-const state = {
+export default () => ({
     e1: 0,
     typeCalc: '',
     hintsForRadios: {
@@ -29,5 +29,4 @@ const state = {
         fats:0,
         carbs: 0
     }
-}
-export default state;
+})

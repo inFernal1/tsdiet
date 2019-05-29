@@ -1,6 +1,5 @@
-const getters =  {
+export default  {
    getFilter(state) {
     return state.filter
    }
 }
-export default getters;

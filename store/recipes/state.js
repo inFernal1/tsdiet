@@ -1,4 +1,4 @@
-const state = {
+export default () => ({
        filter: [{
         title: 'Тип блюда',
         items: ['Салаты', 'Выпечка', 'Перекусы', 'Вторые блюда','Супы','Напитки', 'Десерты']
@@ -17,5 +17,4 @@ const state = {
       }],
       recipeID: 0
       
-}
-export default state;
+})

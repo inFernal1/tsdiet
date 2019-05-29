@@ -1,24 +1,12 @@
-import Vuex from 'vuex'
-import calc from './calc/calc.module.js'
-import recipes from './recipes/recipes.module.js'
-import Vue from 'vue'
-import axios from 'axios'
-Vue.use(Vuex)
-const store = () => {
-    return new Vuex.Store({
-      modules: {
-        Calc: calc,
-        Recipes: recipes
-      },
-      state: {
+      export const state = () => ({
         authAdmin: null
-      },
-      mutations:{
+      }),
+      export const mutations = {
         SET_ADMIN: function (state, admin) {
           state.authAdmin = admin
         }
       },
-      actions:{
+      export const actions = {
         nuxtServerInit({ commit }, { req }) {
           if (req.session && req.session.authUser) {
             commit('SET_USER', req.session.authUser)
@@ -45,7 +33,3 @@ const store = () => {
       }
     }
       
-
-})
-}
-export default store;
