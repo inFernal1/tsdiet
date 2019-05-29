@@ -9,6 +9,7 @@ module.exports = {
   /*
   ** Headers of the page
   */
+
   head: {
     title: pkg.name,
     meta: [
@@ -64,7 +65,21 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
-   
+   babel: {
+    presets({ isServer }) {
+      return [
+        [
+          require.resolve('@nuxt/babel-preset-app'),
+          {
+            buildTarget: isServer ? 'server' : 'client',
+            useBuiltIns: "usage",
+            corejs: { version: 3
+             }
+          }
+        ]
+      ]
+    }
+  },
     extend(config, ctx) {
       
       if (ctx.isServer) {
