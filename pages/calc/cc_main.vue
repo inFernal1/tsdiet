@@ -51,18 +51,9 @@ import activityDataSimple from "~/components/activity_data_simple"
 import purposeData from "~/components/purpose_data"
 import resultCalc from "~/components/result_calc"
 import activityDataWide from "~/components/activity_data_wide"
-import { mapGetters, mapMutations, mapState } from "vuex"
+import { mapGetters, mapMutations } from "vuex"
 export default {
   layout: "default",
-  computed: mapGetters({
-    getE1: "сalc/getE1",
-    getTypeCalc: "сalc/getTypeCalc"
-  }),
-  methods: {
-    ...mapMutations({
-      changeE1: "сalc/changeE1"
-    })
-  },
   components: {
     selectCalc,
     resultCalc,
@@ -70,7 +61,17 @@ export default {
     activityDataSimple,
     purposeData,
     activityDataWide
-  }
+  },
+  computed: {
+    ...mapGetters({
+    getE1: "сalc/getE1",
+    getTypeCalc: "сalc/getTypeCalc"
+  })},
+  methods: {
+    ...mapMutations({
+      changeE1: "сalc/changeE1"
+    })
+  },
 }
 </script>
 <style scoped>

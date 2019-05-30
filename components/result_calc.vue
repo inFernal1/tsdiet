@@ -257,7 +257,8 @@ export default {
       this.pfcMyselfValue = ""
     }
   },
-  computed: mapGetters({
+  computed: {
+    ...mapGetters({
     getResultSum: "calc/getResultSum",
     getUserPurpose: "calc/getUserPurpose",
     getPfc: "calc/getPfc",
@@ -294,6 +295,7 @@ export default {
   },
   getCalCarbs() {
     return this.getPfc.carbs * 4
+  }
   },
   components: {
     ChartPfc

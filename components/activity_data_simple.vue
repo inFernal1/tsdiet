@@ -73,7 +73,8 @@ export default {
       ]
     }
   },
-  computed: mapGetters({
+  computed: { 
+    ...mapGetters({
     getUserActivity: "calc/getUserActivitySimple"
   }),
   userActivity: {
@@ -83,6 +84,7 @@ export default {
     set(value) {
       this.setUserActivity(value)
     }
+  }
   },
   methods: {
     ...mapMutations({

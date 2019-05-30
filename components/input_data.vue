@@ -94,7 +94,7 @@ export default {
       }
     }
   },
-  computed: mapGetters({
+  computed: { ...mapGetters({
     getUserAge: "сalc/getUserAge",
     getGender: "сalc/getGender",
     getUserTall: "сalc/getUserTall",
@@ -131,6 +131,7 @@ export default {
     set(value) {
       this.setUserTall(value)
     }
+  }
   },
   methods: {
     ...mapMutations({

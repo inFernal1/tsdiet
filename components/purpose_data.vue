@@ -186,9 +186,10 @@ export default {
       this.change(5)
     }
   },
-  computed: mapGetters({
-    getUserPurpose: "сalc/getUserPurpose",
-    getUserPurposeWay: "сalc/getUserPurposeWay"
+  computed: { 
+    ...mapGetters({
+    getUserPurpose: "calc/getUserPurpose",
+    getUserPurposeWay: "calc/getUserPurposeWay"
   }),
   userPurpose: {
     get() {
@@ -212,6 +213,7 @@ export default {
       this.getUserPurpose == "keepWeight"
     )
   }
+}
 }
 </script>
 <style scoped>

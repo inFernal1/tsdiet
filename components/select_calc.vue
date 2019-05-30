@@ -75,7 +75,8 @@
 <script>
 import { mapMutations, mapGetters } from "vuex"
 export default {
-  computed: mapGetters({
+  computed: {
+    ...mapGetters({
     getTypeCalc: "сalc/getTypeCalc",
     getHints: "сalc/getHintsForRadios",
     getHintsColor: "сalc/getHintsColor"
@@ -95,6 +96,7 @@ export default {
     set(value) {
       this.changeHints({ show: value })
     }
+  }
   },
 
   methods: {
