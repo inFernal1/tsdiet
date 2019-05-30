@@ -1,5 +1,5 @@
-export default  {
-   getFilter(state) {
+export default {
+  getFilter(state) {
     return state.filter
-   }
+  }
 }

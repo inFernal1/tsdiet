@@ -1,75 +1,128 @@
 <template>
-<div>
-        <v-card class="mb-5">
-            <h2 class="result-captions">Суточная калорийность</h2>
-            <v-layout column class="container-items">
-                <v-flex class="cal-items">
-                    <div class="mb-2">Базовый обмен: <v-tooltip left offset-overflow color="success">
-                          <v-icon color="success" slot="activator">help_outline</v-icon>
-                          <div v-html="hintBasicExchange"></div>
-                          </v-tooltip></div>
-                     <div><span class="cal-number">{{getResultSum.calBasic}}</span> ккал</div>
-                </v-flex>
-                <v-flex class="cal-items">
-                   <div class="mb-2">Для поддержания веса:</div>
-                     <div><span class="cal-number">{{getResultSum.calKeepWeight}}</span> ккал</div>
-                </v-flex>
-                <v-flex class="cal-items" v-if="getUserPurpose !== 'keepWeight'">
-                    <div class="mb-2">С учётом вашей цели:</div>
-                     <div><span class="cal-number">{{getResultSum.calWithPurpose}}</span> ккал</div>
-                </v-flex>
-            </v-layout>
-             <h2 class="result-captions">БЖУ</h2>
-            <v-layout class="container-items pt-4" row wrap >
-                <v-flex class="tsd-chart" xs11 lg5 md5 sm5>
-                   <chart-pfc :chart-data="fillData" ></chart-pfc>
-                </v-flex>
-                <v-flex class="pfc-text" xs11 lg6 md6 sm6>
-                    <div class="pfc-items pfc-proteins">Белки: <b>{{getPfc.proteins}} г.</b>
-                    или <b>{{getCalProteins}} ккал</b></div>
-                    <div class="pfc-items pfc-fats">Жиры: <b>{{getPfc.fats}} г.</b>
-                    или <b>{{getCalFats}} ккал</b></div>
-                    <div class="pfc-items pfc-carbs">Углеводы: <b>{{getPfc.carbs}} г.</b>
-                    или <b>{{getCalCarbs}} ккал</b></div>
-                </v-flex>
-                <v-flex xs12><hr></v-flex>
-                <v-flex class="mt-3  pfc-myself" row>
-                    <v-layout row wrap class="mx-4">
-                    <v-flex>
-                    <v-text-field type="number" v-model="pfcMyselfValue" 
-                    :rules="[(val) => (val > getResultSum.calBasic || val.length === 0) 
-                    || 'Введенное значение не может быть ниже значения вашего базового обмена']"
-                    label="Ваше значение"
-                    suffix="ккал" ></v-text-field>
-                    </v-flex>
-                    <v-flex>
-                        <v-layout justify-center wrap>
-                            <v-btn color="primary" @click="totalSumCalc(pfcMyselfValue)" :disabled="chkPfcMyself">Пересчитать</v-btn>
-                   <v-btn color="primary"  @click="converting">Сбросить БЖУ</v-btn>
-                     </v-layout>
-                </v-flex>
-            </v-layout>
+  <div>
+    <v-card class="mb-5">
+      <h2 class="result-captions">
+        Суточная калорийность
+      </h2>
+      <v-layout column class="container-items">
+        <v-flex class="cal-items">
+          <div class="mb-2">
+            Базовый обмен:
+            <v-tooltip left offset-overflow color="success">
+              <v-icon slot="activator" color="success">
+                help_outline
+              </v-icon>
+              <div v-html="hintBasicExchange" />
+            </v-tooltip>
+          </div>
+          <div>
+            <span class="cal-number">{{ getResultSum.calBasic }}</span> ккал
+          </div>
+        </v-flex>
+        <v-flex class="cal-items">
+          <div class="mb-2">
+            Для поддержания веса:
+          </div>
+          <div>
+            <span class="cal-number">{{ getResultSum.calKeepWeight }}</span>
+            ккал
+          </div>
+        </v-flex>
+        <v-flex v-if="getUserPurpose !== 'keepWeight'" class="cal-items">
+          <div class="mb-2">
+            С учётом вашей цели:
+          </div>
+          <div>
+            <span class="cal-number">{{ getResultSum.calWithPurpose }}</span>
+            ккал
+          </div>
+        </v-flex>
+      </v-layout>
+      <h2 class="result-captions">
+        БЖУ
+      </h2>
+      <v-layout class="container-items pt-4" row wrap>
+        <v-flex class="tsd-chart" xs11 lg5 md5 sm5>
+          <chart-pfc :chart-data="fillData" />
+        </v-flex>
+        <v-flex class="pfc-text" xs11 lg6 md6 sm6>
+          <div class="pfc-items pfc-proteins">
+            Белки: <b>{{ getPfc.proteins }} г.</b>
+            <b>{{ getCalProteins }} ккал</b>
+          </div>
+          <div class="pfc-items pfc-fats">
+            Жиры: <b>{{ getPfc.fats }} г.</b> или <b>{{ getCalFats }} ккал</b>
+          </div>
+          <div class="pfc-items pfc-carbs">
+            Углеводы: <b>{{ getPfc.carbs }} г.</b> или
+            <b>{{ getCalCarbs }} ккал</b>
+          </div>
+        </v-flex>
+        <v-flex xs12>
+          <hr>
+        </v-flex>
+        <v-flex class="mt-3  pfc-myself" row>
+          <v-layout row wrap class="mx-4">
+            <v-flex>
+              <v-text-field
+                v-model="pfcMyselfValue"
+                type="number"
+                :rules="[
+                  val =>
+                    val > getResultSum.calBasic ||
+                    val.length === 0 ||
+                    'Введенное значение не может быть ниже значения вашего базового обмена'
+                ]"
+                label="Ваше значение"
+                suffix="ккал"
+              />
             </v-flex>
-            </v-layout>
-             <h2 class="result-captions">Рекомендации</h2>
-            <v-layout class="container-items">
-                 <v-expansion-panel class="recommendations">
-    <v-expansion-panel-content v-ripple v-for="(item,i) in recommendationContent" :key="i">
-      <div slot="header">{{item.header}}</div>
-      <v-card>
-        <v-card-text class="grey lighten-5" v-html="item.content"></v-card-text>
-      </v-card>
-    </v-expansion-panel-content>
-  </v-expansion-panel>
-            </v-layout>
-        </v-card>
-        <v-btn color="primary" @click.native="change(1)">Рассчитать заново</v-btn>
-</div>
+            <v-flex>
+              <v-layout justify-center wrap>
+                <v-btn
+                  color="primary"
+                  :disabled="chkPfcMyself"
+                  @click="totalSumCalc(pfcMyselfValue)"
+                >
+                  Пересчитать
+                </v-btn>
+                <v-btn color="primary" @click="converting">
+                  Сбросить БЖУ
+                </v-btn>
+              </v-layout>
+            </v-flex>
+          </v-layout>
+        </v-flex>
+      </v-layout>
+      <h2 class="result-captions">
+        Рекомендации
+      </h2>
+      <v-layout class="container-items">
+        <v-expansion-panel class="recommendations">
+          <v-expansion-panel-content
+            v-for="(item, i) in recommendationContent"
+            :key="i"
+            v-ripple
+          >
+            <div slot="header">
+              {{ item.header }}
+            </div>
+            <v-card>
+              <v-card-text class="grey lighten-5" v-html="item.content" />
+            </v-card>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-layout>
+    </v-card>
+    <v-btn color="primary" @click.native="change(1)">
+      Рассчитать заново
+    </v-btn>
+  </div>
 </template>
 
 <script>
-import ChartPfc from "../plugins/ChartPfc.js";
-import { mapMutations, mapGetters } from "vuex";
+import ChartPfc from "../plugins/ChartPfc.js"
+import { mapMutations, mapGetters } from "vuex"
 export default {
   data() {
     return {
@@ -192,7 +245,7 @@ export default {
                 </p>`
         }
       ]
-    };
+    }
   },
   methods: {
     ...mapMutations({
@@ -200,56 +253,60 @@ export default {
       totalSumCalc: "сalc/totalSumCalc"
     }),
     converting() {
-      this.totalSumCalc("");
-      this.pfcMyselfValue = "";
+      this.totalSumCalc("")
+      this.pfcMyselfValue = ""
     }
   },
   computed: mapGetters({
-      getResultSum: "calc/getResultSum",
-      getUserPurpose: "calc/getUserPurpose",
-      getPfc: "calc/getPfc",
-      getPfcPercents: "calc/getPfcPercents"
-    }),
-    chkPfcMyself() {
-      if((this.pfcMyselfValue.length === 0) || this.pfcMyselfValue < this.getResultSum.calBasic) return true;
-    },
-    fillData() {
-      return {
-        labels: ["% белков", "% жиров", "% углеводов"],
-        datasets: [
-          {
-            label: ["% белков", "% жиров", "% углеводов"],
-            backgroundColor: ["#009cff", "orange", "#0ca600"],
-            data: [
-              this.getPfcPercents.proteins,
-              this.getPfcPercents.fats,
-              this.getPfcPercents.carbs
-            ]
-          }
-        ]
-      };
-    },
-    getCalProteins() {
-      return this.getPfc.proteins * 4;
-    },
-    getCalFats() {
-      return this.getPfc.fats * 9;
-    },
-    getCalCarbs() {
-      return this.getPfc.carbs * 4;
-    },
+    getResultSum: "calc/getResultSum",
+    getUserPurpose: "calc/getUserPurpose",
+    getPfc: "calc/getPfc",
+    getPfcPercents: "calc/getPfcPercents"
+  }),
+  chkPfcMyself() {
+    if (
+      this.pfcMyselfValue.length === 0 ||
+      this.pfcMyselfValue < this.getResultSum.calBasic
+    )
+      return true
+  },
+  fillData() {
+    return {
+      labels: ["% белков", "% жиров", "% углеводов"],
+      datasets: [
+        {
+          label: ["% белков", "% жиров", "% углеводов"],
+          backgroundColor: ["#009cff", "orange", "#0ca600"],
+          data: [
+            this.getPfcPercents.proteins,
+            this.getPfcPercents.fats,
+            this.getPfcPercents.carbs
+          ]
+        }
+      ]
+    }
+  },
+  getCalProteins() {
+    return this.getPfc.proteins * 4
+  },
+  getCalFats() {
+    return this.getPfc.fats * 9
+  },
+  getCalCarbs() {
+    return this.getPfc.carbs * 4
+  },
   components: {
     ChartPfc
   }
-};
+}
 </script>
 <style scoped>
 .cal-items {
   text-align: center;
-  font-size: calc( (100vw - 480px)/(1280 - 480) * (16 - 14) + 18px);
+  font-size: calc((100vw - 480px) / (1280 - 480) * (16 - 14) + 18px);
   border-bottom: 2px dashed #0ca600;
   padding: 15px;
-  line-height: calc( (100vw - 480px)/(1280 - 480) * (16 - 14) + 18px);
+  line-height: calc((100vw - 480px) / (1280 - 480) * (16 - 14) + 18px);
 }
 .cal-items:last-of-type {
   border-bottom: 0;
@@ -262,7 +319,7 @@ export default {
   border-top: 2px solid #0ca600;
 }
 .result-captions {
-  font-size: calc( (100vw - 480px)/(1280 - 480) * (22 - 14) + 18px);
+  font-size: calc((100vw - 480px) / (1280 - 480) * (22 - 14) + 18px);
   text-align: center;
   font-weight: 300;
   padding: 5px;

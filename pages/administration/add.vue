@@ -1,17 +1,15 @@
 <template>
-<v-container>
-  <dr-add class="container"></dr-add>
+  <v-container>
+    <dr-add class="container" />
   </v-container>
 </template>
 <script>
-  import DrAdd from '~/components/dr_add'
+import DrAdd from "~/components/dr_add"
 export default {
-  middleware: 'auth',
-    components: {
-        DrAdd
-    }
+  middleware: "auth",
+  components: {
+    DrAdd
+  }
 }
 </script>
-<style scoped>
-
-</style>
+<style scoped></style>

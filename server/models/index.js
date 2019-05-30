@@ -1,3 +1,3 @@
-import Recipe from './recipe'
-import Admin from './admin'
-export {Recipe,Admin}
+import Recipe from "./recipe"
+import Admin from "./admin"
+export { Recipe, Admin }
