@@ -196,20 +196,19 @@ export default {
   },
   methods: {
     ...mapMutations({
-      change: "Calc/changeE1",
-      totalSumCalc: "Calc/totalSumCalc"
+      change: "сalc/changeE1",
+      totalSumCalc: "сalc/totalSumCalc"
     }),
     converting() {
       this.totalSumCalc("");
       this.pfcMyselfValue = "";
     }
   },
-  computed: {
-    ...mapGetters({
-      getResultSum: "Calc/getResultSum",
-      getUserPurpose: "Calc/getUserPurpose",
-      getPfc: "Calc/getPfc",
-      getPfcPercents: "Calc/getPfcPercents"
+  computed: mapGetters({
+      getResultSum: "calc/getResultSum",
+      getUserPurpose: "calc/getUserPurpose",
+      getPfc: "calc/getPfc",
+      getPfcPercents: "calc/getPfcPercents"
     }),
     chkPfcMyself() {
       if((this.pfcMyselfValue.length === 0) || this.pfcMyselfValue < this.getResultSum.calBasic) return true;
@@ -238,8 +237,7 @@ export default {
     },
     getCalCarbs() {
       return this.getPfc.carbs * 4;
-    }
-  },
+    },
   components: {
     ChartPfc
   }

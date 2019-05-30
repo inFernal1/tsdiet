@@ -42,20 +42,16 @@ import activityDataSimple from '~/components/activity_data_simple';
 import purposeData from '~/components/purpose_data';
 import resultCalc from '~/components/result_calc';
 import activityDataWide from '~/components/activity_data_wide'
-import {mapGetters} from 'vuex';
-import {mapMutations} from 'vuex';
-import {mapState} from 'vuex'
+import {mapGetters, mapMutations, mapState} from 'vuex';
 export default {
   layout: 'default',
-  computed: {
-    ...mapGetters({
-      getE1: 'Calc/getE1',
-      getTypeCalc:'Calc/getTypeCalc'
-    })
-  },
+  computed: mapGetters({
+      getE1: 'сalc/getE1',
+      getTypeCalc:'сalc/getTypeCalc'
+    }),
   methods:{
     ...mapMutations({
-      changeE1:'Calc/changeE1'
+      changeE1:'сalc/changeE1'
     })
   },
   	components: {

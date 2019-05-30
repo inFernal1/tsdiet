@@ -102,11 +102,9 @@ let {data} = await axios.get('http://127.0.0.1:3000/api/get-count-recipes');
       countDB: 0
     }
   },
-  computed: {
-    ...mapGetters("Recipes", {
-      getFilter: "getFilter"
-    })
-  },
+  computed: mapGetters({
+      getFilter: "recipes/getFilter"
+    }),
   methods: {
     resetFilter() {
       for(let i = 0; i < this.selectedFilter.length; i++) {

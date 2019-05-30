@@ -55,8 +55,7 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
-import { mapGetters } from "vuex";
+import { mapMutations, mapGetters } from "vuex";
 export default {
       data () {
       return {
@@ -77,12 +76,11 @@ export default {
         }
       }
     },
-    computed: {
-        ...mapGetters({
-            getUserAge:'Calc/getUserAge',
-            getGender: 'Calc/getGender',
-            getUserTall:'Calc/getUserTall',
-            getUserWeight:'Calc/getUserWeight'
+    computed: mapGetters({
+            getUserAge:'сalc/getUserAge',
+            getGender: 'сalc/getGender',
+            getUserTall:'сalc/getUserTall',
+            getUserWeight:'сalc/getUserWeight'
         }),
         userAge: {
             get() {
@@ -115,15 +113,14 @@ export default {
             set(value) {
                 this.setUserTall(value)
             }
-        }
-    },
+        },
   methods: {
     ...mapMutations({
-      change: 'Calc/changeE1',
-      setUserAge: 'Calc/setUserAge',
-      setGender:'Calc/setGender',
-      setUserWeight:'Calc/setUserWeight',
-      setUserTall:'Calc/setUserTall'
+      change: 'сalc/changeE1',
+      setUserAge: 'сalc/setUserAge',
+      setGender:'сalc/setGender',
+      setUserWeight:'сalc/setUserWeight',
+      setUserTall:'сalc/setUserTall'
     }),
     validateAndClick() {
         if(this.$refs.form.validate()) this.change(3)

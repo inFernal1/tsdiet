@@ -154,11 +154,9 @@ import axios from 'axios';
         requireRules: [v => !!v || "Поле является обязательным"]
       };
     },
-    computed: {
-      ...mapGetters('Recipes',{
+    computed: mapGetters('Recipes',{
         getFilter: 'getFilter'
-      })
-    },
+      }),
     methods: {
       /*onPickFile() {
         this.$refs.fileInput.click();

@@ -91,8 +91,7 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
-import { mapGetters } from "vuex";
+import { mapMutations, mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -102,11 +101,11 @@ export default {
   },
   methods: {
     ...mapMutations({
-      change: "Calc/changeE1",
-      setUserPurpose: "Calc/setUserPurpose",
-      setUserPurposeWay: "Calc/setUserPurposeWay",
-      totalSumCalc:"Calc/totalSumCalc",
-      setUserLifting: "Calc/setUserLifting"
+      change: "сalc/changeE1",
+      setUserPurpose: "сalc/setUserPurpose",
+      setUserPurposeWay: "сalc/setUserPurposeWay",
+      totalSumCalc:"сalc/totalSumCalc",
+      setUserLifting: "сalc/setUserLifting"
     }),
     stepResult(userLifting) {
         if(userLifting) {
@@ -120,10 +119,9 @@ export default {
         this.change(5);
     }
   },
-  computed: {
-    ...mapGetters( {
-      getUserPurpose: "Calc/getUserPurpose",
-      getUserPurposeWay: "Calc/getUserPurposeWay",
+  computed: mapGetters({
+      getUserPurpose: "сalc/getUserPurpose",
+      getUserPurposeWay: "сalc/getUserPurposeWay",
       
     }),
     userPurpose: {
@@ -147,7 +145,6 @@ export default {
         (this.getUserPurpose == 'keepWeight')
     }
   }
-};
 </script>
 <style scoped>
 .purpose_lbl {

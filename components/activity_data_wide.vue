@@ -433,9 +433,8 @@
         ]
       };
     },
-    computed: {
-      ...mapGetters({
-        getUserWeight: 'Calc/getUserWeight'
+    computed: mapGetters({
+        getUserWeight: 'сalc/getUserWeight'
       }),
       getTime() {
         function getDecimal(num) {
@@ -461,12 +460,11 @@
       progressPercent() {
         if (this.activateSetTime === false) return 0;
         return 100 - this.activeTime / 1440 * 100;
-      }
-    },
+      },
     methods: {
       ...mapMutations({
-        change: "Calc/changeE1",
-        setUserActivityWide: "Calc/setUserActivityWide"
+        change: "сalc/changeE1",
+        setUserActivityWide: "сalc/setUserActivityWide"
       }),
       onScroll(e) {
         let elem = document.getElementById('fieldsList');

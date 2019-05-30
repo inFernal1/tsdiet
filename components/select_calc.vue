@@ -39,14 +39,12 @@
 </template>
 
 <script>
-import {mapMutations} from 'vuex'
-import {mapGetters} from 'vuex'
+import {mapMutations, mapGetters} from 'vuex'
 export default {
-    computed: {
-        ...mapGetters({
-            getTypeCalc: 'Calc/getTypeCalc',
-            getHints:'Calc/getHintsForRadios',
-            getHintsColor:'Calc/getHintsColor'
+    computed: mapGetters({
+            getTypeCalc: 'сalc/getTypeCalc',
+            getHints:'сalc/getHintsForRadios',
+            getHintsColor:'сalc/getHintsColor'
         }),
         radios: {
             get() {
@@ -64,13 +62,13 @@ export default {
                 this.changeHints({show:value})
             }
 
-        }
-    },
+        },
+        
   methods:{
       ...mapMutations({
-          change: 'Calc/changeE1',
-          setTypeCalc:'Calc/setTypeCalc',
-          changeHints:'Calc/changeHintsForRadios'
+          change: 'сalc/changeE1',
+          setTypeCalc:'сalc/setTypeCalc',
+          changeHints:'сalc/changeHintsForRadios'
       })
   }
 }
