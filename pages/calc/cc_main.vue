@@ -63,13 +63,13 @@ export default {
     activityDataWide
   },
   computed: {
-    ...mapGetters({
-    getE1: "сalc/getE1",
-    getTypeCalc: "сalc/getTypeCalc"
+    ...mapGetters("calc", {
+    getE1: "getE1",
+    getTypeCalc: "getTypeCalc"
   })},
   methods: {
-    ...mapMutations({
-      changeE1: "сalc/changeE1"
+    ...mapMutations("calc",{
+      changeE1: "changeE1"
     })
   },
 }

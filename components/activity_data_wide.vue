@@ -11,10 +11,10 @@
       multi-line
     >
       <h2 class="hidden-xs-only">
-        Осталось ввести: {{ getTime.hours }} ч. {{ getTime.min }} мин.
+        Осталось ввести: {{getTime.hours}} ч. {{getTime.min}} мин.
       </h2>
       <h4 class="hidden-sm-and-up">
-        Осталось ввести: {{ getTime.hours }} ч. {{ getTime.min }}мин.
+        Осталось ввести: {{getTime.hours}} ч. {{getTime.min}}мин.
       </h4>
       <v-progress-linear :value="progressPercent" color="light-blue darken-4" />
     </v-snackbar>
@@ -90,7 +90,7 @@
           multiple
           :items="selects[index].items"
           return-object
-          max-height="auto"
+          :menu-props="{maxHeight:'auto'}"
           label="Выбрать действия"
         />
       </v-flex>
@@ -527,8 +527,9 @@ export default {
       ]
     }
   },
-  computed: mapGetters({
-    getUserWeight: "сalc/getUserWeight"
+  computed: { 
+    ...mapGetters("calc", {
+    getUserWeight: "getUserWeight"
   }),
   getTime() {
     function getDecimal(num) {
@@ -554,11 +555,11 @@ export default {
   progressPercent() {
     if (this.activateSetTime === false) return 0
     return 100 - (this.activeTime / 1440) * 100
-  },
+  }},
   methods: {
-    ...mapMutations({
-      change: "сalc/changeE1",
-      setUserActivityWide: "сalc/setUserActivityWide"
+    ...mapMutations("calc",{
+      change: "changeE1",
+      setUserActivityWide: "setUserActivityWide"
     }),
     onScroll(e) {
       let elem = document.getElementById("fieldsList")

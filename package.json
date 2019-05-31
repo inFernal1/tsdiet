@@ -9,15 +9,15 @@
   "author": "ILYA TERESHCHENKO",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "node -r esm server/index.js",
     "build": "nuxt build",
     "start": "cross-env NODE_ENV=production node build/main.js",
     "generate": "nuxt generate",
     "test": "mocha -100000",
     "heroku-prebuild": "npm i",
     "heroku-postbuild": "npm run build",
-      "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-      "lintfix": "eslint --fix --ext .js,.vue --ignore-path .gitignore ."
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "lintfix": "eslint --fix --ext .js,.vue --ignore-path .gitignore ."
   },
   "dependencies": {
     "@mdi/font": "^3.5.95",
@@ -28,11 +28,15 @@
     "express-session": "^1.15.6",
     "mongoose": "^5.5.1",
     "nano": "^8.0.0",
-    "nuxt": "^2.5.1",
+    "nuxt": "^2.8.0",
     "vue-chartjs": "^3.4.0",
     "vuetify": "^1.5.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/register": "^7.4.4",
+    "@babel/runtime-corejs3": "^7.4.5",
     "babel-eslint": "^10.0.1",
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",

@@ -241,7 +241,7 @@ export default {
       requireRules: [v => !!v || "Поле является обязательным"]
     }
   },
-  computed: mapGetters("Recipes", {
+  computed: mapGetters("recipes", {
     getFilter: "getFilter"
   }),
   methods: {

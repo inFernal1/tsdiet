@@ -248,21 +248,21 @@ export default {
     }
   },
   methods: {
-    ...mapMutations({
-      change: "сalc/changeE1",
-      totalSumCalc: "сalc/totalSumCalc"
+    ...mapMutations("calc",{
+      change: "changeE1",
+      totalSumCalc: "totalSumCalc"
     }),
     converting() {
       this.totalSumCalc("")
       this.pfcMyselfValue = ""
     }
   },
-  computed: {
-    ...mapGetters({
-    getResultSum: "calc/getResultSum",
-    getUserPurpose: "calc/getUserPurpose",
-    getPfc: "calc/getPfc",
-    getPfcPercents: "calc/getPfcPercents"
+  computed: { 
+    ...mapGetters("calc", {
+    getResultSum: "getResultSum",
+    getUserPurpose: "getUserPurpose",
+    getPfc: "getPfc",
+    getPfcPercents: "getPfcPercents"
   }),
   chkPfcMyself() {
     if (

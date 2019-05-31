@@ -63,20 +63,23 @@ module.exports = {
     /*
      ** You can extend webpack config here
      */
-    babel: {
-      presets({ isServer }) {
-        return [
-          [
-            require.resolve("@nuxt/babel-preset-app"),
-            {
-              buildTarget: isServer ? "server" : "client",
-              useBuiltIns: "usage",
-              corejs: { version: 3 }
-            }
+    build: {
+      babel: {
+        presets({ isServer }) {
+          return [
+            [
+              require.resolve('@nuxt/babel-preset-app'),
+              // require.resolve('@nuxt/babel-preset-app-edge'), // For nuxt-edge users
+              {
+                buildTarget: isServer ? 'server' : 'client',
+                corejs: { version: 3, proposals: true, useBuiltIns: "entry" }
+              }
+            ]
           ]
-        ]
+        }
       }
-    },
+    }
+  },
     extend(config, ctx) {
       if (ctx.isServer) {
         config.externals = [
@@ -101,4 +104,3 @@ module.exports = {
     // We add /api/login & /api/logout routes
     '~/server/api/auth'
   ] */
-}

@@ -75,11 +75,11 @@
 <script>
 import { mapMutations, mapGetters } from "vuex"
 export default {
-  computed: {
-    ...mapGetters({
-    getTypeCalc: "сalc/getTypeCalc",
-    getHints: "сalc/getHintsForRadios",
-    getHintsColor: "сalc/getHintsColor"
+  computed: { 
+    ...mapGetters("calc", {
+    getTypeCalc: "getTypeCalc",
+    getHints: "getHintsForRadios",
+    getHintsColor: "getHintsColor"
   }),
   radios: {
     get() {
@@ -100,10 +100,10 @@ export default {
   },
 
   methods: {
-    ...mapMutations({
-      change: "сalc/changeE1",
-      setTypeCalc: "сalc/setTypeCalc",
-      changeHints: "сalc/changeHintsForRadios"
+    ...mapMutations("calc",{
+      change: "changeE1",
+      setTypeCalc: "setTypeCalc",
+      changeHints: "changeHintsForRadios"
     })
   }
 }
