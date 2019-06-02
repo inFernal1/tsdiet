@@ -5,7 +5,6 @@ const nodeExternals = require("webpack-node-externals")
 
 module.exports = {
   mode: "universal",
-
   /*
    ** Headers of the page
    */
@@ -63,13 +62,11 @@ module.exports = {
     /*
      ** You can extend webpack config here
      */
-    build: {
       babel: {
         presets({ isServer }) {
           return [
             [
               require.resolve('@nuxt/babel-preset-app'),
-              // require.resolve('@nuxt/babel-preset-app-edge'), // For nuxt-edge users
               {
                 buildTarget: isServer ? 'server' : 'client',
                 corejs: { version: 3, proposals: true, useBuiltIns: "entry" }
@@ -77,7 +74,6 @@ module.exports = {
             ]
           ]
         }
-      }
     }
   },
     extend(config, ctx) {
@@ -90,17 +86,3 @@ module.exports = {
       }
     }
   }
-  /*serverMiddleware: [
-    // body-parser middleware
-    bodyParser.json(),
-    // session middleware
-    session({
-      secret: 'super-secret-key',
-      resave: false,
-      saveUninitialized: false,
-      cookie: { maxAge: 60000 }
-    }),
-    // Api middleware
-    // We add /api/login & /api/logout routes
-    '~/server/api/auth'
-  ] */
