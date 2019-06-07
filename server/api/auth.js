@@ -1,17 +1,19 @@
 import { Router } from "express"
-import admin from "../models/admin"
-
+//import user from "../models/user"
+//import passport from "passport"
 const router = Router()
 
-router.post("/login", function(req, res, next) {
-  console.log("hi")
-  if (req.body.login === "admin" && req.body.login === "admin") {
-    req.session.authAdmin = { login: "admin" }
-    return res.json({ login: "admin" })
-  }
-  res.status(401).json({ error: "Bad credentials" })
+router.post("/login", function(req, res) {
+  console.log(req.body)
+  console.log(req.body.email)
+  console.log(req.body.password)
+  res.send('hello')
 })
 
+router.post("/register", function(req, res) {
+  console.log(req.body.email);
+  res.send('hello')
+})
 router.post("/logout", function(req, res, next) {
   delete req.session.authAdmin
   res.json({ ok: true })

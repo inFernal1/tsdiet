@@ -16,7 +16,7 @@
       <v-tabs-items v-model="tabActive">
         <v-tab-item value="input">
           <v-card>
-            <v-container v-if="!$store.state.authAdmin" grid-list-md>
+            <v-container v-if="!$store.state.authUser" grid-list-md>
               <v-layout column>
                 <v-flex>
                   <v-layout column align-center>
@@ -133,7 +133,7 @@
             </v-container>
             <v-card-actions>
               <v-layout justify-center>
-                <v-btn color="blue darken-1" flat @click="login">
+                <v-btn color="blue darken-1" flat @click="registration">
                   Регистрация
                 </v-btn>
                 <v-btn color="blue darken-1" flat @click.native="close">
@@ -165,13 +165,24 @@ export default {
     async login() {
       try {
         await this.$store.dispatch("login", {
-          login: this.formLogin,
-          password: this.formPassword
+          email: this.formEmailIn,
+          password: this.formPasswordIn
         })
         this.formEmailIn = ""
         this.formPasswordIn = ""
         this.formError = null
-        if (this.$store.state.authAdmin) this.$nuxt.$router.push("/")
+        if (this.$store.state.authUser) this.$nuxt.$router.push("/")
+      } catch (e) {
+        this.formError = e.message
+      }
+    },
+    async registration() {
+      try {
+        await this.$store.dispatch("login", {
+          email: this.formEmailReg,
+          password: this.formPasswordReg,
+          passwordTwo: this.formPasswordRegD
+        })
       } catch (e) {
         this.formError = e.message
       }
