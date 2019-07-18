@@ -1,4 +1,5 @@
 export default () => ({
+  recipes: [],
   filter: [
     {
       title: "Тип блюда",

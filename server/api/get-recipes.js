@@ -3,7 +3,7 @@ import Recipe from "../models/recipe"
 
 const router = Router()
 
-router.get("/get-recipes", (req, res, next) => {
+router.get("/get-recipes", (req, res) => {
   //let countDoc;
   //Recipe.count({}, (err, count) => {
   // if(err) return console.log(err);

@@ -85,7 +85,7 @@ export default {
   layout: "default",
   async created() {
     let createdWatcher = true;
-    await this.getRecipes(createdWatcher);
+    if(this.recipes.length === 0) await this.getRecipes(createdWatcher);
   }, 
   async mounted() {
 //let {data} = await axios.get('https://thesmartestdiet.herokuapp.com/api/get-count-recipes');
@@ -96,7 +96,6 @@ let {data} = await axios.get('http://127.0.0.1:3000/api/get-count-recipes');
     return {
       filterToggle: false,
       selectedFilter: [[],[],[],[]],
-      recipes: [],
       btnFilterActivate:false,
       getRecipesController: true,
       countDB: 0
@@ -104,7 +103,8 @@ let {data} = await axios.get('http://127.0.0.1:3000/api/get-count-recipes');
   },
   computed: {
     ...mapGetters("recipes", {
-      getFilter: "getFilter"
+      getFilter: "getFilter",
+      recipes: "getRecipes"
     })
   },
   methods: {
@@ -123,20 +123,13 @@ let {data} = await axios.get('http://127.0.0.1:3000/api/get-count-recipes');
             
         }
         this.getRecipesController = false;
-      //await axios.get('https://thesmartestdiet.herokuapp.com/api/get-recipes', {
-        await axios.get('http://127.0.0.1:3000/api/get-recipes', {
-        //proxy: { host: '127.0.0.1', port: 3000 },
-        params:{
-          elems
+        try {
+          this.$store.dispatch('recipes/fetchRecipes',{elems})
+          this.getRecipesController = true;
         }
-      })
-    .then(response => {
-      if(response.status === 200) {
-        this.recipes = this.recipes.concat(response.data);
-        this.getRecipesController = true;
-      }
-    })
-    .catch(error => console.log(error))
+        catch(e) {
+          throw e
+        }
     },
     async filterRecipes(startedFilter) {
       let elems;
@@ -153,27 +146,24 @@ let {data} = await axios.get('http://127.0.0.1:3000/api/get-count-recipes');
           return item
         })
         this.getRecipesController = false;
-        // await axios.post('https://thesmartestdiet.herokuapp.com/api/filter-recipes', {
-          await axios.post('http://127.0.0.1:3000/api/filter-recipes', {
-         elems,
-          tags: sendFilter
-      })
-    .then(response => {
-      if(response.status === 200) {
-       this.getRecipesController = true;
-        this.recipes = this.recipes.concat(response.data);
-      }
-    })
-    .catch(error => console.log(error))
+       try {
+          this.$store.dispatch('recipes/fetchFilterRecipes', {elems, sendFilter})
+          this.getRecipesController = true;
+        }
+        catch(e) {
+          throw e
+        }
     },
     startFilter() {
       this.btnFilterActivate = true;
-    this.recipes.splice(0);
+      this.$store.commit('recipes/resetRecipes')
+    //this.$store.state.recipes.splice(0);
     this.filterToggle = false;
     this.filterRecipes(true)
     },
     onScroll(event) {
-       if(this.recipes.length === this.countDB) return;
+      if(this.recipes.length === this.countDB) return;
+      //alert(this.recipes.length + ' ' + this.countDB)
       const scrollY = window.scrollY
       const visible = document.documentElement.clientHeight
       const pageHeight = document.documentElement.scrollHeight

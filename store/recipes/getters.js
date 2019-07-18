@@ -1,5 +1,4 @@
 export default {
-  getFilter(state) {
-    return state.filter
-  }
+  getFilter: state => state.filter,
+  getRecipes: state => state.recipes
 }
