@@ -88,9 +88,12 @@ export default {
     if(this.recipes.length === 0) await this.getRecipes(createdWatcher);
   }, 
   async mounted() {
-//let {data} = await axios.get('https://thesmartestdiet.herokuapp.com/api/get-count-recipes');
-let {data} = await axios.get('http://127.0.0.1:3000/api/get-count-recipes');
-    this.countDB = data;
+    try {
+          this.$store.dispatch('recipes/getNumberOfRecipes')
+    }
+    catch(e) {
+      throw e
+    }
   },
   data() {
     return {
@@ -98,13 +101,13 @@ let {data} = await axios.get('http://127.0.0.1:3000/api/get-count-recipes');
       selectedFilter: [[],[],[],[]],
       btnFilterActivate:false,
       getRecipesController: true,
-      countDB: 0
     }
   },
   computed: {
     ...mapGetters("recipes", {
       getFilter: "getFilter",
-      recipes: "getRecipes"
+      recipes: "getRecipes",
+      countDB: "getCntRecipes"
     })
   },
   methods: {

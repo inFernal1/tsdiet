@@ -31,5 +31,6 @@ export default () => ({
       items: ["Да", "Нет"]
     }
   ],
-  recipeID: 0
+  recipeID: 0,
+  cntRecipes: 0
 })

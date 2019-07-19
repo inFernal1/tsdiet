@@ -14,6 +14,8 @@ router.post("/filter-recipes", function(req, res, next) {
   })
     .skip(elemsCount)
     .limit(5)
-    .exec((err, recipes) => res.json(recipes))
+    .exec((err, recipes) => {
+      if (err) return console.log(err)
+      res.json(recipes) })
 })
 export default router

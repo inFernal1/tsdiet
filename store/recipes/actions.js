@@ -32,12 +32,20 @@ export default {
          elems,
           tags: sendFilter
       })
-      console.log(filterRecipes)
       commit('setRecipes', filterRecipes)
     }
     catch(e) {
         throw e
     }
-}
+},
+    async getNumberOfRecipes({commit}) {
+        try {
+            let cntRecipes = await this.$axios.$get('http://127.0.0.1:3000/api/get-count-recipes');
+            commit('setCntRecipes', cntRecipes)
+        }
+        catch (e) {
+            throw e
+        }
+    }
 
 }
